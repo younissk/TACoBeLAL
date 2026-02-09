@@ -1,0 +1,23 @@
+{
+  "run_id": "20260209_142635",
+  "task_id": "MCQ-ORDER",
+  "model_name": "llm-openai",
+  "model_metadata": {
+    "seed": 7,
+    "provider": "openai",
+    "openai_model": "gpt-4o-mini",
+    "temperature": 0.0,
+    "timeout_seconds": 60.0,
+    "max_retries": 2,
+    "prediction_retries": 2
+  },
+  "dataset_path": "data/mcq_event_timeline_strong.jsonl",
+  "started_at_utc": "2026-02-09T14:26:35.599141+00:00",
+  "finished_at_utc": "2026-02-09T14:26:38.608133+00:00",
+  "examples": 1,
+  "correct": 1,
+  "accuracy": 1.0,
+  "elapsed_seconds": 3.0089,
+  "average_latency_ms": 3008.844417,
+  "decisions_path": "results/mcq-order/llm-openai/20260209_142635/decisions.jsonl"
+}

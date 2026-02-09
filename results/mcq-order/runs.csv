@@ -1,0 +1,5 @@
+run_id,task_id,model_name,examples,correct,accuracy,elapsed_seconds,average_latency_ms,started_at_utc,finished_at_utc,dataset_path,decisions_path
+20260209_142155,MCQ-ORDER,random,25481,7253,0.284643,0.122988,0.003464,2026-02-09T14:21:55.499874+00:00,2026-02-09T14:21:55.623157+00:00,data/mcq_event_timeline_strong.jsonl,results/mcq-order/random/20260209_142155/decisions.jsonl
+20260209_142558,MCQ-ORDER,random,25481,7253,0.284643,0.121482,0.003461,2026-02-09T14:25:58.302424+00:00,2026-02-09T14:25:58.424330+00:00,data/mcq_event_timeline_strong.jsonl,results/mcq-order/random/20260209_142558/decisions.jsonl
+20260209_142635,MCQ-ORDER,llm-openai,1,1,1.0,3.0089,3008.844417,2026-02-09T14:26:35.599141+00:00,2026-02-09T14:26:38.608133+00:00,data/mcq_event_timeline_strong.jsonl,results/mcq-order/llm-openai/20260209_142635/decisions.jsonl
+20260209_142743,MCQ-ORDER,llm-openai,100,37,0.37,57.648193,576.448679,2026-02-09T14:27:43.415171+00:00,2026-02-09T14:28:41.061354+00:00,data/mcq_event_timeline_strong.jsonl,results/mcq-order/llm-openai/20260209_142743/decisions.jsonl
