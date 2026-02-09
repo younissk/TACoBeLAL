@@ -1,0 +1,51 @@
+# Project data (large or generated)
+/data
+
+# Python bytecode & build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments (uv uses .venv by default)
+.venv/
+venv/
+env/
+.env/
+
+# uv cache (optional; uncomment if you want to ignore)
+# .uv/cache/
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.hypothesis/
+
+# Type checkers & linters
+.mypy_cache/
+.ruff_cache/
+
+# IDE & editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local env / secrets (never commit)
+.env
+.env.local
+*.local
+
+# Jupyter (if you add notebooks later)
+.ipynb_checkpoints/

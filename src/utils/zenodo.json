@@ -1,0 +1,405 @@
+{
+  "access": {
+    "embargo": {
+      "active": false,
+      "reason": null
+    },
+    "files": "public",
+    "record": "public",
+    "status": "open"
+  },
+  "created": "2025-05-12T14:45:28.042835+00:00",
+  "custom_fields": {},
+  "deletion_status": {
+    "is_deleted": false,
+    "status": "P"
+  },
+  "files": {
+    "count": 6,
+    "enabled": true,
+    "entries": {
+      "annotations_strong.csv": {
+        "access": {
+          "hidden": false
+        },
+        "checksum": "md5:882d5a5a28f59441f4c7b4ed17ebab05",
+        "ext": "csv",
+        "id": "f8a7372e-b180-4518-ac13-d654f18d8f59",
+        "key": "annotations_strong.csv",
+        "links": {
+          "content": "https://zenodo.org/api/records/15379789/files/annotations_strong.csv/content",
+          "self": "https://zenodo.org/api/records/15379789/files/annotations_strong.csv"
+        },
+        "metadata": {},
+        "mimetype": "text/csv",
+        "size": 4109451,
+        "storage_class": "L"
+      },
+      "annotations_weak.csv": {
+        "access": {
+          "hidden": false
+        },
+        "checksum": "md5:1445727f4d470273a7395ddcb9e34b93",
+        "ext": "csv",
+        "id": "b54c3699-38bc-4dbf-993f-59bf87c0acf6",
+        "key": "annotations_weak.csv",
+        "links": {
+          "content": "https://zenodo.org/api/records/15379789/files/annotations_weak.csv/content",
+          "self": "https://zenodo.org/api/records/15379789/files/annotations_weak.csv"
+        },
+        "metadata": {},
+        "mimetype": "text/csv",
+        "size": 1318097,
+        "storage_class": "L"
+      },
+      "audio.zip": {
+        "access": {
+          "hidden": false
+        },
+        "checksum": "md5:a1b11ed7a88d6b95109decb577c128fd",
+        "ext": "zip",
+        "id": "f6a73287-5d99-41fe-8a47-eda67b6c7cce",
+        "key": "audio.zip",
+        "links": {
+          "content": "https://zenodo.org/api/records/15379789/files/audio.zip/content",
+          "self": "https://zenodo.org/api/records/15379789/files/audio.zip"
+        },
+        "metadata": {},
+        "mimetype": "application/zip",
+        "size": 1629958981,
+        "storage_class": "L"
+      },
+      "development_split.csv": {
+        "access": {
+          "hidden": false
+        },
+        "checksum": "md5:bee28197d13e859dbc36021c2a928f07",
+        "ext": "csv",
+        "id": "59069cce-7d22-423a-a859-d40e421a9379",
+        "key": "development_split.csv",
+        "links": {
+          "content": "https://zenodo.org/api/records/15379789/files/development_split.csv/content",
+          "self": "https://zenodo.org/api/records/15379789/files/development_split.csv"
+        },
+        "metadata": {},
+        "mimetype": "text/csv",
+        "size": 112843,
+        "storage_class": "L"
+      },
+      "metadata.csv": {
+        "access": {
+          "hidden": false
+        },
+        "checksum": "md5:17e8df44f2d217dc7cf4b75767ee5ab3",
+        "ext": "csv",
+        "id": "4bfcac2e-c9e2-4077-9cc0-9276ee9c12e8",
+        "key": "metadata.csv",
+        "links": {
+          "content": "https://zenodo.org/api/records/15379789/files/metadata.csv/content",
+          "self": "https://zenodo.org/api/records/15379789/files/metadata.csv"
+        },
+        "metadata": {},
+        "mimetype": "text/csv",
+        "size": 8134917,
+        "storage_class": "L"
+      },
+      "test_split.csv": {
+        "access": {
+          "hidden": false
+        },
+        "checksum": "md5:16f5b5eab84753a571e9944739508854",
+        "ext": "csv",
+        "id": "752c42d6-d931-4b8d-b76e-8c12f7ddf60b",
+        "key": "test_split.csv",
+        "links": {
+          "content": "https://zenodo.org/api/records/15379789/files/test_split.csv/content",
+          "self": "https://zenodo.org/api/records/15379789/files/test_split.csv"
+        },
+        "metadata": {},
+        "mimetype": "text/csv",
+        "size": 21794,
+        "storage_class": "L"
+      }
+    },
+    "order": [],
+    "total_bytes": 1643656083
+  },
+  "id": "15379789",
+  "is_draft": false,
+  "is_published": true,
+  "links": {
+    "access": "https://zenodo.org/api/records/15379789/access",
+    "access_grants": "https://zenodo.org/api/records/15379789/access/grants",
+    "access_links": "https://zenodo.org/api/records/15379789/access/links",
+    "access_request": "https://zenodo.org/api/records/15379789/access/request",
+    "access_users": "https://zenodo.org/api/records/15379789/access/users",
+    "archive": "https://zenodo.org/api/records/15379789/files-archive",
+    "archive_media": "https://zenodo.org/api/records/15379789/media-files-archive",
+    "communities": "https://zenodo.org/api/records/15379789/communities",
+    "communities-suggestions": "https://zenodo.org/api/records/15379789/communities-suggestions",
+    "doi": "https://doi.org/10.5281/zenodo.15379789",
+    "draft": "https://zenodo.org/api/records/15379789/draft",
+    "file_modification": "https://zenodo.org/api/records/15379789/file-modification",
+    "files": "https://zenodo.org/api/records/15379789/files",
+    "latest": "https://zenodo.org/api/records/15379789/versions/latest",
+    "latest_html": "https://zenodo.org/records/15379789/latest",
+    "media_files": "https://zenodo.org/api/records/15379789/media-files",
+    "parent": "https://zenodo.org/api/records/15379788",
+    "parent_doi": "https://doi.org/10.5281/zenodo.15379788",
+    "parent_doi_html": "https://zenodo.org/doi/10.5281/zenodo.15379788",
+    "parent_html": "https://zenodo.org/records/15379788",
+    "preview_html": "https://zenodo.org/records/15379789?preview=1",
+    "request_deletion": "https://zenodo.org/api/records/15379789/request-deletion",
+    "requests": "https://zenodo.org/api/records/15379789/requests",
+    "reserve_doi": "https://zenodo.org/api/records/15379789/draft/pids/doi",
+    "self": "https://zenodo.org/api/records/15379789",
+    "self_doi": "https://doi.org/10.5281/zenodo.15379789",
+    "self_doi_html": "https://zenodo.org/doi/10.5281/zenodo.15379789",
+    "self_html": "https://zenodo.org/records/15379789",
+    "self_iiif_manifest": "https://zenodo.org/api/iiif/record:15379789/manifest",
+    "self_iiif_sequence": "https://zenodo.org/api/iiif/record:15379789/sequence/default",
+    "versions": "https://zenodo.org/api/records/15379789/versions"
+  },
+  "media_files": {
+    "count": 0,
+    "enabled": false,
+    "entries": {},
+    "order": [],
+    "total_bytes": 0
+  },
+  "metadata": {
+    "creators": [
+      {
+        "affiliations": [
+          {
+            "id": "052r2xn60",
+            "identifiers": [
+              {
+                "identifier": "052r2xn60",
+                "scheme": "ror"
+              },
+              {
+                "identifier": "grid.9970.7",
+                "scheme": "grid"
+              },
+              {
+                "identifier": "0000 0001 1941 5140",
+                "scheme": "isni"
+              }
+            ],
+            "name": "Johannes Kepler University of Linz"
+          }
+        ],
+        "person_or_org": {
+          "family_name": "Primus",
+          "given_name": "Paul",
+          "identifiers": [
+            {
+              "identifier": "0009-0000-9889-8493",
+              "scheme": "orcid"
+            }
+          ],
+          "name": "Primus, Paul",
+          "type": "personal"
+        }
+      },
+      {
+        "affiliations": [
+          {
+            "id": "052r2xn60",
+            "identifiers": [
+              {
+                "identifier": "052r2xn60",
+                "scheme": "ror"
+              },
+              {
+                "identifier": "grid.9970.7",
+                "scheme": "grid"
+              },
+              {
+                "identifier": "0000 0001 1941 5140",
+                "scheme": "isni"
+              }
+            ],
+            "name": "Johannes Kepler University of Linz"
+          }
+        ],
+        "person_or_org": {
+          "family_name": "Schmid",
+          "given_name": "Florian",
+          "identifiers": [
+            {
+              "identifier": "0009-0007-4988-6067",
+              "scheme": "orcid"
+            }
+          ],
+          "name": "Schmid, Florian",
+          "type": "personal"
+        }
+      },
+      {
+        "affiliations": [
+          {
+            "id": "052r2xn60",
+            "identifiers": [
+              {
+                "identifier": "052r2xn60",
+                "scheme": "ror"
+              },
+              {
+                "identifier": "grid.9970.7",
+                "scheme": "grid"
+              },
+              {
+                "identifier": "0000 0001 1941 5140",
+                "scheme": "isni"
+              }
+            ],
+            "name": "Johannes Kepler University of Linz"
+          }
+        ],
+        "person_or_org": {
+          "family_name": "Widmer",
+          "given_name": "Gerhard",
+          "identifiers": [
+            {
+              "identifier": "0000-0003-3531-1282",
+              "scheme": "orcid"
+            }
+          ],
+          "name": "Widmer, Gerhard",
+          "type": "personal"
+        }
+      }
+    ],
+    "description": "<p>TACOS is a collection of 12,358 audio recordings, annotated with 47,748 temporally strong audio captions (i.e., textual descriptions of sound events and their corresponding temporal onsets and offsets). Each audio file is additionally paired with a weak caption, which was automatically generated from the strong captions using OpenAI&rsquo;s&nbsp;<em>gpt-4o-mini-2024-07-18</em>.</p>\n<p>If you use TACOS in your work, please cite our paper (preprint available on <a href=\"https://arxiv.org/abs/2505.07609\">arXiv</a>).<br><br>A usage example, and more deatils are provided in our&nbsp;<a href=\"https://github.com/OptimusPrimus/tacos\">GitHub repository</a> (available soon).</p>\n<h3>Licensing</h3>\n<p>The audio recordings contained in <code>audio.zip</code> and the associated metadata in <code>metadata.csv</code> were sourced from the FreeSound platform [1]. Each recording and its corresponding metadata are governed by their individual licenses, which are specified&mdash;along with the creator's information&mdash;in the <code>metadata.csv</code> file.</p>\n<p>The captions provided in <code>annotations_strong.csv</code> and <code>annotations_weak.csv</code> are licensed under the <a href=\"https://creativecommons.org/licenses/by/4.0\"><em>CC BY 4.0</em></a>, which permits use under the condition of appropriate attribution.</p>\n<h3>References</h3>\n<p>[1] Frederic Font, Gerard Roma, and Xavier Serra.&nbsp;<em>Freesound technical demo.</em> In Proceedings of the 21st ACM Multimedia Conference (MM '13), Barcelona, Spain, October 21-25, 2013</p>",
+    "languages": [
+      {
+        "id": "eng",
+        "title": {
+          "en": "English"
+        }
+      }
+    ],
+    "publication_date": "2025-05-10",
+    "publisher": "Zenodo",
+    "related_identifiers": [
+      {
+        "identifier": "arXiv:2505.07609",
+        "relation_type": {
+          "id": "isdescribedby",
+          "title": {
+            "de": "Wird beschrieben von",
+            "en": "Is described by"
+          }
+        },
+        "resource_type": {
+          "id": "publication-preprint",
+          "title": {
+            "de": "Preprint",
+            "en": "Preprint"
+          }
+        },
+        "scheme": "arxiv"
+      }
+    ],
+    "resource_type": {
+      "id": "dataset",
+      "title": {
+        "de": "Datensatz",
+        "en": "Dataset"
+      }
+    },
+    "rights": [
+      {
+        "description": {
+          "en": "The Creative Commons Attribution license allows re-distribution and re-use of a licensed work on the condition that the creator is appropriately credited."
+        },
+        "icon": "cc-by-icon",
+        "id": "cc-by-4.0",
+        "props": {
+          "scheme": "spdx",
+          "url": "https://creativecommons.org/licenses/by/4.0/legalcode"
+        },
+        "title": {
+          "en": "Creative Commons Attribution 4.0 International"
+        }
+      }
+    ],
+    "subjects": [
+      {
+        "subject": "Machine Listening"
+      },
+      {
+        "subject": "Audio Captioning"
+      },
+      {
+        "subject": "Text-Audio Models"
+      },
+      {
+        "subject": "Dataset"
+      },
+      {
+        "subject": "Deep Learning"
+      }
+    ],
+    "title": "TACOS: Temporally-aligned Audio CaptiOnS for Language-Audio Pretraining"
+  },
+  "parent": {
+    "access": {
+      "owned_by": {
+        "user": "1317852"
+      },
+      "settings": {
+        "accept_conditions_text": null,
+        "allow_guest_requests": false,
+        "allow_user_requests": false,
+        "secret_link_expiration": 0
+      }
+    },
+    "communities": {},
+    "id": "15379788",
+    "pids": {
+      "doi": {
+        "client": "datacite",
+        "identifier": "10.5281/zenodo.15379788",
+        "provider": "datacite"
+      }
+    }
+  },
+  "pids": {
+    "doi": {
+      "client": "datacite",
+      "identifier": "10.5281/zenodo.15379789",
+      "provider": "datacite"
+    },
+    "oai": {
+      "identifier": "oai:zenodo.org:15379789",
+      "provider": "oai"
+    }
+  },
+  "revision_id": 7,
+  "stats": {
+    "all_versions": {
+      "data_volume": 2979937678828.0,
+      "downloads": 3792,
+      "unique_downloads": 1898,
+      "unique_views": 865,
+      "views": 990
+    },
+    "this_version": {
+      "data_volume": 2979937678828.0,
+      "downloads": 3792,
+      "unique_downloads": 1898,
+      "unique_views": 865,
+      "views": 990
+    }
+  },
+  "status": "published",
+  "swh": {},
+  "updated": "2025-05-13T10:48:33.059540+00:00",
+  "versions": {
+    "index": 1,
+    "is_latest": true
+  }
+}
