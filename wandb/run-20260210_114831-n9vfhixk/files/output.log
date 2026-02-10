@@ -1,0 +1,31 @@
+Preparing 100 examples for Audio Flamingo...
+Preparing AudioFlamingo input ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Prepared input JSON:
+results/mcq-order/audio-flamingo-3/20260210_104834/workdir/audioflamingo_input.j
+son
+Prepared mapping JSON:
+results/mcq-order/audio-flamingo-3/20260210_104834/workdir/audioflamingo_mapping
+.json
+$ torchrun --nproc-per-node=1 -m llava.cli.infer_batch --model-base
+nvidia/audio-flamingo-3 --json-path
+/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_1
+04834/workdir/audioflamingo_input.json --output-dir
+/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_1
+04834/audioflamingo_outputs --batch-size 2 --generation-config
+{"max_new_tokens": 16} --overwrite
+                      MCQ-ORDER Audio Flamingo summary
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Property            ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Task ID             │ MCQ-ORDER                                          │
+│ Model               │ audio-flamingo-3                                   │
+│ Model base          │ nvidia/audio-flamingo-3                            │
+│ Examples            │ 100                                                │
+│ Correct             │ 0                                                  │
+│ Accuracy            │ 0.0000                                             │
+│ Parse invalid       │ 0                                                  │
+│ Missing predictions │ 100                                                │
+│ Elapsed (s)         │ 43.5161                                            │
+│ Avg latency (ms)    │ 435.1607                                           │
+│ Run directory       │ results/mcq-order/audio-flamingo-3/20260210_104834 │
+└─────────────────────┴────────────────────────────────────────────────────┘

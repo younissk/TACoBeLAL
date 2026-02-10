@@ -190,6 +190,7 @@ def prepare_audioflamingo_input(
     audio_root: Path,
     work_dir: Path,
 ) -> tuple[Path, Path, dict[str, Any]]:
+    work_dir = work_dir.resolve()
     links_dir = work_dir / "audio_links"
     links_dir.mkdir(parents=True, exist_ok=True)
 
@@ -284,6 +285,8 @@ def run_audioflamingo_inference(
             "Run setup first (make download-audioflamingo)."
         )
 
+    input_json_path = input_json_path.resolve()
+    output_dir = output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
     generation_config = json.dumps({"max_new_tokens": max_new_tokens})

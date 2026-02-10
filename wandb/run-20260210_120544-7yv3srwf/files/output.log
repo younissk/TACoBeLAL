@@ -1,0 +1,32 @@
+Preparing 100 examples for Audio Flamingo...
+Preparing AudioFlamingo input ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Prepared input JSON:
+/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_1
+10548/workdir/audioflamingo_input.json
+Prepared mapping JSON:
+/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_1
+10548/workdir/audioflamingo_mapping.json
+$ torchrun --nproc-per-node=1 -m llava.cli.infer_batch --model-base
+nvidia/audio-flamingo-3 --json-path
+/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_1
+10548/workdir/audioflamingo_input.json --output-dir
+/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_1
+10548/audioflamingo_outputs --batch-size 2 --generation-config
+{"max_new_tokens": 16} --overwrite
+wandb: WARNING Tried to log to step 1 that is less than the current step 3. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+                      MCQ-ORDER Audio Flamingo summary
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Property            ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Task ID             │ MCQ-ORDER                                          │
+│ Model               │ audio-flamingo-3                                   │
+│ Model base          │ nvidia/audio-flamingo-3                            │
+│ Examples            │ 100                                                │
+│ Correct             │ 34                                                 │
+│ Accuracy            │ 0.3400                                             │
+│ Parse invalid       │ 0                                                  │
+│ Missing predictions │ 0                                                  │
+│ Elapsed (s)         │ 89.6326                                            │
+│ Avg latency (ms)    │ 896.3264                                           │
+│ Run directory       │ results/mcq-order/audio-flamingo-3/20260210_110548 │
+└─────────────────────┴────────────────────────────────────────────────────┘

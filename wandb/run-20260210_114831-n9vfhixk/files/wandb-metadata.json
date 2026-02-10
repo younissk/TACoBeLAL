@@ -1,0 +1,102 @@
+{
+  "os": "Linux-4.18.0-477.10.1.el8_8.x86_64-x86_64-with-glibc2.28",
+  "python": "CPython 3.13.12",
+  "startedAt": "2026-02-10T10:48:31.334320Z",
+  "args": [
+    "--dataset",
+    "data/mcq_event_timeline_strong.jsonl",
+    "--audio-root",
+    "data/audio",
+    "--audioflamingo-repo",
+    "external/audio-flamingo",
+    "--model-base",
+    "nvidia/audio-flamingo-3",
+    "--num-gpus",
+    "1",
+    "--batch-size",
+    "2",
+    "--max-new-tokens",
+    "16",
+    "--limit",
+    "100",
+    "--results-root",
+    "results",
+    "--wandb",
+    "--wandb-project",
+    "tacobelal",
+    "--wandb-log-every",
+    "50"
+  ],
+  "program": "/home/fs73062/younissk01/TACoBeLAL/src/utils/evaluate_mcq_order_audioflamingo.py",
+  "codePath": "src/utils/evaluate_mcq_order_audioflamingo.py",
+  "codePathLocal": "src/utils/evaluate_mcq_order_audioflamingo.py",
+  "git": {
+    "remote": "https://github.com/younissk/TACoBeLAL.git",
+    "commit": "8437e1c2f89e35eeeaddc70f99ec1eecd693e05d"
+  },
+  "email": "younisskandah@gmail.com",
+  "root": "/home/fs73062/younissk01/TACoBeLAL",
+  "host": "n3066-007",
+  "executable": "/home/fs73062/younissk01/TACoBeLAL/.venv/bin/python3",
+  "cpu_count": 16,
+  "cpu_count_logical": 32,
+  "gpu": "NVIDIA A40",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "1889035878400",
+      "used": "666711883776"
+    }
+  },
+  "memory": {
+    "total": "270306709504"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA A40",
+      "memoryTotal": "48305799168",
+      "cudaCores": 10752,
+      "architecture": "Ampere",
+      "uuid": "GPU-5b7e1bfb-26d5-c7d4-45f3-28c79ab2ea3f"
+    }
+  ],
+  "cudaVersion": "12.3",
+  "slurm": {
+    "cluster_name": "vsc5",
+    "conf": "/var/spool/slurm/slurmd/conf-cache/slurm.conf",
+    "cpus_on_node": "16",
+    "gpus_on_node": "1",
+    "gtids": "0",
+    "job_account": "p73062",
+    "job_cpus_per_node": "16",
+    "job_gid": "73062",
+    "job_gpus": "1",
+    "job_id": "7229235",
+    "job_name": "mcq-order-af3",
+    "job_nodelist": "n3066-007",
+    "job_num_nodes": "1",
+    "job_partition": "zen2_0256_a40x2",
+    "job_qos": "33 x a40 nodes with 32 cores each",
+    "job_uid": "78098",
+    "job_user": "younissk01",
+    "jobid": "7229235",
+    "localid": "0",
+    "mem_per_node": "125000",
+    "nnodes": "1",
+    "node_aliases": "(null)",
+    "nodeid": "0",
+    "nodelist": "n3066-007",
+    "nprocs": "8",
+    "ntasks": "8",
+    "prio_process": "0",
+    "procid": "0",
+    "submit_dir": "/home/fs73062/younissk01/TACoBeLAL",
+    "submit_host": "l50.vsc.xcat",
+    "task_pid": "2182913",
+    "tasks_per_node": "8",
+    "topology_addr": "n3066-007",
+    "topology_addr_pattern": "node",
+    "working_cluster": "vsc5:slurm5ctld.vsc5.prov:7817:9728:109"
+  },
+  "writerId": "fcj1um5dt4af27k06xv548a1eb1z1ih0"
+}

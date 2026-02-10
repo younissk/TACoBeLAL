@@ -1,0 +1,14 @@
+Preparing 100 examples for Audio Flamingo...
+Preparing AudioFlamingo input ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Prepared input JSON:
+results/mcq-order/audio-flamingo-3/20260210_103638/workdir/audioflamingo_input.j
+son
+Prepared mapping JSON:
+results/mcq-order/audio-flamingo-3/20260210_103638/workdir/audioflamingo_mapping
+.json
+$ torchrun --nproc-per-node=1 -m llava.cli.infer_batch --model-base
+nvidia/audio-flamingo-3 --json-path
+results/mcq-order/audio-flamingo-3/20260210_103638/workdir/audioflamingo_input.j
+son --output-dir
+results/mcq-order/audio-flamingo-3/20260210_103638/audioflamingo_outputs
+--batch-size 2 --generation-config {"max_new_tokens": 16} --overwrite

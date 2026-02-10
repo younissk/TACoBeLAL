@@ -3,6 +3,7 @@
 /results
 /external
 /logs
+/wandb
 
 # Python bytecode & build
 __pycache__/

@@ -12,6 +12,15 @@ set -euo pipefail
 
 cd "${SLURM_SUBMIT_DIR}"
 
+# Ensure CUDA toolkit is available for DeepSpeed ops.
+if [ -f /etc/profile.d/modules.sh ]; then
+  source /etc/profile.d/modules.sh
+fi
+if command -v module >/dev/null 2>&1; then
+  module load cuda/11.8.0-gcc-12.2.0-bplw5nu || true
+  module load ffmpeg/4.4.1-gcc-12.2.0-d54gcg6 || true
+fi
+
 # Optional cluster cache dirs (recommended on shared storage):
 # export HF_HOME=/path/to/shared/hf_cache
 # export TRANSFORMERS_CACHE=/path/to/shared/hf_cache
