@@ -2,10 +2,10 @@
 # Example SLURM script for MCQ-ORDER Audio Flamingo smoke/full runs on 1x A40.
 
 #SBATCH --job-name=mcq-order-af3
-#SBATCH --partition=gpu
-#SBATCH --gres=gpu:1
+#SBATCH --partition=zen2_0256_a40x2
+#SBATCH --qos=zen2_0256_a40x2
+#SBATCH --gres=gpu:1          # half-node: 1x A40 GPU + associated memory/CPUs
 #SBATCH --cpus-per-task=8
-#SBATCH --mem=64G
 #SBATCH --time=08:00:00
 #SBATCH --output=logs/%x-%j.out
 
