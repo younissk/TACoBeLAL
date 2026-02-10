@@ -1,5 +1,8 @@
 # Project data (large or generated)
 /data
+/results
+/external
+/logs
 
 # Python bytecode & build
 __pycache__/
