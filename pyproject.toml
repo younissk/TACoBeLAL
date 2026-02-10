@@ -10,6 +10,7 @@ dependencies = [
     "certifi>=2024.0.0",
     "numpy>=1.26.0",
     "tqdm>=4.66.0",
+    "loguru>=0.7.0",
     "torch==2.7.0",
 ]
 
