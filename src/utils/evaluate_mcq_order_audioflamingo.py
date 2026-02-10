@@ -287,10 +287,13 @@ def run_audioflamingo_inference(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     generation_config = json.dumps({"max_new_tokens": max_new_tokens})
+    # Use module invocation so that the Audio Flamingo repo root stays on sys.path
+    # and the local `llava` package can be imported correctly.
     command = [
         "torchrun",
         f"--nproc-per-node={num_gpus}",
-        "llava/cli/infer_batch.py",
+        "-m",
+        "llava.cli.infer_batch",
         "--model-base",
         model_base,
         "--json-path",
