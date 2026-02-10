@@ -143,6 +143,8 @@ make eval-mcq-order-random
 make eval-mcq-order-openai
 make eval-mcq-order-qwen2-audio-smoke
 make eval-mcq-order-qwen2-audio-full
+make eval-mcq-order-qwen2-5-omni-smoke
+make eval-mcq-order-qwen2-5-omni-full
 make eval-mcq-order-audioflamingo-smoke
 make eval-mcq-order-audioflamingo-full
 ```
@@ -268,6 +270,44 @@ make eval-mcq-order-qwen2-audio-smoke \
 
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_qwen2_audio_a40.slurm`
+
+### Run audio-capable LALM baseline (Qwen2.5-Omni)
+
+Smoke test (default 100 examples):
+
+```bash
+make eval-mcq-order-qwen2-5-omni-smoke
+```
+
+Full run:
+
+```bash
+make eval-mcq-order-qwen2-5-omni-full
+```
+
+Default configuration:
+- model base: `Qwen/Qwen2.5-Omni-7B`
+- batch size: `1` (conservative default)
+- max new tokens: `16`
+- dtype: `float16`
+- device map: `auto`
+
+Runtime dependency note:
+- this target runs with `uv run --with "transformers>=4.57.0"` so it can use Qwen2.5-Omni APIs without changing the project's pinned base dependencies used by other evaluators.
+
+Useful overrides:
+
+```bash
+make eval-mcq-order-qwen2-5-omni-smoke \
+  QWEN2_5_OMNI_MODEL_ID=Qwen/Qwen2.5-Omni-7B \
+  QWEN2_5_OMNI_BATCH_SIZE=1 \
+  QWEN2_5_OMNI_DTYPE=bfloat16 \
+  QWEN2_5_OMNI_ATTN=flash_attention_2 \
+  QWEN2_5_OMNI_SMOKE_LIMIT=200
+```
+
+SLURM template for cluster runs:
+- `scripts/slurm/eval_mcq_order_qwen2_5_omni_a40.slurm`
 
 ## Task B: Temporal grounding
 

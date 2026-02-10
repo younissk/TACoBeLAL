@@ -13,6 +13,8 @@
 	eval-mcq-order-llama \
 	eval-mcq-order-qwen2-audio-smoke \
 	eval-mcq-order-qwen2-audio-full \
+	eval-mcq-order-qwen2-5-omni-smoke \
+	eval-mcq-order-qwen2-5-omni-full \
 	eval-mcq-order-audioflamingo-smoke \
 	eval-mcq-order-audioflamingo-full \
 	test
@@ -38,6 +40,16 @@ QWEN2_AUDIO_MAX_NEW_TOKENS ?= 16
 QWEN2_AUDIO_DTYPE ?= float16
 QWEN2_AUDIO_DEVICE_MAP ?= auto
 QWEN2_AUDIO_SMOKE_LIMIT ?= 100
+
+QWEN2_5_OMNI_MODEL_ID ?= Qwen/Qwen2.5-Omni-7B
+QWEN2_5_OMNI_BATCH_SIZE ?= 1
+QWEN2_5_OMNI_MAX_NEW_TOKENS ?= 16
+QWEN2_5_OMNI_DTYPE ?= float16
+QWEN2_5_OMNI_DEVICE_MAP ?= auto
+QWEN2_5_OMNI_ATTN ?=
+QWEN2_5_OMNI_SMOKE_LIMIT ?= 100
+QWEN2_5_OMNI_TRANSFORMERS ?= transformers>=4.57.0
+QWEN2_5_OMNI_ATTN_ARG := $(if $(QWEN2_5_OMNI_ATTN),--attn-implementation $(QWEN2_5_OMNI_ATTN),)
 
 QWEN_MODEL_ID ?= Qwen/Qwen2.5-7B-Instruct
 LLAMA_MODEL_ID ?= meta-llama/Llama-3.1-8B-Instruct
@@ -174,6 +186,35 @@ eval-mcq-order-qwen2-audio-full:
 		--max-new-tokens $(QWEN2_AUDIO_MAX_NEW_TOKENS) \
 		--dtype $(QWEN2_AUDIO_DTYPE) \
 		--device-map $(QWEN2_AUDIO_DEVICE_MAP) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-qwen2-5-omni-smoke:
+	uv sync --extra tracking
+	uv run --with "$(QWEN2_5_OMNI_TRANSFORMERS)" python src/utils/evaluate_mcq_order_qwen2_5_omni.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(QWEN2_5_OMNI_MODEL_ID) \
+		--batch-size $(QWEN2_5_OMNI_BATCH_SIZE) \
+		--max-new-tokens $(QWEN2_5_OMNI_MAX_NEW_TOKENS) \
+		--dtype $(QWEN2_5_OMNI_DTYPE) \
+		--device-map $(QWEN2_5_OMNI_DEVICE_MAP) \
+		$(QWEN2_5_OMNI_ATTN_ARG) \
+		--limit $(QWEN2_5_OMNI_SMOKE_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-qwen2-5-omni-full:
+	uv sync --extra tracking
+	uv run --with "$(QWEN2_5_OMNI_TRANSFORMERS)" python src/utils/evaluate_mcq_order_qwen2_5_omni.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(QWEN2_5_OMNI_MODEL_ID) \
+		--batch-size $(QWEN2_5_OMNI_BATCH_SIZE) \
+		--max-new-tokens $(QWEN2_5_OMNI_MAX_NEW_TOKENS) \
+		--dtype $(QWEN2_5_OMNI_DTYPE) \
+		--device-map $(QWEN2_5_OMNI_DEVICE_MAP) \
+		$(QWEN2_5_OMNI_ATTN_ARG) \
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 
