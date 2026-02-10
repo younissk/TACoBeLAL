@@ -544,9 +544,9 @@ def main(
         help="Root directory for evaluation outputs.",
     ),
     limit: int | None = typer.Option(
-        100,
+        None,
         "--limit",
-        help="Number of examples to evaluate (default smoke test size). Omit for full dataset.",
+        help="Number of examples to evaluate (omit for full dataset).",
     ),
     num_gpus: int = typer.Option(
         1,
