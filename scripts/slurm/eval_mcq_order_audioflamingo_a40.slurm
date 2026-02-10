@@ -5,7 +5,6 @@
 #SBATCH --partition=zen2_0256_a40x2
 #SBATCH --qos=zen2_0256_a40x2
 #SBATCH --gres=gpu:1          # half-node: 1x A40 GPU + associated memory/CPUs
-#SBATCH --cpus-per-task=8
 #SBATCH --time=08:00:00
 #SBATCH --output=logs/%x-%j.out
 
