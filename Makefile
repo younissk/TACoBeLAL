@@ -8,13 +8,9 @@
 	download-audioflamingo \
 	setup-from-scratch \
 	eval-mcq-order-random \
-	eval-mcq-order-random-wandb \
 	eval-mcq-order-openai \
-	eval-mcq-order-openai-wandb \
 	eval-mcq-order-audioflamingo-smoke \
-	eval-mcq-order-audioflamingo-smoke-wandb \
 	eval-mcq-order-audioflamingo-full \
-	eval-mcq-order-audioflamingo-full-wandb \
 	test
 
 DATA_DIR ?= data
@@ -69,33 +65,14 @@ download-audioflamingo:
 setup-from-scratch: install-dev install-llm install-tracking download-dataset extract-audio build-mcq-dataset download-audioflamingo
 
 eval-mcq-order-random:
-	uv run python src/utils/evaluate_mcq_order.py --dataset $(MCQ_DATASET) --model random --results-root $(RESULTS_DIR)
-
-eval-mcq-order-random-wandb:
 	uv sync --extra tracking
 	uv run python src/utils/evaluate_mcq_order.py --dataset $(MCQ_DATASET) --model random --results-root $(RESULTS_DIR) $(WAND_ARGS)
 
 eval-mcq-order-openai:
-	uv sync --extra llm
-	uv run python src/utils/evaluate_mcq_order.py --dataset $(MCQ_DATASET) --model llm-openai --openai-model gpt-4o-mini --temperature 0 --results-root $(RESULTS_DIR)
-
-eval-mcq-order-openai-wandb:
 	uv sync --extra llm --extra tracking
 	uv run python src/utils/evaluate_mcq_order.py --dataset $(MCQ_DATASET) --model llm-openai --openai-model gpt-4o-mini --temperature 0 --results-root $(RESULTS_DIR) $(WAND_ARGS)
 
 eval-mcq-order-audioflamingo-smoke:
-	uv run python src/utils/evaluate_mcq_order_audioflamingo.py \
-		--dataset $(MCQ_DATASET) \
-		--audio-root $(AUDIO_ROOT) \
-		--audioflamingo-repo $(AF_HOME) \
-		--model-base $(AF_MODEL_BASE) \
-		--num-gpus $(AF_NUM_GPUS) \
-		--batch-size $(AF_BATCH_SIZE) \
-		--max-new-tokens $(AF_MAX_NEW_TOKENS) \
-		--limit $(AF_SMOKE_LIMIT) \
-		--results-root $(RESULTS_DIR)
-
-eval-mcq-order-audioflamingo-smoke-wandb:
 	uv sync --extra tracking
 	uv run python src/utils/evaluate_mcq_order_audioflamingo.py \
 		--dataset $(MCQ_DATASET) \
@@ -110,17 +87,6 @@ eval-mcq-order-audioflamingo-smoke-wandb:
 		$(WAND_ARGS)
 
 eval-mcq-order-audioflamingo-full:
-	uv run python src/utils/evaluate_mcq_order_audioflamingo.py \
-		--dataset $(MCQ_DATASET) \
-		--audio-root $(AUDIO_ROOT) \
-		--audioflamingo-repo $(AF_HOME) \
-		--model-base $(AF_MODEL_BASE) \
-		--num-gpus $(AF_NUM_GPUS) \
-		--batch-size $(AF_BATCH_SIZE) \
-		--max-new-tokens $(AF_MAX_NEW_TOKENS) \
-		--results-root $(RESULTS_DIR)
-
-eval-mcq-order-audioflamingo-full-wandb:
 	uv sync --extra tracking
 	uv run python src/utils/evaluate_mcq_order_audioflamingo.py \
 		--dataset $(MCQ_DATASET) \

@@ -305,8 +305,8 @@ def main(
         min=1,
     ),
     wandb: bool = typer.Option(
-        False,
-        "--wandb",
+        True,
+        "--wandb/--no-wandb",
         help="Enable live and final logging to Weights & Biases.",
     ),
     wandb_project: str = typer.Option(

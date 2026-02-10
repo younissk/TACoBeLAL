@@ -114,11 +114,13 @@ export WANDB_API_KEY=your_wandb_key
 W&B-enabled targets:
 
 ```bash
-make eval-mcq-order-random-wandb
-make eval-mcq-order-openai-wandb
-make eval-mcq-order-audioflamingo-smoke-wandb
-make eval-mcq-order-audioflamingo-full-wandb
+make eval-mcq-order-random
+make eval-mcq-order-openai
+make eval-mcq-order-audioflamingo-smoke
+make eval-mcq-order-audioflamingo-full
 ```
+
+All standard evaluation targets now log to W&B by default.
 
 These log:
 - live progress (`accuracy_so_far`, progress fraction, per-step correctness/latency)
@@ -128,11 +130,18 @@ These log:
 Optional W&B Make variables:
 
 ```bash
-make eval-mcq-order-audioflamingo-smoke-wandb \
+make eval-mcq-order-audioflamingo-smoke \
   WANDB_PROJECT=tacobelal \
   WANDB_ENTITY=your_team \
   WANDB_LOG_EVERY=25 \
   WANDB_RUN_NAME=af3_smoke_a40
+```
+
+If you need to disable W&B for a one-off run:
+
+```bash
+uv run python src/utils/evaluate_mcq_order.py --no-wandb ...
+uv run python src/utils/evaluate_mcq_order_audioflamingo.py --no-wandb ...
 ```
 
 ### Run audio-capable LALM baseline (Audio Flamingo 3)

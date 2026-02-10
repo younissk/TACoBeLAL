@@ -22,7 +22,8 @@ make setup-from-scratch
 
 # 2) Run smoke test (100 examples by default)
 make eval-mcq-order-audioflamingo-smoke
-# make eval-mcq-order-audioflamingo-smoke-wandb WANDB_PROJECT=tacobelal WANDB_ENTITY=your_team
+# (W&B logging is on by default; override project/entity as needed)
+# make eval-mcq-order-audioflamingo-smoke WANDB_PROJECT=tacobelal WANDB_ENTITY=your_team
 
 # 3) Run full benchmark (uncomment when ready)
 # make eval-mcq-order-audioflamingo-full
