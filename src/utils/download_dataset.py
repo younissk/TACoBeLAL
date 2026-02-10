@@ -3,12 +3,14 @@
 import hashlib
 import json
 import os
+import ssl
 import sys
 import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, Iterable, Tuple
 
+import certifi
 import typer
 from rich.console import Console
 from rich.progress import (
@@ -91,10 +93,19 @@ def _download_file_with_progress(
         console=console,
     )
 
+    # Use certifi's CA bundle to avoid SSL CERTIFICATE_VERIFY_FAILED on environments
+    # where Python's default CA paths do not include Zenodo's issuing CA.
+    # See: https://docs.python.org/3/library/urllib.request.html (credibility 9/10 – official urllib docs),
+    # and https://stackoverflow.com/questions/33745808/using-certifi-module-with-urllib2
+    # (credibility 8/10 – widely adopted pattern consistent with urllib's API).
+    context = ssl.create_default_context(cafile=certifi.where())
+
     with progress:
         task = progress.add_task(f"[cyan]{filename}", total=total)
         try:
-            with urllib.request.urlopen(url) as response, open(dest_path, "wb") as out_file:
+            with urllib.request.urlopen(url, context=context) as response, open(
+                dest_path, "wb"
+            ) as out_file:
                 while True:
                     chunk = response.read(chunk_size)
                     if not chunk:
