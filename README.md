@@ -141,6 +141,8 @@ W&B-enabled targets:
 ```bash
 make eval-mcq-order-random
 make eval-mcq-order-openai
+make eval-mcq-order-qwen2-audio-smoke
+make eval-mcq-order-qwen2-audio-full
 make eval-mcq-order-audioflamingo-smoke
 make eval-mcq-order-audioflamingo-full
 ```
@@ -232,6 +234,40 @@ make eval-mcq-order-audioflamingo-smoke AF_NUM_GPUS=1 AF_BATCH_SIZE=3 AF_SMOKE_L
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_audioflamingo_a40.slurm`
 - `scripts/slurm/eval_mcq_order_text_llm_a40.slurm`
+
+### Run audio-capable LALM baseline (Qwen2-Audio)
+
+Smoke test (default 100 examples):
+
+```bash
+make eval-mcq-order-qwen2-audio-smoke
+```
+
+Full run:
+
+```bash
+make eval-mcq-order-qwen2-audio-full
+```
+
+Default configuration:
+- model base: `Qwen/Qwen2-Audio-7B-Instruct`
+- batch size: `2`
+- max new tokens: `16`
+- dtype: `float16`
+- device map: `auto`
+
+Useful overrides:
+
+```bash
+make eval-mcq-order-qwen2-audio-smoke \
+  QWEN2_AUDIO_MODEL_ID=Qwen/Qwen2-Audio-7B-Instruct \
+  QWEN2_AUDIO_BATCH_SIZE=1 \
+  QWEN2_AUDIO_DTYPE=bfloat16 \
+  QWEN2_AUDIO_SMOKE_LIMIT=200
+```
+
+SLURM template for cluster runs:
+- `scripts/slurm/eval_mcq_order_qwen2_audio_a40.slurm`
 
 ## Task B: Temporal grounding
 

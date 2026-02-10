@@ -11,6 +11,8 @@
 	eval-mcq-order-openai \
 	eval-mcq-order-qwen \
 	eval-mcq-order-llama \
+	eval-mcq-order-qwen2-audio-smoke \
+	eval-mcq-order-qwen2-audio-full \
 	eval-mcq-order-audioflamingo-smoke \
 	eval-mcq-order-audioflamingo-full \
 	test
@@ -29,6 +31,13 @@ AF_NUM_GPUS ?= 1
 AF_BATCH_SIZE ?= 2
 AF_MAX_NEW_TOKENS ?= 16
 AF_SMOKE_LIMIT ?= 100
+
+QWEN2_AUDIO_MODEL_ID ?= Qwen/Qwen2-Audio-7B-Instruct
+QWEN2_AUDIO_BATCH_SIZE ?= 2
+QWEN2_AUDIO_MAX_NEW_TOKENS ?= 16
+QWEN2_AUDIO_DTYPE ?= float16
+QWEN2_AUDIO_DEVICE_MAP ?= auto
+QWEN2_AUDIO_SMOKE_LIMIT ?= 100
 
 QWEN_MODEL_ID ?= Qwen/Qwen2.5-7B-Instruct
 LLAMA_MODEL_ID ?= meta-llama/Llama-3.1-8B-Instruct
@@ -138,6 +147,33 @@ eval-mcq-order-audioflamingo-full:
 		--num-gpus $(AF_NUM_GPUS) \
 		--batch-size $(AF_BATCH_SIZE) \
 		--max-new-tokens $(AF_MAX_NEW_TOKENS) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-qwen2-audio-smoke:
+	uv sync --extra tracking
+	uv run python src/utils/evaluate_mcq_order_qwen2_audio.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(QWEN2_AUDIO_MODEL_ID) \
+		--batch-size $(QWEN2_AUDIO_BATCH_SIZE) \
+		--max-new-tokens $(QWEN2_AUDIO_MAX_NEW_TOKENS) \
+		--dtype $(QWEN2_AUDIO_DTYPE) \
+		--device-map $(QWEN2_AUDIO_DEVICE_MAP) \
+		--limit $(QWEN2_AUDIO_SMOKE_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-qwen2-audio-full:
+	uv sync --extra tracking
+	uv run python src/utils/evaluate_mcq_order_qwen2_audio.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(QWEN2_AUDIO_MODEL_ID) \
+		--batch-size $(QWEN2_AUDIO_BATCH_SIZE) \
+		--max-new-tokens $(QWEN2_AUDIO_MAX_NEW_TOKENS) \
+		--dtype $(QWEN2_AUDIO_DTYPE) \
+		--device-map $(QWEN2_AUDIO_DEVICE_MAP) \
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 
