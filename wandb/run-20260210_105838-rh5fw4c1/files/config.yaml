@@ -1,0 +1,63 @@
+_wandb:
+    value:
+        cli_version: 0.24.2
+        e:
+            5q49wvtuuppfqy3wtd5mmot6dhvmib3q:
+                args:
+                    - --dataset
+                    - data/mcq_event_timeline_strong.jsonl
+                    - --model
+                    - random
+                    - --results-root
+                    - results
+                    - --wandb
+                    - --wandb-project
+                    - tacobelal
+                    - --wandb-log-every
+                    - "50"
+                codePath: src/utils/evaluate_mcq_order.py
+                codePathLocal: src/utils/evaluate_mcq_order.py
+                cpu_count: 64
+                cpu_count_logical: 128
+                disk:
+                    /:
+                        total: "1886709780480"
+                        used: "23635533824"
+                email: younisskandah@gmail.com
+                executable: /home/fs73062/younissk01/TACoBeLAL/.venv/bin/python3
+                git:
+                    commit: 5b43b5b1b4754139238b75368a7a7828d1aabc96
+                    remote: https://github.com/younissk/TACoBeLAL.git
+                host: l50.vsc.xcat
+                memory:
+                    total: "269723402240"
+                os: Linux-4.18.0-477.27.2.el8_8.x86_64-x86_64-with-glibc2.28
+                program: /home/fs73062/younissk01/TACoBeLAL/src/utils/evaluate_mcq_order.py
+                python: CPython 3.13.12
+                root: /home/fs73062/younissk01/TACoBeLAL
+                startedAt: "2026-02-10T09:58:38.208898Z"
+                writerId: 5q49wvtuuppfqy3wtd5mmot6dhvmib3q
+        m: []
+        python_version: 3.13.12
+        t:
+            "3":
+                - 2
+                - 15
+                - 16
+                - 61
+                - 62
+            "4": 3.13.12
+            "5": 0.24.2
+            "12": 0.24.2
+            "13": linux-x86_64
+dataset:
+    value: data/mcq_event_timeline_strong.jsonl
+limit:
+    value: null
+model:
+    value: random
+model_config:
+    value:
+        seed: 7
+task_id:
+    value: MCQ-ORDER
