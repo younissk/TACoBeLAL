@@ -1,0 +1,12 @@
+{
+  "task_id": "MCQ-ORDER",
+  "dataset": "data/mcq_event_timeline_strong.jsonl",
+  "audio_root": "data/audio",
+  "audioflamingo_repo": "external/audio-flamingo",
+  "model_base": "nvidia/audio-flamingo-3",
+  "limit": null,
+  "num_gpus": 1,
+  "batch_size": 2,
+  "max_new_tokens": 16,
+  "think_mode": false
+}

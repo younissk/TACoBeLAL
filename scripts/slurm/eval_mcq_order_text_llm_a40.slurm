@@ -28,6 +28,8 @@ fi
 
 # qwen (default) or llama
 MODEL_FAMILY="${MODEL_FAMILY:-qwen}"
+# Set FULL_BENCHMARK=1 to run without --limit
+FULL_BENCHMARK="${FULL_BENCHMARK:-0}"
 
 # Install runtime deps and ensure dataset exists.
 make install-llm
@@ -35,16 +37,18 @@ make install-tracking
 make download-dataset
 make build-mcq-dataset
 
+if [ "${FULL_BENCHMARK}" = "1" ]; then
+  export LOCAL_LIMIT=
+fi
+
 if [ "${MODEL_FAMILY}" = "llama" ]; then
   make eval-mcq-order-llama \
     WANDB_PROJECT="${WANDB_PROJECT:-tacobelal}" \
     WANDB_ENTITY="${WANDB_ENTITY:-}" \
-    WANDB_RUN_NAME="${WANDB_RUN_NAME:-llama_mcq_order_a40}" \
-    LOCAL_LIMIT="${LOCAL_LIMIT:-100}"
+    WANDB_RUN_NAME="${WANDB_RUN_NAME:-llama_mcq_order_a40}"
 else
   make eval-mcq-order-qwen \
     WANDB_PROJECT="${WANDB_PROJECT:-tacobelal}" \
     WANDB_ENTITY="${WANDB_ENTITY:-}" \
-    WANDB_RUN_NAME="${WANDB_RUN_NAME:-qwen_mcq_order_a40}" \
-    LOCAL_LIMIT="${LOCAL_LIMIT:-100}"
+    WANDB_RUN_NAME="${WANDB_RUN_NAME:-qwen_mcq_order_a40}"
 fi

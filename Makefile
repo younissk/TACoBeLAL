@@ -38,6 +38,7 @@ LOCAL_MAX_NEW_TOKENS ?= 16
 LOCAL_TEMPERATURE ?= 0.0
 LOCAL_TOP_P ?= 1.0
 LOCAL_LIMIT ?= 100
+LIMIT_ARG := $(if $(LOCAL_LIMIT),--limit $(LOCAL_LIMIT),)
 
 WANDB_PROJECT ?= tacobelal
 WANDB_ENTITY ?=
@@ -94,7 +95,7 @@ eval-mcq-order-qwen:
 		--local-max-new-tokens $(LOCAL_MAX_NEW_TOKENS) \
 		--local-temperature $(LOCAL_TEMPERATURE) \
 		--local-top-p $(LOCAL_TOP_P) \
-		--limit $(LOCAL_LIMIT) \
+		$(LIMIT_ARG) \
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 
@@ -109,7 +110,7 @@ eval-mcq-order-llama:
 		--local-max-new-tokens $(LOCAL_MAX_NEW_TOKENS) \
 		--local-temperature $(LOCAL_TEMPERATURE) \
 		--local-top-p $(LOCAL_TOP_P) \
-		--limit $(LOCAL_LIMIT) \
+		$(LIMIT_ARG) \
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 

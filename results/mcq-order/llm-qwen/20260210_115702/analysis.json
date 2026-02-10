@@ -1,0 +1,177 @@
+{
+  "task_id": "MCQ-ORDER",
+  "model_name": "llm-qwen",
+  "examples": 100,
+  "correct": 28,
+  "accuracy": 0.28,
+  "labels": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ],
+  "answer_distribution": [
+    {
+      "label": "A",
+      "count": 33,
+      "rate": 0.33
+    },
+    {
+      "label": "B",
+      "count": 35,
+      "rate": 0.35
+    },
+    {
+      "label": "C",
+      "count": 14,
+      "rate": 0.14
+    },
+    {
+      "label": "D",
+      "count": 13,
+      "rate": 0.13
+    },
+    {
+      "label": "E",
+      "count": 5,
+      "rate": 0.05
+    },
+    {
+      "label": "F",
+      "count": 0,
+      "rate": 0.0
+    }
+  ],
+  "prediction_distribution": [
+    {
+      "label": "A",
+      "count": 28,
+      "rate": 0.28
+    },
+    {
+      "label": "B",
+      "count": 33,
+      "rate": 0.33
+    },
+    {
+      "label": "C",
+      "count": 22,
+      "rate": 0.22
+    },
+    {
+      "label": "D",
+      "count": 12,
+      "rate": 0.12
+    },
+    {
+      "label": "E",
+      "count": 4,
+      "rate": 0.04
+    },
+    {
+      "label": "F",
+      "count": 1,
+      "rate": 0.01
+    }
+  ],
+  "by_answer_label": [
+    {
+      "label": "A",
+      "support": 33,
+      "correct": 10,
+      "accuracy": 0.30303030303030304,
+      "predicted_count": 28,
+      "prediction_rate": 0.28
+    },
+    {
+      "label": "B",
+      "support": 35,
+      "correct": 10,
+      "accuracy": 0.2857142857142857,
+      "predicted_count": 33,
+      "prediction_rate": 0.33
+    },
+    {
+      "label": "C",
+      "support": 14,
+      "correct": 4,
+      "accuracy": 0.2857142857142857,
+      "predicted_count": 22,
+      "prediction_rate": 0.22
+    },
+    {
+      "label": "D",
+      "support": 13,
+      "correct": 3,
+      "accuracy": 0.23076923076923078,
+      "predicted_count": 12,
+      "prediction_rate": 0.12
+    },
+    {
+      "label": "E",
+      "support": 5,
+      "correct": 1,
+      "accuracy": 0.2,
+      "predicted_count": 4,
+      "prediction_rate": 0.04
+    },
+    {
+      "label": "F",
+      "support": 0,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 1,
+      "prediction_rate": 0.01
+    }
+  ],
+  "by_n_options": [
+    {
+      "n_options": 2,
+      "examples": 22,
+      "correct": 11,
+      "accuracy": 0.5
+    },
+    {
+      "n_options": 3,
+      "examples": 30,
+      "correct": 8,
+      "accuracy": 0.26666666666666666
+    },
+    {
+      "n_options": 4,
+      "examples": 22,
+      "correct": 6,
+      "accuracy": 0.2727272727272727
+    },
+    {
+      "n_options": 5,
+      "examples": 20,
+      "correct": 3,
+      "accuracy": 0.15
+    },
+    {
+      "n_options": 6,
+      "examples": 6,
+      "correct": 0,
+      "accuracy": 0.0
+    }
+  ],
+  "by_answer_type": [
+    {
+      "answer_type": "event",
+      "examples": 69,
+      "correct": 4,
+      "accuracy": 0.057971014492753624
+    },
+    {
+      "answer_type": "none",
+      "examples": 31,
+      "correct": 24,
+      "accuracy": 0.7741935483870968
+    }
+  ],
+  "answer_entropy": 2.053773817264922,
+  "prediction_entropy": 2.1418762960235616
+}

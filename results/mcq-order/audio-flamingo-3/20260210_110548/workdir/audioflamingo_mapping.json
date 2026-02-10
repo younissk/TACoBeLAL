@@ -1,0 +1,2434 @@
+{
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000000_100388.mp3__0.mp3": {
+    "index": 0,
+    "example_id": "100388.mp3__0",
+    "audio_filename": "100388.mp3",
+    "question": "What happens immediately after this event first appears: \"A river flows loudly outdoors.\"?",
+    "answer_label": "A",
+    "answer_text": "A bird tweets quietly and repeatedly outdoors.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A bird tweets quietly and repeatedly outdoors."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000001_100388.mp3__1.mp3": {
+    "index": 1,
+    "example_id": "100388.mp3__1",
+    "audio_filename": "100388.mp3",
+    "question": "What happens immediately after this event first appears: \"A bird tweets quietly and repeatedly outdoors.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A river flows loudly outdoors."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000002_100476.mp3__0.mp3": {
+    "index": 2,
+    "example_id": "100476.mp3__0",
+    "audio_filename": "100476.mp3",
+    "question": "What happens immediately after this event first appears: \"A saxophone plays a soft melody with oscillating volume.\"?",
+    "answer_label": "B",
+    "answer_text": "A saxophone plays a soft melody with varying volume and fades out.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A saxophone plays a soft melody with varying volume and fades out."
+      },
+      {
+        "label": "C",
+        "text": "A string is plucked repeatedly without pauses."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000003_100476.mp3__1.mp3": {
+    "index": 3,
+    "example_id": "100476.mp3__1",
+    "audio_filename": "100476.mp3",
+    "question": "What happens immediately after this event first appears: \"A saxophone plays a soft melody with varying volume and fades out.\"?",
+    "answer_label": "A",
+    "answer_text": "A string is plucked repeatedly without pauses.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A string is plucked repeatedly without pauses."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A saxophone plays a soft melody with oscillating volume."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000004_100476.mp3__2.mp3": {
+    "index": 4,
+    "example_id": "100476.mp3__2",
+    "audio_filename": "100476.mp3",
+    "question": "What happens immediately after this event first appears: \"A string is plucked repeatedly without pauses.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A saxophone plays a soft melody with oscillating volume."
+      },
+      {
+        "label": "C",
+        "text": "A saxophone plays a soft melody with varying volume and fades out."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000005_100481.mp3__0.mp3": {
+    "index": 5,
+    "example_id": "100481.mp3__0",
+    "audio_filename": "100481.mp3",
+    "question": "What happens immediately after this event first appears: \"Birds chirping in the distance.\"?",
+    "answer_label": "B",
+    "answer_text": "A motor is whirring consistently.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A bird chirps loudly."
+      },
+      {
+        "label": "B",
+        "text": "A motor is whirring consistently."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000006_100481.mp3__1.mp3": {
+    "index": 6,
+    "example_id": "100481.mp3__1",
+    "audio_filename": "100481.mp3",
+    "question": "What happens immediately after this event first appears: \"A motor is whirring consistently.\"?",
+    "answer_label": "A",
+    "answer_text": "A bird chirps loudly.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A bird chirps loudly."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "Birds chirping in the distance."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000007_100481.mp3__2.mp3": {
+    "index": 7,
+    "example_id": "100481.mp3__2",
+    "audio_filename": "100481.mp3",
+    "question": "What happens immediately after this event first appears: \"A bird chirps loudly.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Birds chirping in the distance."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A motor is whirring consistently."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000008_100489.mp3__0.mp3": {
+    "index": 8,
+    "example_id": "100489.mp3__0",
+    "audio_filename": "100489.mp3",
+    "question": "What happens immediately after this event first appears: \"A bell rings repeatedly in the background.\"?",
+    "answer_label": "D",
+    "answer_text": "Low-pitched engine running.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A scratching noise."
+      },
+      {
+        "label": "B",
+        "text": "A whistling sound is heard in the background."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "Low-pitched engine running."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000009_100489.mp3__1.mp3": {
+    "index": 9,
+    "example_id": "100489.mp3__1",
+    "audio_filename": "100489.mp3",
+    "question": "What happens immediately after this event first appears: \"Low-pitched engine running.\"?",
+    "answer_label": "A",
+    "answer_text": "A scratching noise.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A scratching noise."
+      },
+      {
+        "label": "B",
+        "text": "A whistling sound is heard in the background."
+      },
+      {
+        "label": "C",
+        "text": "A bell rings repeatedly in the background."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000010_100489.mp3__2.mp3": {
+    "index": 10,
+    "example_id": "100489.mp3__2",
+    "audio_filename": "100489.mp3",
+    "question": "What happens immediately after this event first appears: \"A scratching noise.\"?",
+    "answer_label": "C",
+    "answer_text": "A whistling sound is heard in the background.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A bell rings repeatedly in the background."
+      },
+      {
+        "label": "C",
+        "text": "A whistling sound is heard in the background."
+      },
+      {
+        "label": "D",
+        "text": "Low-pitched engine running."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000011_100489.mp3__3.mp3": {
+    "index": 11,
+    "example_id": "100489.mp3__3",
+    "audio_filename": "100489.mp3",
+    "question": "What happens immediately after this event first appears: \"A whistling sound is heard in the background.\"?",
+    "answer_label": "D",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Low-pitched engine running."
+      },
+      {
+        "label": "B",
+        "text": "A scratching noise."
+      },
+      {
+        "label": "C",
+        "text": "A bell rings repeatedly in the background."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000012_100491.mp3__0.mp3": {
+    "index": 12,
+    "example_id": "100491.mp3__0",
+    "audio_filename": "100491.mp3",
+    "question": "What happens immediately after this event first appears: \"The sound of air whooshing as a train passes by gradually increases.\"?",
+    "answer_label": "E",
+    "answer_text": "A continuous, rhythmic bell chime gradually increasing in volume.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A continuous and rhythmic bell chime gradually fading and decreasing."
+      },
+      {
+        "label": "C",
+        "text": "The whooshing sound of displaced air as a train passes by gradually fades."
+      },
+      {
+        "label": "D",
+        "text": "A brief burst of pressurized air or steam hissing."
+      },
+      {
+        "label": "E",
+        "text": "A continuous, rhythmic bell chime gradually increasing in volume."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000013_100491.mp3__1.mp3": {
+    "index": 13,
+    "example_id": "100491.mp3__1",
+    "audio_filename": "100491.mp3",
+    "question": "What happens immediately after this event first appears: \"A continuous, rhythmic bell chime gradually increasing in volume.\"?",
+    "answer_label": "E",
+    "answer_text": "A brief burst of pressurized air or steam hissing.",
+    "options": [
+      {
+        "label": "A",
+        "text": "The whooshing sound of displaced air as a train passes by gradually fades."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A continuous and rhythmic bell chime gradually fading and decreasing."
+      },
+      {
+        "label": "D",
+        "text": "The sound of air whooshing as a train passes by gradually increases."
+      },
+      {
+        "label": "E",
+        "text": "A brief burst of pressurized air or steam hissing."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000014_100491.mp3__2.mp3": {
+    "index": 14,
+    "example_id": "100491.mp3__2",
+    "audio_filename": "100491.mp3",
+    "question": "What happens immediately after this event first appears: \"A brief burst of pressurized air or steam hissing.\"?",
+    "answer_label": "B",
+    "answer_text": "A continuous and rhythmic bell chime gradually fading and decreasing.",
+    "options": [
+      {
+        "label": "A",
+        "text": "The whooshing sound of displaced air as a train passes by gradually fades."
+      },
+      {
+        "label": "B",
+        "text": "A continuous and rhythmic bell chime gradually fading and decreasing."
+      },
+      {
+        "label": "C",
+        "text": "The sound of air whooshing as a train passes by gradually increases."
+      },
+      {
+        "label": "D",
+        "text": "A continuous, rhythmic bell chime gradually increasing in volume."
+      },
+      {
+        "label": "E",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000015_100491.mp3__3.mp3": {
+    "index": 15,
+    "example_id": "100491.mp3__3",
+    "audio_filename": "100491.mp3",
+    "question": "What happens immediately after this event first appears: \"A continuous and rhythmic bell chime gradually fading and decreasing.\"?",
+    "answer_label": "B",
+    "answer_text": "The whooshing sound of displaced air as a train passes by gradually fades.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A continuous, rhythmic bell chime gradually increasing in volume."
+      },
+      {
+        "label": "B",
+        "text": "The whooshing sound of displaced air as a train passes by gradually fades."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "The sound of air whooshing as a train passes by gradually increases."
+      },
+      {
+        "label": "E",
+        "text": "A brief burst of pressurized air or steam hissing."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000016_100491.mp3__4.mp3": {
+    "index": 16,
+    "example_id": "100491.mp3__4",
+    "audio_filename": "100491.mp3",
+    "question": "What happens immediately after this event first appears: \"The whooshing sound of displaced air as a train passes by gradually fades.\"?",
+    "answer_label": "E",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A continuous, rhythmic bell chime gradually increasing in volume."
+      },
+      {
+        "label": "B",
+        "text": "A continuous and rhythmic bell chime gradually fading and decreasing."
+      },
+      {
+        "label": "C",
+        "text": "A brief burst of pressurized air or steam hissing."
+      },
+      {
+        "label": "D",
+        "text": "The sound of air whooshing as a train passes by gradually increases."
+      },
+      {
+        "label": "E",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000017_100774.mp3__0.mp3": {
+    "index": 17,
+    "example_id": "100774.mp3__0",
+    "audio_filename": "100774.mp3",
+    "question": "What happens immediately after this event first appears: \"A flying object approaches with its propeller spinning quickly.\"?",
+    "answer_label": "A",
+    "answer_text": "A sudden, very loud explosion nearby.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A sudden, very loud explosion nearby."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "The lingering sound of air after a sudden explosion."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000018_100774.mp3__1.mp3": {
+    "index": 18,
+    "example_id": "100774.mp3__1",
+    "audio_filename": "100774.mp3",
+    "question": "What happens immediately after this event first appears: \"A sudden, very loud explosion nearby.\"?",
+    "answer_label": "C",
+    "answer_text": "The lingering sound of air after a sudden explosion.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A flying object approaches with its propeller spinning quickly."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "The lingering sound of air after a sudden explosion."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000019_100774.mp3__2.mp3": {
+    "index": 19,
+    "example_id": "100774.mp3__2",
+    "audio_filename": "100774.mp3",
+    "question": "What happens immediately after this event first appears: \"The lingering sound of air after a sudden explosion.\"?",
+    "answer_label": "C",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A flying object approaches with its propeller spinning quickly."
+      },
+      {
+        "label": "B",
+        "text": "A sudden, very loud explosion nearby."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000020_101508.mp3__0.mp3": {
+    "index": 20,
+    "example_id": "101508.mp3__0",
+    "audio_filename": "101508.mp3",
+    "question": "What happens immediately after this event first appears: \"Heavy rain pouring continuously.\"?",
+    "answer_label": "A",
+    "answer_text": "Thunder rumbles quietly in the distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thunder rumbles quietly in the distance."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000021_101508.mp3__1.mp3": {
+    "index": 21,
+    "example_id": "101508.mp3__1",
+    "audio_filename": "101508.mp3",
+    "question": "What happens immediately after this event first appears: \"Thunder rumbles quietly in the distance.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Heavy rain pouring continuously."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000022_101692.mp3__0.mp3": {
+    "index": 22,
+    "example_id": "101692.mp3__0",
+    "audio_filename": "101692.mp3",
+    "question": "What happens immediately after this event first appears: \"Heavy rain splashes continuously onto the ground.\"?",
+    "answer_label": "B",
+    "answer_text": "Thunder rolling in the distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thunder rolls softly in the distance."
+      },
+      {
+        "label": "B",
+        "text": "Thunder rolling in the distance."
+      },
+      {
+        "label": "C",
+        "text": "A short roll of thunder in the distance."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "E",
+        "text": "Thunder rolls in the far distance."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000023_101692.mp3__1.mp3": {
+    "index": 23,
+    "example_id": "101692.mp3__1",
+    "audio_filename": "101692.mp3",
+    "question": "What happens immediately after this event first appears: \"Thunder rolling in the distance.\"?",
+    "answer_label": "B",
+    "answer_text": "Thunder rolls in the far distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Thunder rolls in the far distance."
+      },
+      {
+        "label": "C",
+        "text": "Thunder rolls softly in the distance."
+      },
+      {
+        "label": "D",
+        "text": "A short roll of thunder in the distance."
+      },
+      {
+        "label": "E",
+        "text": "Heavy rain splashes continuously onto the ground."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000024_101692.mp3__2.mp3": {
+    "index": 24,
+    "example_id": "101692.mp3__2",
+    "audio_filename": "101692.mp3",
+    "question": "What happens immediately after this event first appears: \"Thunder rolls in the far distance.\"?",
+    "answer_label": "E",
+    "answer_text": "A short roll of thunder in the distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Heavy rain splashes continuously onto the ground."
+      },
+      {
+        "label": "C",
+        "text": "Thunder rolling in the distance."
+      },
+      {
+        "label": "D",
+        "text": "Thunder rolls softly in the distance."
+      },
+      {
+        "label": "E",
+        "text": "A short roll of thunder in the distance."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000025_101692.mp3__3.mp3": {
+    "index": 25,
+    "example_id": "101692.mp3__3",
+    "audio_filename": "101692.mp3",
+    "question": "What happens immediately after this event first appears: \"A short roll of thunder in the distance.\"?",
+    "answer_label": "D",
+    "answer_text": "Thunder rolls softly in the distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thunder rolls in the far distance."
+      },
+      {
+        "label": "B",
+        "text": "Thunder rolling in the distance."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "Thunder rolls softly in the distance."
+      },
+      {
+        "label": "E",
+        "text": "Heavy rain splashes continuously onto the ground."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000026_101692.mp3__4.mp3": {
+    "index": 26,
+    "example_id": "101692.mp3__4",
+    "audio_filename": "101692.mp3",
+    "question": "What happens immediately after this event first appears: \"Thunder rolls softly in the distance.\"?",
+    "answer_label": "C",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thunder rolls in the far distance."
+      },
+      {
+        "label": "B",
+        "text": "Heavy rain splashes continuously onto the ground."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "A short roll of thunder in the distance."
+      },
+      {
+        "label": "E",
+        "text": "Thunder rolling in the distance."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000027_101693.mp3__0.mp3": {
+    "index": 27,
+    "example_id": "101693.mp3__0",
+    "audio_filename": "101693.mp3",
+    "question": "What happens immediately after this event first appears: \"Heavy rain pouring down with a loud, constant splashing sound.\"?",
+    "answer_label": "B",
+    "answer_text": "Thunder rumbles and gradually fades in intensity.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Thunder rumbles and gradually fades in intensity."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000028_101693.mp3__1.mp3": {
+    "index": 28,
+    "example_id": "101693.mp3__1",
+    "audio_filename": "101693.mp3",
+    "question": "What happens immediately after this event first appears: \"Thunder rumbles and gradually fades in intensity.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Heavy rain pouring down with a loud, constant splashing sound."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000029_101811.mp3__0.mp3": {
+    "index": 29,
+    "example_id": "101811.mp3__0",
+    "audio_filename": "101811.mp3",
+    "question": "What happens immediately after this event first appears: \"People are talking loudly indoors.\"?",
+    "answer_label": "A",
+    "answer_text": "People are talking loudly indoors, with the sound gradually increasing.",
+    "options": [
+      {
+        "label": "A",
+        "text": "People are talking loudly indoors, with the sound gradually increasing."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000030_101811.mp3__1.mp3": {
+    "index": 30,
+    "example_id": "101811.mp3__1",
+    "audio_filename": "101811.mp3",
+    "question": "What happens immediately after this event first appears: \"People are talking loudly indoors, with the sound gradually increasing.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "People are talking loudly indoors."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000031_101814.mp3__0.mp3": {
+    "index": 31,
+    "example_id": "101814.mp3__0",
+    "audio_filename": "101814.mp3",
+    "question": "What happens immediately after this event first appears: \"Background music is playing.\"?",
+    "answer_label": "A",
+    "answer_text": "Several people are talking loudly outdoors indistinctly.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Several people are talking loudly outdoors indistinctly."
+      },
+      {
+        "label": "B",
+        "text": "Traffic noise is audible in the distance."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000032_101814.mp3__1.mp3": {
+    "index": 32,
+    "example_id": "101814.mp3__1",
+    "audio_filename": "101814.mp3",
+    "question": "What happens immediately after this event first appears: \"Several people are talking loudly outdoors indistinctly.\"?",
+    "answer_label": "B",
+    "answer_text": "Traffic noise is audible in the distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Background music is playing."
+      },
+      {
+        "label": "B",
+        "text": "Traffic noise is audible in the distance."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000033_101814.mp3__2.mp3": {
+    "index": 33,
+    "example_id": "101814.mp3__2",
+    "audio_filename": "101814.mp3",
+    "question": "What happens immediately after this event first appears: \"Traffic noise is audible in the distance.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Several people are talking loudly outdoors indistinctly."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "Background music is playing."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000034_101847.mp3__0.mp3": {
+    "index": 34,
+    "example_id": "101847.mp3__0",
+    "audio_filename": "101847.mp3",
+    "question": "What happens immediately after this event first appears: \"Multiple people are speaking.\"?",
+    "answer_label": "A",
+    "answer_text": "Two people are speaking in Spanish, one close to the microphone and the other in the background.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Two people are speaking in Spanish, one close to the microphone and the other in the background."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000035_101847.mp3__1.mp3": {
+    "index": 35,
+    "example_id": "101847.mp3__1",
+    "audio_filename": "101847.mp3",
+    "question": "What happens immediately after this event first appears: \"Two people are speaking in Spanish, one close to the microphone and the other in the background.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Multiple people are speaking."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000036_101948.mp3__0.mp3": {
+    "index": 36,
+    "example_id": "101948.mp3__0",
+    "audio_filename": "101948.mp3",
+    "question": "What happens immediately after this event first appears: \"Distant thunderclaps rumble low with brief pauses in between.\"?",
+    "answer_label": "B",
+    "answer_text": "Thunder echoes faintly.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Thunder echoes faintly."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000037_101948.mp3__1.mp3": {
+    "index": 37,
+    "example_id": "101948.mp3__1",
+    "audio_filename": "101948.mp3",
+    "question": "What happens immediately after this event first appears: \"Thunder echoes faintly.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Distant thunderclaps rumble low with brief pauses in between."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000038_102409.mp3__0.mp3": {
+    "index": 38,
+    "example_id": "102409.mp3__0",
+    "audio_filename": "102409.mp3",
+    "question": "What happens immediately after this event first appears: \"People are speaking loudly in a crowd.\"?",
+    "answer_label": "A",
+    "answer_text": "People boarding a boat.",
+    "options": [
+      {
+        "label": "A",
+        "text": "People boarding a boat."
+      },
+      {
+        "label": "B",
+        "text": "Multiple bicycles clicking."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "A ferry wobbling on water with waves hitting it."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000039_102409.mp3__1.mp3": {
+    "index": 39,
+    "example_id": "102409.mp3__1",
+    "audio_filename": "102409.mp3",
+    "question": "What happens immediately after this event first appears: \"People boarding a boat.\"?",
+    "answer_label": "B",
+    "answer_text": "Multiple bicycles clicking.",
+    "options": [
+      {
+        "label": "A",
+        "text": "People are speaking loudly in a crowd."
+      },
+      {
+        "label": "B",
+        "text": "Multiple bicycles clicking."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "A ferry wobbling on water with waves hitting it."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000040_102409.mp3__2.mp3": {
+    "index": 40,
+    "example_id": "102409.mp3__2",
+    "audio_filename": "102409.mp3",
+    "question": "What happens immediately after this event first appears: \"Multiple bicycles clicking.\"?",
+    "answer_label": "D",
+    "answer_text": "A ferry wobbling on water with waves hitting it.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "People boarding a boat."
+      },
+      {
+        "label": "C",
+        "text": "People are speaking loudly in a crowd."
+      },
+      {
+        "label": "D",
+        "text": "A ferry wobbling on water with waves hitting it."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000041_102409.mp3__3.mp3": {
+    "index": 41,
+    "example_id": "102409.mp3__3",
+    "audio_filename": "102409.mp3",
+    "question": "What happens immediately after this event first appears: \"A ferry wobbling on water with waves hitting it.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "People boarding a boat."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "People are speaking loudly in a crowd."
+      },
+      {
+        "label": "D",
+        "text": "Multiple bicycles clicking."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000042_102411.mp3__0.mp3": {
+    "index": 42,
+    "example_id": "102411.mp3__0",
+    "audio_filename": "102411.mp3",
+    "question": "What happens immediately after this event first appears: \"Background chatter from a crowd on a ferry.\"?",
+    "answer_label": "C",
+    "answer_text": "A ferry boat motor is running.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Subtle waves sound overlaid by engine noise."
+      },
+      {
+        "label": "B",
+        "text": "A child cries."
+      },
+      {
+        "label": "C",
+        "text": "A ferry boat motor is running."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000043_102411.mp3__1.mp3": {
+    "index": 43,
+    "example_id": "102411.mp3__1",
+    "audio_filename": "102411.mp3",
+    "question": "What happens immediately after this event first appears: \"A ferry boat motor is running.\"?",
+    "answer_label": "A",
+    "answer_text": "Subtle waves sound overlaid by engine noise.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Subtle waves sound overlaid by engine noise."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "Background chatter from a crowd on a ferry."
+      },
+      {
+        "label": "D",
+        "text": "A child cries."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000044_102411.mp3__2.mp3": {
+    "index": 44,
+    "example_id": "102411.mp3__2",
+    "audio_filename": "102411.mp3",
+    "question": "What happens immediately after this event first appears: \"Subtle waves sound overlaid by engine noise.\"?",
+    "answer_label": "B",
+    "answer_text": "A child cries.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Background chatter from a crowd on a ferry."
+      },
+      {
+        "label": "B",
+        "text": "A child cries."
+      },
+      {
+        "label": "C",
+        "text": "A ferry boat motor is running."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000045_102411.mp3__3.mp3": {
+    "index": 45,
+    "example_id": "102411.mp3__3",
+    "audio_filename": "102411.mp3",
+    "question": "What happens immediately after this event first appears: \"A child cries.\"?",
+    "answer_label": "C",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Subtle waves sound overlaid by engine noise."
+      },
+      {
+        "label": "B",
+        "text": "A ferry boat motor is running."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "Background chatter from a crowd on a ferry."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000046_102431.mp3__0.mp3": {
+    "index": 46,
+    "example_id": "102431.mp3__0",
+    "audio_filename": "102431.mp3",
+    "question": "What happens immediately after this event first appears: \"A baby is crying with short, irregular pulses at a mid-frequency tone.\"?",
+    "answer_label": "C",
+    "answer_text": "A baby crying repeatedly indoors nearby.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A baby makes mid-pitched vocal noises without crying."
+      },
+      {
+        "label": "C",
+        "text": "A baby crying repeatedly indoors nearby."
+      },
+      {
+        "label": "D",
+        "text": "A baby cries loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "E",
+        "text": "A baby is crying loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "F",
+        "text": "Baby making mid-pitched unrhythmic vocal noises."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000047_102431.mp3__1.mp3": {
+    "index": 47,
+    "example_id": "102431.mp3__1",
+    "audio_filename": "102431.mp3",
+    "question": "What happens immediately after this event first appears: \"A baby crying repeatedly indoors nearby.\"?",
+    "answer_label": "C",
+    "answer_text": "A baby makes mid-pitched vocal noises without crying.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A baby is crying with short, irregular pulses at a mid-frequency tone."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A baby makes mid-pitched vocal noises without crying."
+      },
+      {
+        "label": "D",
+        "text": "Baby making mid-pitched unrhythmic vocal noises."
+      },
+      {
+        "label": "E",
+        "text": "A baby cries loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "F",
+        "text": "A baby is crying loudly at a mid-frequency pitch."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000048_102431.mp3__2.mp3": {
+    "index": 48,
+    "example_id": "102431.mp3__2",
+    "audio_filename": "102431.mp3",
+    "question": "What happens immediately after this event first appears: \"A baby makes mid-pitched vocal noises without crying.\"?",
+    "answer_label": "B",
+    "answer_text": "A baby cries loudly at a mid-frequency pitch.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A baby is crying loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "B",
+        "text": "A baby cries loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "C",
+        "text": "Baby making mid-pitched unrhythmic vocal noises."
+      },
+      {
+        "label": "D",
+        "text": "A baby is crying with short, irregular pulses at a mid-frequency tone."
+      },
+      {
+        "label": "E",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "F",
+        "text": "A baby crying repeatedly indoors nearby."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000049_102431.mp3__3.mp3": {
+    "index": 49,
+    "example_id": "102431.mp3__3",
+    "audio_filename": "102431.mp3",
+    "question": "What happens immediately after this event first appears: \"A baby cries loudly at a mid-frequency pitch.\"?",
+    "answer_label": "B",
+    "answer_text": "Baby making mid-pitched unrhythmic vocal noises.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A baby makes mid-pitched vocal noises without crying."
+      },
+      {
+        "label": "B",
+        "text": "Baby making mid-pitched unrhythmic vocal noises."
+      },
+      {
+        "label": "C",
+        "text": "A baby is crying loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "D",
+        "text": "A baby is crying with short, irregular pulses at a mid-frequency tone."
+      },
+      {
+        "label": "E",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "F",
+        "text": "A baby crying repeatedly indoors nearby."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000050_102431.mp3__4.mp3": {
+    "index": 50,
+    "example_id": "102431.mp3__4",
+    "audio_filename": "102431.mp3",
+    "question": "What happens immediately after this event first appears: \"Baby making mid-pitched unrhythmic vocal noises.\"?",
+    "answer_label": "A",
+    "answer_text": "A baby is crying loudly at a mid-frequency pitch.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A baby is crying loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "B",
+        "text": "A baby crying repeatedly indoors nearby."
+      },
+      {
+        "label": "C",
+        "text": "A baby cries loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "D",
+        "text": "A baby is crying with short, irregular pulses at a mid-frequency tone."
+      },
+      {
+        "label": "E",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "F",
+        "text": "A baby makes mid-pitched vocal noises without crying."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000051_102431.mp3__5.mp3": {
+    "index": 51,
+    "example_id": "102431.mp3__5",
+    "audio_filename": "102431.mp3",
+    "question": "What happens immediately after this event first appears: \"A baby is crying loudly at a mid-frequency pitch.\"?",
+    "answer_label": "D",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A baby crying repeatedly indoors nearby."
+      },
+      {
+        "label": "B",
+        "text": "A baby cries loudly at a mid-frequency pitch."
+      },
+      {
+        "label": "C",
+        "text": "A baby is crying with short, irregular pulses at a mid-frequency tone."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "E",
+        "text": "A baby makes mid-pitched vocal noises without crying."
+      },
+      {
+        "label": "F",
+        "text": "Baby making mid-pitched unrhythmic vocal noises."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000052_102568.mp3__0.mp3": {
+    "index": 52,
+    "example_id": "102568.mp3__0",
+    "audio_filename": "102568.mp3",
+    "question": "What happens immediately after this event first appears: \"The washing machine is running idly.\"?",
+    "answer_label": "A",
+    "answer_text": "A washing machine is running.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A washing machine is running."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000053_102568.mp3__1.mp3": {
+    "index": 53,
+    "example_id": "102568.mp3__1",
+    "audio_filename": "102568.mp3",
+    "question": "What happens immediately after this event first appears: \"A washing machine is running.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "The washing machine is running idly."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000054_102714.mp3__0.mp3": {
+    "index": 54,
+    "example_id": "102714.mp3__0",
+    "audio_filename": "102714.mp3",
+    "question": "What happens immediately after this event first appears: \"The bus engine sounds steady.\"?",
+    "answer_label": "A",
+    "answer_text": "The bus door closes with a beep.",
+    "options": [
+      {
+        "label": "A",
+        "text": "The bus door closes with a beep."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A bus departs."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000055_102714.mp3__1.mp3": {
+    "index": 55,
+    "example_id": "102714.mp3__1",
+    "audio_filename": "102714.mp3",
+    "question": "What happens immediately after this event first appears: \"The bus door closes with a beep.\"?",
+    "answer_label": "C",
+    "answer_text": "A bus departs.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "The bus engine sounds steady."
+      },
+      {
+        "label": "C",
+        "text": "A bus departs."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000056_102714.mp3__2.mp3": {
+    "index": 56,
+    "example_id": "102714.mp3__2",
+    "audio_filename": "102714.mp3",
+    "question": "What happens immediately after this event first appears: \"A bus departs.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "The bus engine sounds steady."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "The bus door closes with a beep."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000057_102744.mp3__0.mp3": {
+    "index": 57,
+    "example_id": "102744.mp3__0",
+    "audio_filename": "102744.mp3",
+    "question": "What happens immediately after this event first appears: \"A rough, somewhat aggressive male voice repeats the same phrase three times.\"?",
+    "answer_label": "C",
+    "answer_text": "Someone is speaking clearly and distinctly.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A calm mature male voice is speaking, sharing coordinates and military news."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "Someone is speaking clearly and distinctly."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000058_102744.mp3__1.mp3": {
+    "index": 58,
+    "example_id": "102744.mp3__1",
+    "audio_filename": "102744.mp3",
+    "question": "What happens immediately after this event first appears: \"Someone is speaking clearly and distinctly.\"?",
+    "answer_label": "A",
+    "answer_text": "A calm mature male voice is speaking, sharing coordinates and military news.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A calm mature male voice is speaking, sharing coordinates and military news."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A rough, somewhat aggressive male voice repeats the same phrase three times."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000059_102744.mp3__2.mp3": {
+    "index": 59,
+    "example_id": "102744.mp3__2",
+    "audio_filename": "102744.mp3",
+    "question": "What happens immediately after this event first appears: \"A calm mature male voice is speaking, sharing coordinates and military news.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A rough, somewhat aggressive male voice repeats the same phrase three times."
+      },
+      {
+        "label": "C",
+        "text": "Someone is speaking clearly and distinctly."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000060_102806.mp3__0.mp3": {
+    "index": 60,
+    "example_id": "102806.mp3__0",
+    "audio_filename": "102806.mp3",
+    "question": "What happens immediately after this event first appears: \"Monotonous bright rain noise.\"?",
+    "answer_label": "B",
+    "answer_text": "Rain falling with muffled thunder rumbling in the distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Rain falling with muffled thunder rumbling in the distance."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000061_102806.mp3__1.mp3": {
+    "index": 61,
+    "example_id": "102806.mp3__1",
+    "audio_filename": "102806.mp3",
+    "question": "What happens immediately after this event first appears: \"Rain falling with muffled thunder rumbling in the distance.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Monotonous bright rain noise."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000062_102849.mp3__0.mp3": {
+    "index": 62,
+    "example_id": "102849.mp3__0",
+    "audio_filename": "102849.mp3",
+    "question": "What happens immediately after this event first appears: \"A bird chirps.\"?",
+    "answer_label": "D",
+    "answer_text": "A frog croaks.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A bird chirping."
+      },
+      {
+        "label": "B",
+        "text": "A bee is buzzing."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "A frog croaks."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000063_102849.mp3__1.mp3": {
+    "index": 63,
+    "example_id": "102849.mp3__1",
+    "audio_filename": "102849.mp3",
+    "question": "What happens immediately after this event first appears: \"A frog croaks.\"?",
+    "answer_label": "D",
+    "answer_text": "A bird chirping.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A bird chirps."
+      },
+      {
+        "label": "C",
+        "text": "A bee is buzzing."
+      },
+      {
+        "label": "D",
+        "text": "A bird chirping."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000064_102849.mp3__2.mp3": {
+    "index": 64,
+    "example_id": "102849.mp3__2",
+    "audio_filename": "102849.mp3",
+    "question": "What happens immediately after this event first appears: \"A bird chirping.\"?",
+    "answer_label": "D",
+    "answer_text": "A bee is buzzing.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A frog croaks."
+      },
+      {
+        "label": "B",
+        "text": "A bird chirps."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "A bee is buzzing."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000065_102849.mp3__3.mp3": {
+    "index": 65,
+    "example_id": "102849.mp3__3",
+    "audio_filename": "102849.mp3",
+    "question": "What happens immediately after this event first appears: \"A bee is buzzing.\"?",
+    "answer_label": "C",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A bird chirping."
+      },
+      {
+        "label": "B",
+        "text": "A frog croaks."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "A bird chirps."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000066_102852.mp3__0.mp3": {
+    "index": 66,
+    "example_id": "102852.mp3__0",
+    "audio_filename": "102852.mp3",
+    "question": "What happens immediately after this event first appears: \"Waves crashing at the seaside.\"?",
+    "answer_label": "A",
+    "answer_text": "Heavy waves crashing on the beach.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Heavy waves crashing on the beach."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "Seagulls call in the distance by the seaside."
+      },
+      {
+        "label": "D",
+        "text": "A seagull screams loudly."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000067_102852.mp3__1.mp3": {
+    "index": 67,
+    "example_id": "102852.mp3__1",
+    "audio_filename": "102852.mp3",
+    "question": "What happens immediately after this event first appears: \"Heavy waves crashing on the beach.\"?",
+    "answer_label": "B",
+    "answer_text": "A seagull screams loudly.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Waves crashing at the seaside."
+      },
+      {
+        "label": "B",
+        "text": "A seagull screams loudly."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "D",
+        "text": "Seagulls call in the distance by the seaside."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000068_102852.mp3__2.mp3": {
+    "index": 68,
+    "example_id": "102852.mp3__2",
+    "audio_filename": "102852.mp3",
+    "question": "What happens immediately after this event first appears: \"A seagull screams loudly.\"?",
+    "answer_label": "B",
+    "answer_text": "Seagulls call in the distance by the seaside.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Heavy waves crashing on the beach."
+      },
+      {
+        "label": "B",
+        "text": "Seagulls call in the distance by the seaside."
+      },
+      {
+        "label": "C",
+        "text": "Waves crashing at the seaside."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000069_102852.mp3__3.mp3": {
+    "index": 69,
+    "example_id": "102852.mp3__3",
+    "audio_filename": "102852.mp3",
+    "question": "What happens immediately after this event first appears: \"Seagulls call in the distance by the seaside.\"?",
+    "answer_label": "D",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Waves crashing at the seaside."
+      },
+      {
+        "label": "B",
+        "text": "A seagull screams loudly."
+      },
+      {
+        "label": "C",
+        "text": "Heavy waves crashing on the beach."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000070_102853.mp3__0.mp3": {
+    "index": 70,
+    "example_id": "102853.mp3__0",
+    "audio_filename": "102853.mp3",
+    "question": "What happens immediately after this event first appears: \"A police siren sounds loudly in a steady pattern.\"?",
+    "answer_label": "A",
+    "answer_text": "Metallic sound of a chain outdoors.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Metallic sound of a chain outdoors."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A motorbike engine is running in the distance."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000071_102853.mp3__1.mp3": {
+    "index": 71,
+    "example_id": "102853.mp3__1",
+    "audio_filename": "102853.mp3",
+    "question": "What happens immediately after this event first appears: \"Metallic sound of a chain outdoors.\"?",
+    "answer_label": "A",
+    "answer_text": "A motorbike engine is running in the distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A motorbike engine is running in the distance."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A police siren sounds loudly in a steady pattern."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000072_102853.mp3__2.mp3": {
+    "index": 72,
+    "example_id": "102853.mp3__2",
+    "audio_filename": "102853.mp3",
+    "question": "What happens immediately after this event first appears: \"A motorbike engine is running in the distance.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Metallic sound of a chain outdoors."
+      },
+      {
+        "label": "C",
+        "text": "A police siren sounds loudly in a steady pattern."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000073_102856.mp3__0.mp3": {
+    "index": 73,
+    "example_id": "102856.mp3__0",
+    "audio_filename": "102856.mp3",
+    "question": "What happens immediately after this event first appears: \"A siren is ringing loudly.\"?",
+    "answer_label": "A",
+    "answer_text": "Heavy engine noise.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Heavy engine noise."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000074_102856.mp3__1.mp3": {
+    "index": 74,
+    "example_id": "102856.mp3__1",
+    "audio_filename": "102856.mp3",
+    "question": "What happens immediately after this event first appears: \"Heavy engine noise.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A siren is ringing loudly."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000075_102871.mp3__0.mp3": {
+    "index": 75,
+    "example_id": "102871.mp3__0",
+    "audio_filename": "102871.mp3",
+    "question": "What happens immediately after this event first appears: \"A piercing and rhythmic siren sounds.\"?",
+    "answer_label": "B",
+    "answer_text": "Distant vehicle engines rumbling continuously in a city.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Frequent clicking typing sounds from a keyboard."
+      },
+      {
+        "label": "B",
+        "text": "Distant vehicle engines rumbling continuously in a city."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000076_102871.mp3__1.mp3": {
+    "index": 76,
+    "example_id": "102871.mp3__1",
+    "audio_filename": "102871.mp3",
+    "question": "What happens immediately after this event first appears: \"Distant vehicle engines rumbling continuously in a city.\"?",
+    "answer_label": "A",
+    "answer_text": "Frequent clicking typing sounds from a keyboard.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Frequent clicking typing sounds from a keyboard."
+      },
+      {
+        "label": "B",
+        "text": "A piercing and rhythmic siren sounds."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000077_102871.mp3__2.mp3": {
+    "index": 77,
+    "example_id": "102871.mp3__2",
+    "audio_filename": "102871.mp3",
+    "question": "What happens immediately after this event first appears: \"Frequent clicking typing sounds from a keyboard.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Distant vehicle engines rumbling continuously in a city."
+      },
+      {
+        "label": "C",
+        "text": "A piercing and rhythmic siren sounds."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000078_102876.mp3__0.mp3": {
+    "index": 78,
+    "example_id": "102876.mp3__0",
+    "audio_filename": "102876.mp3",
+    "question": "What happens immediately after this event first appears: \"A solo trumpet plays a clean phrase in a jazz style.\"?",
+    "answer_label": "D",
+    "answer_text": "A bright, rhythmic trumpet lick with a jazzy feel.",
+    "options": [
+      {
+        "label": "A",
+        "text": "The trumpet lick is played louder with less echo and an added distinct extra note."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A rhythmic trumpet lick with added echo creating a wider and more ambient sound."
+      },
+      {
+        "label": "D",
+        "text": "A bright, rhythmic trumpet lick with a jazzy feel."
+      },
+      {
+        "label": "E",
+        "text": "An upbeat, rhythmic trumpet lick played in a jazz style."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000079_102876.mp3__1.mp3": {
+    "index": 79,
+    "example_id": "102876.mp3__1",
+    "audio_filename": "102876.mp3",
+    "question": "What happens immediately after this event first appears: \"A bright, rhythmic trumpet lick with a jazzy feel.\"?",
+    "answer_label": "B",
+    "answer_text": "An upbeat, rhythmic trumpet lick played in a jazz style.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "An upbeat, rhythmic trumpet lick played in a jazz style."
+      },
+      {
+        "label": "C",
+        "text": "The trumpet lick is played louder with less echo and an added distinct extra note."
+      },
+      {
+        "label": "D",
+        "text": "A rhythmic trumpet lick with added echo creating a wider and more ambient sound."
+      },
+      {
+        "label": "E",
+        "text": "A solo trumpet plays a clean phrase in a jazz style."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000080_102876.mp3__2.mp3": {
+    "index": 80,
+    "example_id": "102876.mp3__2",
+    "audio_filename": "102876.mp3",
+    "question": "What happens immediately after this event first appears: \"An upbeat, rhythmic trumpet lick played in a jazz style.\"?",
+    "answer_label": "D",
+    "answer_text": "A rhythmic trumpet lick with added echo creating a wider and more ambient sound.",
+    "options": [
+      {
+        "label": "A",
+        "text": "The trumpet lick is played louder with less echo and an added distinct extra note."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A solo trumpet plays a clean phrase in a jazz style."
+      },
+      {
+        "label": "D",
+        "text": "A rhythmic trumpet lick with added echo creating a wider and more ambient sound."
+      },
+      {
+        "label": "E",
+        "text": "A bright, rhythmic trumpet lick with a jazzy feel."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000081_102876.mp3__3.mp3": {
+    "index": 81,
+    "example_id": "102876.mp3__3",
+    "audio_filename": "102876.mp3",
+    "question": "What happens immediately after this event first appears: \"A rhythmic trumpet lick with added echo creating a wider and more ambient sound.\"?",
+    "answer_label": "B",
+    "answer_text": "The trumpet lick is played louder with less echo and an added distinct extra note.",
+    "options": [
+      {
+        "label": "A",
+        "text": "An upbeat, rhythmic trumpet lick played in a jazz style."
+      },
+      {
+        "label": "B",
+        "text": "The trumpet lick is played louder with less echo and an added distinct extra note."
+      },
+      {
+        "label": "C",
+        "text": "A solo trumpet plays a clean phrase in a jazz style."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "E",
+        "text": "A bright, rhythmic trumpet lick with a jazzy feel."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000082_102876.mp3__4.mp3": {
+    "index": 82,
+    "example_id": "102876.mp3__4",
+    "audio_filename": "102876.mp3",
+    "question": "What happens immediately after this event first appears: \"The trumpet lick is played louder with less echo and an added distinct extra note.\"?",
+    "answer_label": "D",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A solo trumpet plays a clean phrase in a jazz style."
+      },
+      {
+        "label": "B",
+        "text": "A rhythmic trumpet lick with added echo creating a wider and more ambient sound."
+      },
+      {
+        "label": "C",
+        "text": "An upbeat, rhythmic trumpet lick played in a jazz style."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "E",
+        "text": "A bright, rhythmic trumpet lick with a jazzy feel."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000083_102877.mp3__0.mp3": {
+    "index": 83,
+    "example_id": "102877.mp3__0",
+    "audio_filename": "102877.mp3",
+    "question": "What happens immediately after this event first appears: \"A trumpet is played in a jazzy style.\"?",
+    "answer_label": "A",
+    "answer_text": "A trumpet is played in a jazzy style with an echo.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A trumpet is played in a jazzy style with an echo."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000084_102877.mp3__1.mp3": {
+    "index": 84,
+    "example_id": "102877.mp3__1",
+    "audio_filename": "102877.mp3",
+    "question": "What happens immediately after this event first appears: \"A trumpet is played in a jazzy style with an echo.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A trumpet is played in a jazzy style."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000085_103025.mp3__0.mp3": {
+    "index": 85,
+    "example_id": "103025.mp3__0",
+    "audio_filename": "103025.mp3",
+    "question": "What happens immediately after this event first appears: \"A train rumbles loudly as it passes by with wind sounds.\"?",
+    "answer_label": "B",
+    "answer_text": "A train passes by with a strong rumble and rushing sound.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A train passes by with a strong rumble and rushing sound."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000086_103025.mp3__1.mp3": {
+    "index": 86,
+    "example_id": "103025.mp3__1",
+    "audio_filename": "103025.mp3",
+    "question": "What happens immediately after this event first appears: \"A train passes by with a strong rumble and rushing sound.\"?",
+    "answer_label": "B",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A train rumbles loudly as it passes by with wind sounds."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000087_103074.mp3__0.mp3": {
+    "index": 87,
+    "example_id": "103074.mp3__0",
+    "audio_filename": "103074.mp3",
+    "question": "What happens immediately after this event first appears: \"A deep humming sound from machinery.\"?",
+    "answer_label": "C",
+    "answer_text": "A loud, rapid jackhammering sound with a consistent pounding rhythm and a short pause, echoing slightly in an urban environment.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A harsh, repetitive banging sound from a pneumatic drill."
+      },
+      {
+        "label": "C",
+        "text": "A loud, rapid jackhammering sound with a consistent pounding rhythm and a short pause, echoing slightly in an urban environment."
+      },
+      {
+        "label": "D",
+        "text": "Clicking noises coming from machinery."
+      },
+      {
+        "label": "E",
+        "text": "Machinery producing a crisp clicking sound."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000088_103074.mp3__1.mp3": {
+    "index": 88,
+    "example_id": "103074.mp3__1",
+    "audio_filename": "103074.mp3",
+    "question": "What happens immediately after this event first appears: \"A loud, rapid jackhammering sound with a consistent pounding rhythm and a short pause, echoing slightly in an urban environment.\"?",
+    "answer_label": "C",
+    "answer_text": "A harsh, repetitive banging sound from a pneumatic drill.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "A deep humming sound from machinery."
+      },
+      {
+        "label": "C",
+        "text": "A harsh, repetitive banging sound from a pneumatic drill."
+      },
+      {
+        "label": "D",
+        "text": "Clicking noises coming from machinery."
+      },
+      {
+        "label": "E",
+        "text": "Machinery producing a crisp clicking sound."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000089_103074.mp3__2.mp3": {
+    "index": 89,
+    "example_id": "103074.mp3__2",
+    "audio_filename": "103074.mp3",
+    "question": "What happens immediately after this event first appears: \"A harsh, repetitive banging sound from a pneumatic drill.\"?",
+    "answer_label": "A",
+    "answer_text": "Clicking noises coming from machinery.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Clicking noises coming from machinery."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "Machinery producing a crisp clicking sound."
+      },
+      {
+        "label": "D",
+        "text": "A deep humming sound from machinery."
+      },
+      {
+        "label": "E",
+        "text": "A loud, rapid jackhammering sound with a consistent pounding rhythm and a short pause, echoing slightly in an urban environment."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000090_103074.mp3__3.mp3": {
+    "index": 90,
+    "example_id": "103074.mp3__3",
+    "audio_filename": "103074.mp3",
+    "question": "What happens immediately after this event first appears: \"Clicking noises coming from machinery.\"?",
+    "answer_label": "A",
+    "answer_text": "Machinery producing a crisp clicking sound.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Machinery producing a crisp clicking sound."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A deep humming sound from machinery."
+      },
+      {
+        "label": "D",
+        "text": "A harsh, repetitive banging sound from a pneumatic drill."
+      },
+      {
+        "label": "E",
+        "text": "A loud, rapid jackhammering sound with a consistent pounding rhythm and a short pause, echoing slightly in an urban environment."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000091_103074.mp3__4.mp3": {
+    "index": 91,
+    "example_id": "103074.mp3__4",
+    "audio_filename": "103074.mp3",
+    "question": "What happens immediately after this event first appears: \"Machinery producing a crisp clicking sound.\"?",
+    "answer_label": "E",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Clicking noises coming from machinery."
+      },
+      {
+        "label": "B",
+        "text": "A harsh, repetitive banging sound from a pneumatic drill."
+      },
+      {
+        "label": "C",
+        "text": "A loud, rapid jackhammering sound with a consistent pounding rhythm and a short pause, echoing slightly in an urban environment."
+      },
+      {
+        "label": "D",
+        "text": "A deep humming sound from machinery."
+      },
+      {
+        "label": "E",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000092_103191.mp3__0.mp3": {
+    "index": 92,
+    "example_id": "103191.mp3__0",
+    "audio_filename": "103191.mp3",
+    "question": "What happens immediately after this event first appears: \"Multiple horns or trumpets play a single prolonged, slightly echoing note.\"?",
+    "answer_label": "B",
+    "answer_text": "Two horns or trumpets sound in succession with slight echo.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A horn or trumpet sounds twice in succession with a slight echo."
+      },
+      {
+        "label": "B",
+        "text": "Two horns or trumpets sound in succession with slight echo."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000093_103191.mp3__1.mp3": {
+    "index": 93,
+    "example_id": "103191.mp3__1",
+    "audio_filename": "103191.mp3",
+    "question": "What happens immediately after this event first appears: \"Two horns or trumpets sound in succession with slight echo.\"?",
+    "answer_label": "A",
+    "answer_text": "A horn or trumpet sounds twice in succession with a slight echo.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A horn or trumpet sounds twice in succession with a slight echo."
+      },
+      {
+        "label": "B",
+        "text": "Multiple horns or trumpets play a single prolonged, slightly echoing note."
+      },
+      {
+        "label": "C",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000094_103191.mp3__2.mp3": {
+    "index": 94,
+    "example_id": "103191.mp3__2",
+    "audio_filename": "103191.mp3",
+    "question": "What happens immediately after this event first appears: \"A horn or trumpet sounds twice in succession with a slight echo.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Multiple horns or trumpets play a single prolonged, slightly echoing note."
+      },
+      {
+        "label": "C",
+        "text": "Two horns or trumpets sound in succession with slight echo."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000095_103192.mp3__0.mp3": {
+    "index": 95,
+    "example_id": "103192.mp3__0",
+    "audio_filename": "103192.mp3",
+    "question": "What happens immediately after this event first appears: \"A loud musical horn playing indoors.\"?",
+    "answer_label": "B",
+    "answer_text": "People are talking in the background.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "People are talking in the background."
+      },
+      {
+        "label": "C",
+        "text": "A ship's horn sounds repeatedly in the distance."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000096_103192.mp3__1.mp3": {
+    "index": 96,
+    "example_id": "103192.mp3__1",
+    "audio_filename": "103192.mp3",
+    "question": "What happens immediately after this event first appears: \"People are talking in the background.\"?",
+    "answer_label": "C",
+    "answer_text": "A ship's horn sounds repeatedly in the distance.",
+    "options": [
+      {
+        "label": "A",
+        "text": "A loud musical horn playing indoors."
+      },
+      {
+        "label": "B",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "C",
+        "text": "A ship's horn sounds repeatedly in the distance."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000097_103192.mp3__2.mp3": {
+    "index": 97,
+    "example_id": "103192.mp3__2",
+    "audio_filename": "103192.mp3",
+    "question": "What happens immediately after this event first appears: \"A ship's horn sounds repeatedly in the distance.\"?",
+    "answer_label": "A",
+    "answer_text": "This is the last event, no immediate event after.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "People are talking in the background."
+      },
+      {
+        "label": "C",
+        "text": "A loud musical horn playing indoors."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000098_103538.mp3__0.mp3": {
+    "index": 98,
+    "example_id": "103538.mp3__0",
+    "audio_filename": "103538.mp3",
+    "question": "What happens immediately after this event first appears: \"Insects are sounding continually.\"?",
+    "answer_label": "B",
+    "answer_text": "Birds chirp briefly.",
+    "options": [
+      {
+        "label": "A",
+        "text": "Birds chirp simultaneously in public."
+      },
+      {
+        "label": "B",
+        "text": "Birds chirp briefly."
+      },
+      {
+        "label": "C",
+        "text": "An airplane is descending."
+      },
+      {
+        "label": "D",
+        "text": "This is the last event, no immediate event after."
+      }
+    ]
+  },
+  "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260210_110548/workdir/audio_links/000099_103538.mp3__1.mp3": {
+    "index": 99,
+    "example_id": "103538.mp3__1",
+    "audio_filename": "103538.mp3",
+    "question": "What happens immediately after this event first appears: \"Birds chirp briefly.\"?",
+    "answer_label": "D",
+    "answer_text": "An airplane is descending.",
+    "options": [
+      {
+        "label": "A",
+        "text": "This is the last event, no immediate event after."
+      },
+      {
+        "label": "B",
+        "text": "Birds chirp simultaneously in public."
+      },
+      {
+        "label": "C",
+        "text": "Insects are sounding continually."
+      },
+      {
+        "label": "D",
+        "text": "An airplane is descending."
+      }
+    ]
+  }
+}
