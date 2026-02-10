@@ -9,6 +9,8 @@
 	setup-from-scratch \
 	eval-mcq-order-random \
 	eval-mcq-order-openai \
+	eval-mcq-order-qwen \
+	eval-mcq-order-llama \
 	eval-mcq-order-audioflamingo-smoke \
 	eval-mcq-order-audioflamingo-full \
 	test
@@ -27,6 +29,15 @@ AF_NUM_GPUS ?= 1
 AF_BATCH_SIZE ?= 2
 AF_MAX_NEW_TOKENS ?= 16
 AF_SMOKE_LIMIT ?= 100
+
+QWEN_MODEL_ID ?= Qwen/Qwen2.5-7B-Instruct
+LLAMA_MODEL_ID ?= meta-llama/Llama-3.1-8B-Instruct
+LOCAL_DTYPE ?= float16
+LOCAL_DEVICE_MAP ?= auto
+LOCAL_MAX_NEW_TOKENS ?= 16
+LOCAL_TEMPERATURE ?= 0.0
+LOCAL_TOP_P ?= 1.0
+LOCAL_LIMIT ?= 100
 
 WANDB_PROJECT ?= tacobelal
 WANDB_ENTITY ?=
@@ -71,6 +82,36 @@ eval-mcq-order-random:
 eval-mcq-order-openai:
 	uv sync --extra llm --extra tracking
 	uv run python src/utils/evaluate_mcq_order.py --dataset $(MCQ_DATASET) --model llm-openai --openai-model gpt-4o-mini --temperature 0 --results-root $(RESULTS_DIR) $(WAND_ARGS)
+
+eval-mcq-order-qwen:
+	uv sync --extra llm --extra tracking
+	uv run python src/utils/evaluate_mcq_order.py \
+		--dataset $(MCQ_DATASET) \
+		--model llm-qwen \
+		--qwen-model-id $(QWEN_MODEL_ID) \
+		--local-dtype $(LOCAL_DTYPE) \
+		--local-device-map $(LOCAL_DEVICE_MAP) \
+		--local-max-new-tokens $(LOCAL_MAX_NEW_TOKENS) \
+		--local-temperature $(LOCAL_TEMPERATURE) \
+		--local-top-p $(LOCAL_TOP_P) \
+		--limit $(LOCAL_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-llama:
+	uv sync --extra llm --extra tracking
+	uv run python src/utils/evaluate_mcq_order.py \
+		--dataset $(MCQ_DATASET) \
+		--model llm-llama \
+		--llama-model-id $(LLAMA_MODEL_ID) \
+		--local-dtype $(LOCAL_DTYPE) \
+		--local-device-map $(LOCAL_DEVICE_MAP) \
+		--local-max-new-tokens $(LOCAL_MAX_NEW_TOKENS) \
+		--local-temperature $(LOCAL_TEMPERATURE) \
+		--local-top-p $(LOCAL_TOP_P) \
+		--limit $(LOCAL_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
 
 eval-mcq-order-audioflamingo-smoke:
 	uv sync --extra tracking

@@ -103,6 +103,31 @@ uv run python src/utils/evaluate_mcq_order.py \
   --results-root results
 ```
 
+### Run text-only open-source LLM baselines (local Hugging Face)
+
+Qwen (A40-friendly default, 100-example smoke run):
+
+```bash
+make eval-mcq-order-qwen
+```
+
+Llama (requires HF access token for gated Meta checkpoints):
+
+```bash
+export HF_TOKEN=your_hf_token
+make eval-mcq-order-llama
+```
+
+Useful overrides:
+
+```bash
+make eval-mcq-order-qwen \
+  QWEN_MODEL_ID=Qwen/Qwen2.5-7B-Instruct \
+  LOCAL_DTYPE=float16 \
+  LOCAL_LIMIT=200 \
+  LOCAL_MAX_NEW_TOKENS=16
+```
+
 ### Cloud run tracking (Weights & Biases)
 
 Set your API key once (or add to `.env`):
@@ -125,7 +150,13 @@ All standard evaluation targets now log to W&B by default.
 These log:
 - live progress (`accuracy_so_far`, progress fraction, per-step correctness/latency)
 - final summary metrics
-- output artifacts (`decisions.jsonl`, `metrics.json`, `results_table.md`, and AF3 raw outputs when applicable)
+- rich analysis views:
+  - answer-label distribution vs prediction distribution
+  - accuracy by answer label
+  - accuracy by option count
+  - answer-type accuracy (`event` vs `none`)
+  - confusion matrix (answer label vs predicted label)
+- output artifacts (`decisions.jsonl`, `metrics.json`, `results_table.md`, `analysis.json`, and AF3 raw outputs when applicable)
 
 Optional W&B Make variables:
 
@@ -200,6 +231,7 @@ make eval-mcq-order-audioflamingo-smoke AF_NUM_GPUS=1 AF_BATCH_SIZE=3 AF_SMOKE_L
 
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_audioflamingo_a40.slurm`
+- `scripts/slurm/eval_mcq_order_text_llm_a40.slurm`
 
 ## Task B: Temporal grounding
 

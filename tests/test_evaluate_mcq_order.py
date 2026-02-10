@@ -93,11 +93,13 @@ def test_main_writes_results_artifacts(tmp_path: Path) -> None:
     decisions_path = run_dir / "decisions.jsonl"
     metrics_path = run_dir / "metrics.json"
     table_path = run_dir / "results_table.md"
+    analysis_path = run_dir / "analysis.json"
     runs_csv_path = results_root / "mcq-order" / "runs.csv"
 
     assert decisions_path.exists()
     assert metrics_path.exists()
     assert table_path.exists()
+    assert analysis_path.exists()
     assert runs_csv_path.exists()
 
     with open(decisions_path, "r", encoding="utf-8") as f:
@@ -115,3 +117,7 @@ def test_main_writes_results_artifacts(tmp_path: Path) -> None:
     table_content = table_path.read_text(encoding="utf-8")
     assert "MCQ-ORDER" in table_content
     assert "random" in table_content
+
+    analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
+    assert analysis["examples"] == 2
+    assert "by_answer_label" in analysis

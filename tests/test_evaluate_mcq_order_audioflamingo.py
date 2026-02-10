@@ -82,7 +82,10 @@ def test_evaluate_audioflamingo_outputs_handles_missing_and_invalid() -> None:
             "question": ex.question,
             "answer_label": ex.answer_label,
             "answer_text": ex.answer_text,
-            "options": [{"label": opt.label, "text": opt.text} for opt in ex.options],
+            "options": [
+                {"label": opt.label, "text": opt.text, "type": opt.option_type}
+                for opt in ex.options
+            ],
         }
     }
 

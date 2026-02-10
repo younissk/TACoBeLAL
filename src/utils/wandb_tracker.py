@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Sequence
 
 
 @dataclass
@@ -64,18 +64,24 @@ class WandbTracker:
         accuracy_so_far: float,
         latency_ms: float,
         is_correct: bool,
+        correct_so_far: int | None = None,
         force: bool = False,
     ) -> None:
         if not self.active:
             return
         if not force and index % self.log_every != 0:
             return
+        if correct_so_far is None:
+            correct_so_far = int(round(accuracy_so_far * index))
+        incorrect_so_far = max(0, index - correct_so_far)
         self._wandb.log(
             {
                 "live/example_index": index,
                 "live/examples_total": total,
                 "live/progress": index / total if total else 0.0,
                 "live/accuracy_so_far": accuracy_so_far,
+                "live/correct_so_far": correct_so_far,
+                "live/incorrect_so_far": incorrect_so_far,
                 "live/latency_ms": latency_ms,
                 "live/is_correct": int(is_correct),
             },
@@ -97,6 +103,31 @@ class WandbTracker:
             if path.exists():
                 artifact.add_file(str(path))
         self._run.log_artifact(artifact)
+
+    def log_table(self, *, key: str, columns: Sequence[str], rows: Sequence[Sequence[Any]]) -> None:
+        if not self.active:
+            return
+        table = self._wandb.Table(columns=list(columns), data=[list(row) for row in rows])
+        self._wandb.log({key: table})
+
+    def log_confusion_matrix(
+        self,
+        *,
+        key: str,
+        y_true: Sequence[str],
+        y_pred: Sequence[str],
+        class_names: Sequence[str],
+    ) -> None:
+        if not self.active:
+            return
+        if not y_true or not y_pred:
+            return
+        confusion_plot = self._wandb.plot.confusion_matrix(
+            y_true=list(y_true),
+            preds=list(y_pred),
+            class_names=list(class_names),
+        )
+        self._wandb.log({key: confusion_plot})
 
     def finish(self) -> None:
         if not self.active:

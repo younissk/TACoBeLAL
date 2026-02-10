@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import os
 import re
 import shutil
 import subprocess
 import time
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -44,10 +46,12 @@ class Decision:
     predicted_text: str
     answer_label: str
     answer_text: str
+    answer_type: str
     is_correct: bool
     parse_status: str
     raw_prediction: str
     n_options: int
+    predicted_type: str
 
     def to_json(self) -> dict[str, Any]:
         return {
@@ -61,10 +65,12 @@ class Decision:
             "predicted_text": self.predicted_text,
             "answer_label": self.answer_label,
             "answer_text": self.answer_text,
+            "answer_type": self.answer_type,
             "is_correct": self.is_correct,
             "parse_status": self.parse_status,
             "raw_prediction": self.raw_prediction,
             "n_options": self.n_options,
+            "predicted_type": self.predicted_type,
         }
 
 
@@ -233,7 +239,10 @@ def prepare_audioflamingo_input(
                 "question": example.question,
                 "answer_label": example.answer_label,
                 "answer_text": example.answer_text,
-                "options": [{"label": option.label, "text": option.text} for option in example.options],
+                "options": [
+                    {"label": option.label, "text": option.text, "type": option.option_type}
+                    for option in example.options
+                ],
             }
             progress.advance(task, 1)
 
@@ -356,6 +365,7 @@ def evaluate_audioflamingo_outputs(
         options = metadata["options"]
         valid_labels = {option["label"] for option in options}
         label_to_text = {option["label"]: option["text"] for option in options}
+        label_to_type = {option["label"]: option["type"] for option in options}
 
         raw_prediction = ""
         parse_status = "missing"
@@ -375,7 +385,9 @@ def evaluate_audioflamingo_outputs(
 
         final_label = predicted_label if predicted_label is not None else "INVALID"
         predicted_text = label_to_text.get(final_label, "")
+        predicted_type = label_to_type.get(final_label, "invalid")
         is_correct = final_label == metadata["answer_label"]
+        answer_type = label_to_type.get(metadata["answer_label"], "unknown")
 
         decisions.append(
             Decision(
@@ -389,10 +401,12 @@ def evaluate_audioflamingo_outputs(
                 predicted_text=predicted_text,
                 answer_label=metadata["answer_label"],
                 answer_text=metadata["answer_text"],
+                answer_type=answer_type,
                 is_correct=is_correct,
                 parse_status=parse_status,
                 raw_prediction=raw_prediction,
                 n_options=len(options),
+                predicted_type=predicted_type,
             )
         )
         if tracker is not None and tracker.active:
@@ -404,6 +418,7 @@ def evaluate_audioflamingo_outputs(
                 accuracy_so_far=correct_so_far / index,
                 latency_ms=0.0,
                 is_correct=decisions[-1].is_correct,
+                correct_so_far=correct_so_far,
                 force=(index == 1 or index == len(mapping)),
             )
 
@@ -414,6 +429,198 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
         f.write("\n")
+
+
+def _safe_divide(numerator: float, denominator: float) -> float:
+    return numerator / denominator if denominator else 0.0
+
+
+def _entropy(counts: Counter[str]) -> float:
+    total = sum(counts.values())
+    if total == 0:
+        return 0.0
+    entropy = 0.0
+    for count in counts.values():
+        probability = count / total
+        if probability > 0:
+            entropy -= probability * math.log2(probability)
+    return entropy
+
+
+def _build_analysis_payload(decisions: list[Decision]) -> dict[str, Any]:
+    total = len(decisions)
+    correct = sum(1 for decision in decisions if decision.is_correct)
+    answer_counts: Counter[str] = Counter(decision.answer_label for decision in decisions)
+    prediction_counts: Counter[str] = Counter(decision.predicted_label for decision in decisions)
+    correct_by_answer: Counter[str] = Counter(
+        decision.answer_label for decision in decisions if decision.is_correct
+    )
+    parse_status_counts: Counter[str] = Counter(decision.parse_status for decision in decisions)
+    by_n_options: defaultdict[int, dict[str, int]] = defaultdict(lambda: {"examples": 0, "correct": 0})
+    by_answer_type: defaultdict[str, dict[str, int]] = defaultdict(lambda: {"examples": 0, "correct": 0})
+
+    for decision in decisions:
+        by_n_options[decision.n_options]["examples"] += 1
+        by_n_options[decision.n_options]["correct"] += int(decision.is_correct)
+        by_answer_type[decision.answer_type]["examples"] += 1
+        by_answer_type[decision.answer_type]["correct"] += int(decision.is_correct)
+
+    labels = sorted(set(answer_counts) | set(prediction_counts))
+    answer_distribution = [
+        {
+            "label": label,
+            "count": answer_counts[label],
+            "rate": _safe_divide(answer_counts[label], total),
+        }
+        for label in labels
+    ]
+    prediction_distribution = [
+        {
+            "label": label,
+            "count": prediction_counts[label],
+            "rate": _safe_divide(prediction_counts[label], total),
+        }
+        for label in labels
+    ]
+    by_answer_label = [
+        {
+            "label": label,
+            "support": answer_counts[label],
+            "correct": correct_by_answer[label],
+            "accuracy": _safe_divide(correct_by_answer[label], answer_counts[label]),
+            "predicted_count": prediction_counts[label],
+            "prediction_rate": _safe_divide(prediction_counts[label], total),
+        }
+        for label in labels
+    ]
+    by_option_count = [
+        {
+            "n_options": n_options,
+            "examples": stats["examples"],
+            "correct": stats["correct"],
+            "accuracy": _safe_divide(stats["correct"], stats["examples"]),
+        }
+        for n_options, stats in sorted(by_n_options.items())
+    ]
+    by_type = [
+        {
+            "answer_type": answer_type,
+            "examples": stats["examples"],
+            "correct": stats["correct"],
+            "accuracy": _safe_divide(stats["correct"], stats["examples"]),
+        }
+        for answer_type, stats in sorted(by_answer_type.items())
+    ]
+    parse_status = [
+        {
+            "parse_status": status,
+            "count": count,
+            "rate": _safe_divide(count, total),
+        }
+        for status, count in sorted(parse_status_counts.items())
+    ]
+
+    return {
+        "examples": total,
+        "correct": correct,
+        "accuracy": _safe_divide(correct, total),
+        "labels": labels,
+        "answer_distribution": answer_distribution,
+        "prediction_distribution": prediction_distribution,
+        "by_answer_label": by_answer_label,
+        "by_n_options": by_option_count,
+        "by_answer_type": by_type,
+        "parse_status": parse_status,
+        "answer_entropy": _entropy(answer_counts),
+        "prediction_entropy": _entropy(prediction_counts),
+    }
+
+
+def _log_wandb_analysis(
+    *,
+    tracker: WandbTracker,
+    analysis: dict[str, Any],
+    decisions: list[Decision],
+) -> None:
+    if not tracker.active:
+        return
+
+    summary_metrics: dict[str, Any] = {
+        "analysis/labels": len(analysis["labels"]),
+        "analysis/answer_entropy": analysis["answer_entropy"],
+        "analysis/prediction_entropy": analysis["prediction_entropy"],
+    }
+    for row in analysis["by_answer_label"]:
+        label = row["label"]
+        summary_metrics[f"analysis/answer_label_accuracy/{label}"] = row["accuracy"]
+        summary_metrics[f"analysis/answer_label_support/{label}"] = row["support"]
+        summary_metrics[f"analysis/prediction_rate/{label}"] = row["prediction_rate"]
+    for row in analysis["by_n_options"]:
+        n_options = row["n_options"]
+        summary_metrics[f"analysis/n_options_accuracy/{n_options}"] = row["accuracy"]
+        summary_metrics[f"analysis/n_options_examples/{n_options}"] = row["examples"]
+    for row in analysis["by_answer_type"]:
+        answer_type = row["answer_type"]
+        summary_metrics[f"analysis/answer_type_accuracy/{answer_type}"] = row["accuracy"]
+        summary_metrics[f"analysis/answer_type_examples/{answer_type}"] = row["examples"]
+    for row in analysis["parse_status"]:
+        status = row["parse_status"]
+        summary_metrics[f"analysis/parse_status_rate/{status}"] = row["rate"]
+        summary_metrics[f"analysis/parse_status_count/{status}"] = row["count"]
+    tracker.log(summary_metrics)
+
+    tracker.log_table(
+        key="analysis/by_answer_label",
+        columns=["label", "support", "correct", "accuracy", "predicted_count", "prediction_rate"],
+        rows=[
+            [
+                row["label"],
+                row["support"],
+                row["correct"],
+                row["accuracy"],
+                row["predicted_count"],
+                row["prediction_rate"],
+            ]
+            for row in analysis["by_answer_label"]
+        ],
+    )
+    tracker.log_table(
+        key="analysis/by_n_options",
+        columns=["n_options", "examples", "correct", "accuracy"],
+        rows=[[row["n_options"], row["examples"], row["correct"], row["accuracy"]] for row in analysis["by_n_options"]],
+    )
+    tracker.log_table(
+        key="analysis/by_answer_type",
+        columns=["answer_type", "examples", "correct", "accuracy"],
+        rows=[
+            [row["answer_type"], row["examples"], row["correct"], row["accuracy"]]
+            for row in analysis["by_answer_type"]
+        ],
+    )
+    tracker.log_table(
+        key="analysis/parse_status",
+        columns=["parse_status", "count", "rate"],
+        rows=[[row["parse_status"], row["count"], row["rate"]] for row in analysis["parse_status"]],
+    )
+    tracker.log_table(
+        key="analysis/prediction_distribution",
+        columns=["label", "count", "rate"],
+        rows=[
+            [row["label"], row["count"], row["rate"]]
+            for row in analysis["prediction_distribution"]
+        ],
+    )
+    tracker.log_table(
+        key="analysis/answer_distribution",
+        columns=["label", "count", "rate"],
+        rows=[[row["label"], row["count"], row["rate"]] for row in analysis["answer_distribution"]],
+    )
+    tracker.log_confusion_matrix(
+        key="analysis/confusion_matrix",
+        y_true=[decision.answer_label for decision in decisions],
+        y_pred=[decision.predicted_label for decision in decisions],
+        class_names=analysis["labels"],
+    )
 
 
 def _write_decisions(path: Path, decisions: Iterable[Decision]) -> None:
@@ -720,6 +927,9 @@ def main(
         _write_json(run_dir / "metrics.json", metrics.to_json())
         _write_results_table(run_dir / "results_table.md", metrics)
         _append_runs_csv(results_root / "mcq-order" / "runs.csv", metrics)
+        analysis_payload = _build_analysis_payload(decisions)
+        analysis_path = run_dir / "analysis.json"
+        _write_json(analysis_path, analysis_payload)
 
         config_payload = {
             "task_id": TASK_ID_MCQ_ORDER,
@@ -749,8 +959,11 @@ def main(
                 "average_latency_ms": metrics.average_latency_ms,
                 "run_id": metrics.run_id,
                 "dataset_path": metrics.dataset_path,
+                "analysis/answer_entropy": analysis_payload["answer_entropy"],
+                "analysis/prediction_entropy": analysis_payload["prediction_entropy"],
             }
         )
+        _log_wandb_analysis(tracker=tracker, analysis=analysis_payload, decisions=decisions)
         tracker.log_artifact(
             name=f"{metrics.task_id.lower()}-{metrics.model_name}-{metrics.run_id}",
             artifact_type="evaluation",
@@ -759,6 +972,7 @@ def main(
                 decisions_path,
                 run_dir / "metrics.json",
                 run_dir / "results_table.md",
+                analysis_path,
                 raw_copy_path,
             ],
         )
