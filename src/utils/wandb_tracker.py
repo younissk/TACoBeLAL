@@ -122,9 +122,18 @@ class WandbTracker:
             return
         if not y_true or not y_pred:
             return
+        label_to_idx = {name: idx for idx, name in enumerate(class_names)}
+        mapped_true: list[int] = []
+        mapped_pred: list[int] = []
+        for true_label, pred_label in zip(y_true, y_pred):
+            if true_label in label_to_idx and pred_label in label_to_idx:
+                mapped_true.append(label_to_idx[true_label])
+                mapped_pred.append(label_to_idx[pred_label])
+        if not mapped_true:
+            return
         confusion_plot = self._wandb.plot.confusion_matrix(
-            y_true=list(y_true),
-            preds=list(y_pred),
+            y_true=mapped_true,
+            preds=mapped_pred,
             class_names=list(class_names),
         )
         self._wandb.log({key: confusion_plot})
