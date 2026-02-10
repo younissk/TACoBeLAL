@@ -79,6 +79,11 @@ def test_main_writes_results_artifacts(tmp_path: Path) -> None:
         seed=7,
         results_root=results_root,
         limit=None,
+        wandb=False,
+        wandb_project="tacobelal",
+        wandb_entity=None,
+        wandb_run_name=None,
+        wandb_log_every=50,
     )
 
     run_dirs = sorted((results_root / "mcq-order" / "random").glob("*"))

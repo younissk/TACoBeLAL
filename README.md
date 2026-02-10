@@ -36,7 +36,7 @@ make setup-from-scratch
 ```
 
 This target:
-- installs local dev + llm extras (`uv sync --extra dev --extra llm`)
+- installs local dev + llm + tracking extras (`uv sync --extra dev --extra llm --extra tracking`)
 - downloads TACoBeLAL dataset into `data/`
 - extracts `data/audio.zip` to `data/audio/`
 - builds `data/mcq_event_timeline_strong.jsonl`
@@ -101,6 +101,38 @@ uv run python src/utils/evaluate_mcq_order.py \
   --temperature 0 \
   --limit 100 \
   --results-root results
+```
+
+### Cloud run tracking (Weights & Biases)
+
+Set your API key once (or add to `.env`):
+
+```bash
+export WANDB_API_KEY=your_wandb_key
+```
+
+W&B-enabled targets:
+
+```bash
+make eval-mcq-order-random-wandb
+make eval-mcq-order-openai-wandb
+make eval-mcq-order-audioflamingo-smoke-wandb
+make eval-mcq-order-audioflamingo-full-wandb
+```
+
+These log:
+- live progress (`accuracy_so_far`, progress fraction, per-step correctness/latency)
+- final summary metrics
+- output artifacts (`decisions.jsonl`, `metrics.json`, `results_table.md`, and AF3 raw outputs when applicable)
+
+Optional W&B Make variables:
+
+```bash
+make eval-mcq-order-audioflamingo-smoke-wandb \
+  WANDB_PROJECT=tacobelal \
+  WANDB_ENTITY=your_team \
+  WANDB_LOG_EVERY=25 \
+  WANDB_RUN_NAME=af3_smoke_a40
 ```
 
 ### Run audio-capable LALM baseline (Audio Flamingo 3)

@@ -22,9 +22,11 @@ from rich.table import Table
 try:
     from .evaluate_mcq_order import load_examples
     from .mcq_order_models import MCQOrderExample, TASK_ID_MCQ_ORDER
+    from .wandb_tracker import WandbTracker
 except ImportError:  # pragma: no cover - enables direct script execution
     from evaluate_mcq_order import load_examples
     from mcq_order_models import MCQOrderExample, TASK_ID_MCQ_ORDER
+    from wandb_tracker import WandbTracker
 
 console = Console()
 MODEL_NAME = "audio-flamingo-3"
@@ -331,6 +333,7 @@ def evaluate_audioflamingo_outputs(
     mapping: dict[str, Any],
     raw_outputs: list[dict[str, Any]],
     model_base: str,
+    tracker: WandbTracker | None = None,
 ) -> tuple[list[Decision], int, int]:
     outputs_by_id: dict[str, dict[str, Any]] = {}
     for row in raw_outputs:
@@ -386,6 +389,17 @@ def evaluate_audioflamingo_outputs(
                 n_options=len(options),
             )
         )
+        if tracker is not None and tracker.active:
+            index = len(decisions)
+            correct_so_far = sum(1 for d in decisions if d.is_correct)
+            tracker.log_live(
+                index=index,
+                total=len(mapping),
+                accuracy_so_far=correct_so_far / index,
+                latency_ms=0.0,
+                is_correct=decisions[-1].is_correct,
+                force=(index == 1 or index == len(mapping)),
+            )
 
     return decisions, invalid_count, missing_count
 
@@ -561,6 +575,32 @@ def main(
         "--dry-run",
         help="Prepare inputs only; skip model inference and evaluation.",
     ),
+    wandb: bool = typer.Option(
+        False,
+        "--wandb",
+        help="Enable live and final logging to Weights & Biases.",
+    ),
+    wandb_project: str = typer.Option(
+        "tacobelal",
+        "--wandb-project",
+        help="W&B project name.",
+    ),
+    wandb_entity: str | None = typer.Option(
+        None,
+        "--wandb-entity",
+        help="W&B entity/team (optional).",
+    ),
+    wandb_run_name: str | None = typer.Option(
+        None,
+        "--wandb-run-name",
+        help="W&B run name (optional).",
+    ),
+    wandb_log_every: int = typer.Option(
+        50,
+        "--wandb-log-every",
+        help="Log every N evaluated examples to W&B.",
+        min=1,
+    ),
 ) -> None:
     if limit is not None and limit < 1:
         raise typer.BadParameter("--limit must be >= 1 when provided.")
@@ -569,6 +609,27 @@ def main(
     if not examples:
         raise typer.BadParameter("No examples found to evaluate.")
 
+    tracker = WandbTracker(
+        enabled=wandb,
+        project=wandb_project,
+        entity=wandb_entity,
+        run_name=wandb_run_name,
+        log_every=wandb_log_every,
+        config={
+            "task_id": TASK_ID_MCQ_ORDER,
+            "dataset": str(dataset),
+            "audio_root": str(audio_root),
+            "audioflamingo_repo": str(audioflamingo_repo),
+            "model_base": model_base,
+            "limit": limit,
+            "num_gpus": num_gpus,
+            "batch_size": batch_size,
+            "max_new_tokens": max_new_tokens,
+            "think_mode": think_mode,
+        },
+        tags=["mcq-order", MODEL_NAME],
+    )
+
     started_at = datetime.now(UTC)
     run_id = started_at.strftime("%Y%m%d_%H%M%S")
     run_dir = _create_run_dir(results_root, run_id)
@@ -576,96 +637,132 @@ def main(
     af_output_dir = run_dir / "audioflamingo_outputs"
     work_dir.mkdir(parents=True, exist_ok=True)
 
-    console.print(f"[bold]Preparing {len(examples)} examples for Audio Flamingo...[/bold]")
-    input_json_path, mapping_json_path, mapping = prepare_audioflamingo_input(
-        examples,
-        audio_root=audio_root,
-        work_dir=work_dir,
-    )
-    console.print(f"[green]Prepared input JSON:[/green] {input_json_path}")
-    console.print(f"[green]Prepared mapping JSON:[/green] {mapping_json_path}")
+    try:
+        console.print(f"[bold]Preparing {len(examples)} examples for Audio Flamingo...[/bold]")
+        input_json_path, mapping_json_path, mapping = prepare_audioflamingo_input(
+            examples,
+            audio_root=audio_root,
+            work_dir=work_dir,
+        )
+        tracker.log({"stage/prepare_complete": 1, "stage/examples_prepared": len(mapping)})
+        console.print(f"[green]Prepared input JSON:[/green] {input_json_path}")
+        console.print(f"[green]Prepared mapping JSON:[/green] {mapping_json_path}")
 
-    if dry_run:
-        console.print("[yellow]Dry run enabled; skipping inference and evaluation.[/yellow]")
-        return
+        if dry_run:
+            console.print("[yellow]Dry run enabled; skipping inference and evaluation.[/yellow]")
+            tracker.log({"stage/dry_run": 1})
+            return
 
-    inference_elapsed = run_audioflamingo_inference(
-        audioflamingo_repo=audioflamingo_repo,
-        model_base=model_base,
-        input_json_path=input_json_path,
-        output_dir=af_output_dir,
-        num_gpus=num_gpus,
-        batch_size=batch_size,
-        max_new_tokens=max_new_tokens,
-        think_mode=think_mode,
-    )
+        tracker.log({"stage/inference_started": 1})
+        inference_elapsed = run_audioflamingo_inference(
+            audioflamingo_repo=audioflamingo_repo,
+            model_base=model_base,
+            input_json_path=input_json_path,
+            output_dir=af_output_dir,
+            num_gpus=num_gpus,
+            batch_size=batch_size,
+            max_new_tokens=max_new_tokens,
+            think_mode=think_mode,
+        )
+        tracker.log({"stage/inference_complete": 1, "stage/inference_elapsed_seconds": inference_elapsed})
 
-    raw_outputs_path = af_output_dir / "outputs.jsonl"
-    if not raw_outputs_path.exists():
-        raise FileNotFoundError(f"Audio Flamingo output file not found: {raw_outputs_path}")
+        raw_outputs_path = af_output_dir / "outputs.jsonl"
+        if not raw_outputs_path.exists():
+            raise FileNotFoundError(f"Audio Flamingo output file not found: {raw_outputs_path}")
 
-    raw_outputs = _load_jsonl(raw_outputs_path)
-    raw_copy_path = run_dir / "raw_model_outputs.jsonl"
-    shutil.copy2(raw_outputs_path, raw_copy_path)
+        raw_outputs = _load_jsonl(raw_outputs_path)
+        raw_copy_path = run_dir / "raw_model_outputs.jsonl"
+        shutil.copy2(raw_outputs_path, raw_copy_path)
 
-    decisions, invalid_count, missing_count = evaluate_audioflamingo_outputs(
-        mapping=mapping,
-        raw_outputs=raw_outputs,
-        model_base=model_base,
-    )
+        decisions, invalid_count, missing_count = evaluate_audioflamingo_outputs(
+            mapping=mapping,
+            raw_outputs=raw_outputs,
+            model_base=model_base,
+            tracker=tracker,
+        )
 
-    finished_at = datetime.now(UTC)
-    correct = sum(decision.is_correct for decision in decisions)
-    total = len(decisions)
-    accuracy = correct / total if total else 0.0
-    average_latency_ms = (inference_elapsed * 1000.0 / total) if total else 0.0
+        finished_at = datetime.now(UTC)
+        correct = sum(decision.is_correct for decision in decisions)
+        total = len(decisions)
+        accuracy = correct / total if total else 0.0
+        average_latency_ms = (inference_elapsed * 1000.0 / total) if total else 0.0
 
-    decisions_path = run_dir / "decisions.jsonl"
-    _write_decisions(decisions_path, decisions)
+        decisions_path = run_dir / "decisions.jsonl"
+        _write_decisions(decisions_path, decisions)
 
-    metrics = RunMetrics(
-        run_id=run_dir.name,
-        task_id=TASK_ID_MCQ_ORDER,
-        model_name=MODEL_NAME,
-        model_base=model_base,
-        dataset_path=str(dataset),
-        audio_root=str(audio_root),
-        audioflamingo_repo=str(audioflamingo_repo),
-        examples=total,
-        correct=correct,
-        accuracy=accuracy,
-        parse_invalid=invalid_count,
-        missing_predictions=missing_count,
-        elapsed_seconds=inference_elapsed,
-        average_latency_ms=average_latency_ms,
-        started_at_utc=started_at.isoformat(),
-        finished_at_utc=finished_at.isoformat(),
-        decisions_path=str(decisions_path),
-        raw_outputs_path=str(raw_copy_path),
-    )
+        metrics = RunMetrics(
+            run_id=run_dir.name,
+            task_id=TASK_ID_MCQ_ORDER,
+            model_name=MODEL_NAME,
+            model_base=model_base,
+            dataset_path=str(dataset),
+            audio_root=str(audio_root),
+            audioflamingo_repo=str(audioflamingo_repo),
+            examples=total,
+            correct=correct,
+            accuracy=accuracy,
+            parse_invalid=invalid_count,
+            missing_predictions=missing_count,
+            elapsed_seconds=inference_elapsed,
+            average_latency_ms=average_latency_ms,
+            started_at_utc=started_at.isoformat(),
+            finished_at_utc=finished_at.isoformat(),
+            decisions_path=str(decisions_path),
+            raw_outputs_path=str(raw_copy_path),
+        )
 
-    _write_json(run_dir / "metrics.json", metrics.to_json())
-    _write_results_table(run_dir / "results_table.md", metrics)
-    _append_runs_csv(results_root / "mcq-order" / "runs.csv", metrics)
+        _write_json(run_dir / "metrics.json", metrics.to_json())
+        _write_results_table(run_dir / "results_table.md", metrics)
+        _append_runs_csv(results_root / "mcq-order" / "runs.csv", metrics)
 
-    config_payload = {
-        "task_id": TASK_ID_MCQ_ORDER,
-        "dataset": str(dataset),
-        "audio_root": str(audio_root),
-        "audioflamingo_repo": str(audioflamingo_repo),
-        "model_base": model_base,
-        "limit": limit,
-        "num_gpus": num_gpus,
-        "batch_size": batch_size,
-        "max_new_tokens": max_new_tokens,
-        "think_mode": think_mode,
-    }
-    _write_json(run_dir / "run_config.json", config_payload)
+        config_payload = {
+            "task_id": TASK_ID_MCQ_ORDER,
+            "dataset": str(dataset),
+            "audio_root": str(audio_root),
+            "audioflamingo_repo": str(audioflamingo_repo),
+            "model_base": model_base,
+            "limit": limit,
+            "num_gpus": num_gpus,
+            "batch_size": batch_size,
+            "max_new_tokens": max_new_tokens,
+            "think_mode": think_mode,
+        }
+        _write_json(run_dir / "run_config.json", config_payload)
 
-    if not keep_workdir:
-        shutil.rmtree(work_dir, ignore_errors=True)
+        tracker.update_summary(
+            {
+                "task_id": metrics.task_id,
+                "model_name": metrics.model_name,
+                "model_base": metrics.model_base,
+                "examples": metrics.examples,
+                "correct": metrics.correct,
+                "accuracy": metrics.accuracy,
+                "parse_invalid": metrics.parse_invalid,
+                "missing_predictions": metrics.missing_predictions,
+                "elapsed_seconds": metrics.elapsed_seconds,
+                "average_latency_ms": metrics.average_latency_ms,
+                "run_id": metrics.run_id,
+                "dataset_path": metrics.dataset_path,
+            }
+        )
+        tracker.log_artifact(
+            name=f"{metrics.task_id.lower()}-{metrics.model_name}-{metrics.run_id}",
+            artifact_type="evaluation",
+            files=[
+                run_dir / "run_config.json",
+                decisions_path,
+                run_dir / "metrics.json",
+                run_dir / "results_table.md",
+                raw_copy_path,
+            ],
+        )
 
-    _print_summary(metrics, run_dir)
+        if not keep_workdir:
+            shutil.rmtree(work_dir, ignore_errors=True)
+
+        _print_summary(metrics, run_dir)
+    finally:
+        tracker.finish()
 
 
 if __name__ == "__main__":

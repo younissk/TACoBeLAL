@@ -8,7 +8,7 @@ import time
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 
 import typer
 from rich.console import Console
@@ -16,8 +16,10 @@ from rich.table import Table
 
 try:
     from .mcq_order_models import TASK_ID_MCQ_ORDER, MCQOrderExample, MCQOrderModel, build_model
+    from .wandb_tracker import WandbTracker
 except ImportError:  # pragma: no cover - enables direct script execution
     from mcq_order_models import TASK_ID_MCQ_ORDER, MCQOrderExample, MCQOrderModel, build_model
+    from wandb_tracker import WandbTracker
 
 console = Console()
 
@@ -106,10 +108,19 @@ def load_examples(dataset_jsonl: Path, limit: int | None = None) -> list[MCQOrde
 
 
 def evaluate(model: MCQOrderModel, examples: Iterable[MCQOrderExample]) -> tuple[list[Decision], float]:
+    return evaluate_with_callback(model=model, examples=examples, callback=None)
+
+
+def evaluate_with_callback(
+    model: MCQOrderModel,
+    examples: Iterable[MCQOrderExample],
+    callback: Callable[[int, Decision, int], None] | None,
+) -> tuple[list[Decision], float]:
     decisions: list[Decision] = []
     started = time.perf_counter()
+    correct_so_far = 0
 
-    for example in examples:
+    for index, example in enumerate(examples, start=1):
         decision_started = time.perf_counter()
         predicted_label = model.predict(example)
         latency_ms = (time.perf_counter() - decision_started) * 1000.0
@@ -123,6 +134,8 @@ def evaluate(model: MCQOrderModel, examples: Iterable[MCQOrderExample]) -> tuple
             ) from exc
 
         is_correct = predicted_label == example.answer_label
+        if is_correct:
+            correct_so_far += 1
         decisions.append(
             Decision(
                 task_id=TASK_ID_MCQ_ORDER,
@@ -139,6 +152,8 @@ def evaluate(model: MCQOrderModel, examples: Iterable[MCQOrderExample]) -> tuple
                 n_options=len(example.options),
             )
         )
+        if callback is not None:
+            callback(index, decisions[-1], correct_so_far)
 
     elapsed_seconds = time.perf_counter() - started
     return decisions, elapsed_seconds
@@ -289,6 +304,32 @@ def main(
         help="Optional max number of examples to evaluate.",
         min=1,
     ),
+    wandb: bool = typer.Option(
+        False,
+        "--wandb",
+        help="Enable live and final logging to Weights & Biases.",
+    ),
+    wandb_project: str = typer.Option(
+        "tacobelal",
+        "--wandb-project",
+        help="W&B project name.",
+    ),
+    wandb_entity: str | None = typer.Option(
+        None,
+        "--wandb-entity",
+        help="W&B entity/team (optional).",
+    ),
+    wandb_run_name: str | None = typer.Option(
+        None,
+        "--wandb-run-name",
+        help="W&B run name (optional).",
+    ),
+    wandb_log_every: int = typer.Option(
+        50,
+        "--wandb-log-every",
+        help="Log every N evaluated examples to W&B.",
+        min=1,
+    ),
 ) -> None:
     model_instance = build_model(
         model,
@@ -303,40 +344,98 @@ def main(
     if not examples:
         raise typer.BadParameter("No examples found in dataset.")
 
-    started_at = datetime.now(UTC)
-    decisions, elapsed_seconds = evaluate(model=model_instance, examples=examples)
-    finished_at = datetime.now(UTC)
-
-    correct = sum(decision.is_correct for decision in decisions)
-    average_latency_ms = sum(decision.latency_ms for decision in decisions) / len(decisions)
-    run_id = started_at.strftime("%Y%m%d_%H%M%S")
-    run_dir = results_root / "mcq-order" / model_instance.model_name / run_id
-    run_dir.mkdir(parents=True, exist_ok=False)
-
-    decisions_path = run_dir / "decisions.jsonl"
-    _write_decisions(decisions_path, decisions)
-
-    metrics = RunMetrics(
-        task_id=TASK_ID_MCQ_ORDER,
-        model_name=model_instance.model_name,
-        model_metadata=model_instance.run_metadata(),
-        examples=len(decisions),
-        correct=correct,
-        accuracy=correct / len(decisions),
-        elapsed_seconds=elapsed_seconds,
-        average_latency_ms=average_latency_ms,
-        run_id=run_id,
-        started_at_utc=started_at.isoformat(),
-        finished_at_utc=finished_at.isoformat(),
-        dataset_path=str(dataset),
-        decisions_path=str(decisions_path),
+    tracker = WandbTracker(
+        enabled=wandb,
+        project=wandb_project,
+        entity=wandb_entity,
+        run_name=wandb_run_name,
+        log_every=wandb_log_every,
+        config={
+            "task_id": TASK_ID_MCQ_ORDER,
+            "dataset": str(dataset),
+            "model": model_instance.model_name,
+            "model_config": model_instance.run_metadata(),
+            "limit": limit,
+        },
+        tags=["mcq-order", model_instance.model_name],
     )
 
-    _write_metrics(run_dir / "metrics.json", metrics)
-    _write_results_table(run_dir / "results_table.md", metrics)
-    _append_runs_csv(results_root / "mcq-order" / "runs.csv", metrics)
+    try:
+        started_at = datetime.now(UTC)
+        total_examples = len(examples)
 
-    _print_summary(metrics, run_dir)
+        def _on_decision(index: int, decision: Decision, correct_so_far: int) -> None:
+            tracker.log_live(
+                index=index,
+                total=total_examples,
+                accuracy_so_far=correct_so_far / index,
+                latency_ms=decision.latency_ms,
+                is_correct=decision.is_correct,
+                force=(index == 1 or index == total_examples),
+            )
+
+        decisions, elapsed_seconds = evaluate_with_callback(
+            model=model_instance,
+            examples=examples,
+            callback=_on_decision if tracker.active else None,
+        )
+        finished_at = datetime.now(UTC)
+
+        correct = sum(decision.is_correct for decision in decisions)
+        average_latency_ms = sum(decision.latency_ms for decision in decisions) / len(decisions)
+        run_id = started_at.strftime("%Y%m%d_%H%M%S")
+        run_dir = results_root / "mcq-order" / model_instance.model_name / run_id
+        run_dir.mkdir(parents=True, exist_ok=False)
+
+        decisions_path = run_dir / "decisions.jsonl"
+        _write_decisions(decisions_path, decisions)
+
+        metrics = RunMetrics(
+            task_id=TASK_ID_MCQ_ORDER,
+            model_name=model_instance.model_name,
+            model_metadata=model_instance.run_metadata(),
+            examples=len(decisions),
+            correct=correct,
+            accuracy=correct / len(decisions),
+            elapsed_seconds=elapsed_seconds,
+            average_latency_ms=average_latency_ms,
+            run_id=run_id,
+            started_at_utc=started_at.isoformat(),
+            finished_at_utc=finished_at.isoformat(),
+            dataset_path=str(dataset),
+            decisions_path=str(decisions_path),
+        )
+
+        _write_metrics(run_dir / "metrics.json", metrics)
+        _write_results_table(run_dir / "results_table.md", metrics)
+        _append_runs_csv(results_root / "mcq-order" / "runs.csv", metrics)
+
+        tracker.update_summary(
+            {
+                "task_id": metrics.task_id,
+                "model_name": metrics.model_name,
+                "examples": metrics.examples,
+                "correct": metrics.correct,
+                "accuracy": metrics.accuracy,
+                "elapsed_seconds": metrics.elapsed_seconds,
+                "average_latency_ms": metrics.average_latency_ms,
+                "dataset_path": metrics.dataset_path,
+                "run_id": metrics.run_id,
+            }
+        )
+        tracker.log_artifact(
+            name=f"{metrics.task_id.lower()}-{metrics.model_name}-{metrics.run_id}",
+            artifact_type="evaluation",
+            files=[
+                decisions_path,
+                run_dir / "metrics.json",
+                run_dir / "results_table.md",
+            ],
+        )
+
+        _print_summary(metrics, run_dir)
+    finally:
+        tracker.finish()
 
 
 if __name__ == "__main__":

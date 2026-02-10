@@ -188,7 +188,7 @@ class TestMainIntegration:
         output_dir = tmp_path / "out"
         call_count = 0
 
-        def mock_urlopen(url: str) -> MagicMock:
+        def mock_urlopen(url: str, **_: object) -> MagicMock:
             nonlocal call_count
             call_count += 1
             resp = MagicMock()
