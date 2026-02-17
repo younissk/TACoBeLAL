@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import csv
 import json
+import random
+import struct
 import math
 import os
 import re
@@ -14,6 +16,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
+import wave
 from typing import Any, Iterable
 
 import typer
@@ -190,6 +193,23 @@ def _create_audio_link(source: Path, link_path: Path) -> None:
         shutil.copy2(source.resolve(), link_path)
 
 
+def _write_dummy_noise_wav(path: Path, *, duration_s: float = 3.0, sample_rate: int = 16000) -> None:
+    if path.exists():
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    num_samples = int(duration_s * sample_rate)
+    rng = random.Random(0)
+    with wave.open(str(path), "wb") as wav_file:
+        wav_file.setnchannels(1)
+        wav_file.setsampwidth(2)  # 16-bit
+        wav_file.setframerate(sample_rate)
+        frames = bytearray()
+        for _ in range(num_samples):
+            sample = rng.randint(-32768, 32767)
+            frames.extend(struct.pack("<h", sample))
+        wav_file.writeframes(frames)
+
+
 def _normalize_output_id_path(value: str) -> str:
     return str(Path(value).absolute())
 
@@ -248,11 +268,17 @@ def prepare_audioflamingo_input(
                 }
                 mapped_output_id = _normalize_output_id_path(str(link_path))
             else:
-                mapped_output_id = f"text::{example.example_id}"
+                dummy_source = work_dir / "dummy_noise.wav"
+                _write_dummy_noise_wav(dummy_source)
+                link_name = f"{idx:06d}_{_safe_name(example.example_id)}.wav"
+                link_path = links_dir / link_name
+                _create_audio_link(dummy_source, link_path)
                 data[key] = {
+                    "name": link_name,
                     "prompt": build_prompt(example),
                     "output": example.answer_label,
                 }
+                mapped_output_id = _normalize_output_id_path(str(link_path))
 
             mapping[mapped_output_id] = {
                 "index": idx,
