@@ -1,0 +1,364 @@
+{
+  "examples": 1000,
+  "correct": 320,
+  "accuracy": 0.32,
+  "labels": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+  ],
+  "answer_distribution": [
+    {
+      "label": "A",
+      "count": 325,
+      "rate": 0.325
+    },
+    {
+      "label": "B",
+      "count": 297,
+      "rate": 0.297
+    },
+    {
+      "label": "C",
+      "count": 143,
+      "rate": 0.143
+    },
+    {
+      "label": "D",
+      "count": 100,
+      "rate": 0.1
+    },
+    {
+      "label": "E",
+      "count": 47,
+      "rate": 0.047
+    },
+    {
+      "label": "F",
+      "count": 43,
+      "rate": 0.043
+    },
+    {
+      "label": "G",
+      "count": 19,
+      "rate": 0.019
+    },
+    {
+      "label": "H",
+      "count": 6,
+      "rate": 0.006
+    },
+    {
+      "label": "I",
+      "count": 8,
+      "rate": 0.008
+    },
+    {
+      "label": "J",
+      "count": 4,
+      "rate": 0.004
+    },
+    {
+      "label": "K",
+      "count": 3,
+      "rate": 0.003
+    },
+    {
+      "label": "L",
+      "count": 1,
+      "rate": 0.001
+    },
+    {
+      "label": "M",
+      "count": 2,
+      "rate": 0.002
+    },
+    {
+      "label": "N",
+      "count": 2,
+      "rate": 0.002
+    }
+  ],
+  "prediction_distribution": [
+    {
+      "label": "A",
+      "count": 253,
+      "rate": 0.253
+    },
+    {
+      "label": "B",
+      "count": 353,
+      "rate": 0.353
+    },
+    {
+      "label": "C",
+      "count": 229,
+      "rate": 0.229
+    },
+    {
+      "label": "D",
+      "count": 94,
+      "rate": 0.094
+    },
+    {
+      "label": "E",
+      "count": 35,
+      "rate": 0.035
+    },
+    {
+      "label": "F",
+      "count": 21,
+      "rate": 0.021
+    },
+    {
+      "label": "G",
+      "count": 10,
+      "rate": 0.01
+    },
+    {
+      "label": "H",
+      "count": 3,
+      "rate": 0.003
+    },
+    {
+      "label": "I",
+      "count": 2,
+      "rate": 0.002
+    },
+    {
+      "label": "J",
+      "count": 0,
+      "rate": 0.0
+    },
+    {
+      "label": "K",
+      "count": 0,
+      "rate": 0.0
+    },
+    {
+      "label": "L",
+      "count": 0,
+      "rate": 0.0
+    },
+    {
+      "label": "M",
+      "count": 0,
+      "rate": 0.0
+    },
+    {
+      "label": "N",
+      "count": 0,
+      "rate": 0.0
+    }
+  ],
+  "by_answer_label": [
+    {
+      "label": "A",
+      "support": 325,
+      "correct": 102,
+      "accuracy": 0.31384615384615383,
+      "predicted_count": 253,
+      "prediction_rate": 0.253
+    },
+    {
+      "label": "B",
+      "support": 297,
+      "correct": 138,
+      "accuracy": 0.46464646464646464,
+      "predicted_count": 353,
+      "prediction_rate": 0.353
+    },
+    {
+      "label": "C",
+      "support": 143,
+      "correct": 54,
+      "accuracy": 0.3776223776223776,
+      "predicted_count": 229,
+      "prediction_rate": 0.229
+    },
+    {
+      "label": "D",
+      "support": 100,
+      "correct": 19,
+      "accuracy": 0.19,
+      "predicted_count": 94,
+      "prediction_rate": 0.094
+    },
+    {
+      "label": "E",
+      "support": 47,
+      "correct": 6,
+      "accuracy": 0.1276595744680851,
+      "predicted_count": 35,
+      "prediction_rate": 0.035
+    },
+    {
+      "label": "F",
+      "support": 43,
+      "correct": 1,
+      "accuracy": 0.023255813953488372,
+      "predicted_count": 21,
+      "prediction_rate": 0.021
+    },
+    {
+      "label": "G",
+      "support": 19,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 10,
+      "prediction_rate": 0.01
+    },
+    {
+      "label": "H",
+      "support": 6,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 3,
+      "prediction_rate": 0.003
+    },
+    {
+      "label": "I",
+      "support": 8,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 2,
+      "prediction_rate": 0.002
+    },
+    {
+      "label": "J",
+      "support": 4,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 0,
+      "prediction_rate": 0.0
+    },
+    {
+      "label": "K",
+      "support": 3,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 0,
+      "prediction_rate": 0.0
+    },
+    {
+      "label": "L",
+      "support": 1,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 0,
+      "prediction_rate": 0.0
+    },
+    {
+      "label": "M",
+      "support": 2,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 0,
+      "prediction_rate": 0.0
+    },
+    {
+      "label": "N",
+      "support": 2,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 0,
+      "prediction_rate": 0.0
+    }
+  ],
+  "by_n_options": [
+    {
+      "n_options": 2,
+      "examples": 268,
+      "correct": 139,
+      "accuracy": 0.5186567164179104
+    },
+    {
+      "n_options": 3,
+      "examples": 207,
+      "correct": 71,
+      "accuracy": 0.34299516908212563
+    },
+    {
+      "n_options": 4,
+      "examples": 179,
+      "correct": 52,
+      "accuracy": 0.2905027932960894
+    },
+    {
+      "n_options": 5,
+      "examples": 95,
+      "correct": 24,
+      "accuracy": 0.25263157894736843
+    },
+    {
+      "n_options": 6,
+      "examples": 108,
+      "correct": 16,
+      "accuracy": 0.14814814814814814
+    },
+    {
+      "n_options": 7,
+      "examples": 63,
+      "correct": 12,
+      "accuracy": 0.19047619047619047
+    },
+    {
+      "n_options": 8,
+      "examples": 24,
+      "correct": 2,
+      "accuracy": 0.08333333333333333
+    },
+    {
+      "n_options": 9,
+      "examples": 9,
+      "correct": 1,
+      "accuracy": 0.1111111111111111
+    },
+    {
+      "n_options": 10,
+      "examples": 30,
+      "correct": 2,
+      "accuracy": 0.06666666666666667
+    },
+    {
+      "n_options": 17,
+      "examples": 17,
+      "correct": 1,
+      "accuracy": 0.058823529411764705
+    }
+  ],
+  "by_answer_type": [
+    {
+      "answer_type": "event",
+      "examples": 699,
+      "correct": 220,
+      "accuracy": 0.3147353361945637
+    },
+    {
+      "answer_type": "none",
+      "examples": 301,
+      "correct": 100,
+      "accuracy": 0.33222591362126247
+    }
+  ],
+  "parse_status": [
+    {
+      "parse_status": "exact-label",
+      "count": 1000,
+      "rate": 1.0
+    }
+  ],
+  "answer_entropy": 2.4946177698318786,
+  "prediction_entropy": 2.2354160470453364
+}
