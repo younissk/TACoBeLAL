@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import inspect
 import json
 import math
 import os
@@ -146,8 +147,14 @@ def build_conversation(
     if use_audio:
         if audio_path is None:
             raise ValueError("audio_path is required when use_audio=True.")
-        # Qwen2-Audio chat template expects audio entries in the content.
-        user_content.append({"type": "audio", "audio_url": str(audio_path)})
+        # Keep both keys for compatibility across Qwen2-Audio processor/template variants.
+        user_content.append(
+            {
+                "type": "audio",
+                "audio": str(audio_path),
+                "audio_url": str(audio_path),
+            }
+        )
     user_content.append({"type": "text", "text": build_prompt(example, use_audio=False)})
     return [{"role": "user", "content": user_content}]
 
@@ -170,18 +177,32 @@ def parse_predicted_label(
         return None, "empty"
     if candidate in valid_labels:
         return candidate, "exact-label"
+    candidate_upper = candidate.upper()
+    if candidate_upper in valid_labels:
+        return candidate_upper, "exact-label"
 
     try:
         parsed = json.loads(candidate)
         if isinstance(parsed, dict):
             label = parsed.get("label")
-            if isinstance(label, str) and label.strip() in valid_labels:
-                return label.strip(), "json-label"
+            if isinstance(label, str):
+                normalized = label.strip().upper()
+                if normalized in valid_labels:
+                    return normalized, "json-label"
     except json.JSONDecodeError:
         pass
 
     for match in re.finditer(r"\b([A-Z]{1,3})\b", candidate):
-        label = match.group(1)
+        label = match.group(1).upper()
+        if label in valid_labels:
+            return label, "regex-label"
+
+    for match in re.finditer(
+        r"\b(?:option|answer)\b[^A-Za-z0-9]{0,8}(?:is[^A-Za-z0-9]{0,8})?\b([A-Za-z]{1,3})\b",
+        candidate,
+        flags=re.IGNORECASE,
+    ):
+        label = match.group(1).upper()
         if label in valid_labels:
             return label, "regex-label"
 
@@ -246,6 +267,24 @@ def _resolve_input_device(model: Any, torch_module: Any) -> Any:
         return model_device
 
     return torch_module.device("cpu")
+
+
+def _resolve_processor_audio_argument(processor: Any) -> str:
+    """Return the audio kwarg name expected by this processor call signature."""
+    call = getattr(processor, "__call__", None)
+    if call is None:
+        return "audios"
+
+    try:
+        params = inspect.signature(call).parameters
+    except (TypeError, ValueError):
+        return "audios"
+
+    if "audio" in params:
+        return "audio"
+    if "audios" in params:
+        return "audios"
+    return "audios"
 
 
 def _load_audio_file(path: Path, *, sampling_rate: int) -> Any:
@@ -358,6 +397,7 @@ def run_qwen2_audio_inference(
 
     sampling_rate = int(getattr(processor.feature_extractor, "sampling_rate", 16000))
     input_device = _resolve_input_device(model, torch)
+    audio_argument = _resolve_processor_audio_argument(processor) if use_audio else None
     raw_outputs: list[dict[str, Any]] = []
 
     started = time.perf_counter()
@@ -397,20 +437,33 @@ def run_qwen2_audio_inference(
                     prompt = build_prompt(example, use_audio=use_audio)
                 batch_prompts.append(prompt)
 
+            processor_inputs: dict[str, Any] = {
+                "text": batch_prompts,
+                "padding": True,
+                "return_tensors": "pt",
+            }
             if use_audio:
-                batch_inputs = processor(
-                    text=batch_prompts,
-                    audios=batch_audio_arrays,
-                    sampling_rate=sampling_rate,
-                    padding=True,
-                    return_tensors="pt",
-                )
+                if audio_argument is None:
+                    audio_argument = "audios"
+                processor_inputs["sampling_rate"] = sampling_rate
+                processor_inputs[audio_argument] = batch_audio_arrays
+                try:
+                    batch_inputs = processor(**processor_inputs)
+                except TypeError as first_exc:
+                    fallback_argument = "audio" if audio_argument == "audios" else "audios"
+                    fallback_inputs = dict(processor_inputs)
+                    fallback_inputs.pop(audio_argument, None)
+                    fallback_inputs[fallback_argument] = batch_audio_arrays
+                    try:
+                        batch_inputs = processor(**fallback_inputs)
+                        audio_argument = fallback_argument
+                    except TypeError as second_exc:
+                        raise TypeError(
+                            "Qwen2-Audio processor call failed with both audio argument names "
+                            f"('{audio_argument}' and '{fallback_argument}')."
+                        ) from second_exc
             else:
-                batch_inputs = processor(
-                    text=batch_prompts,
-                    padding=True,
-                    return_tensors="pt",
-                )
+                batch_inputs = processor(**processor_inputs)
             batch_inputs = {key: value.to(input_device) for key, value in batch_inputs.items()}
 
             generation_kwargs: dict[str, Any] = {

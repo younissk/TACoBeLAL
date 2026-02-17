@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from utils.evaluate_mcq_order_qwen2_audio import (
     _extract_completion_ids,
+    _resolve_processor_audio_argument,
+    build_conversation,
     build_prompt,
     evaluate_qwen2_audio_outputs,
     parse_predicted_label,
@@ -45,12 +47,48 @@ def test_build_prompt_without_audio_token_when_disabled() -> None:
     assert "Return only the option label" in prompt
 
 
+def test_build_conversation_contains_both_audio_keys_for_compatibility() -> None:
+    conversation = build_conversation(_example("ex-1"), audio_path=None, use_audio=False)
+    assert conversation[0]["content"][0]["type"] == "text"
+
+
+def test_build_conversation_audio_mode_contains_audio_and_audio_url(tmp_path) -> None:
+    audio_path = tmp_path / "sample.mp3"
+    audio_path.write_bytes(b"fake")
+    conversation = build_conversation(_example("ex-1"), audio_path=audio_path, use_audio=True)
+    audio_item = conversation[0]["content"][0]
+    assert audio_item["type"] == "audio"
+    assert audio_item["audio"] == str(audio_path)
+    assert audio_item["audio_url"] == str(audio_path)
+
+
+class _ProcessorWithAudio:
+    def __call__(self, text=None, audio=None):  # pragma: no cover - signature only
+        return {"text": text, "audio": audio}
+
+
+class _ProcessorWithAudios:
+    def __call__(self, text=None, audios=None):  # pragma: no cover - signature only
+        return {"text": text, "audios": audios}
+
+
+def test_resolve_processor_audio_argument_prefers_audio_when_available() -> None:
+    assert _resolve_processor_audio_argument(_ProcessorWithAudio()) == "audio"
+
+
+def test_resolve_processor_audio_argument_supports_audios_variant() -> None:
+    assert _resolve_processor_audio_argument(_ProcessorWithAudios()) == "audios"
+
+
 def test_parse_predicted_label() -> None:
     valid = {"A", "B", "C"}
     label_to_text = {"A": "Option A", "B": "Option B", "C": "None"}
     assert parse_predicted_label("A", valid_labels=valid, label_to_text=label_to_text)[0] == "A"
+    assert parse_predicted_label("b", valid_labels=valid, label_to_text=label_to_text)[0] == "B"
     assert parse_predicted_label('{"label":"B"}', valid_labels=valid, label_to_text=label_to_text)[0] == "B"
+    assert parse_predicted_label('{"label":"b"}', valid_labels=valid, label_to_text=label_to_text)[0] == "B"
     assert parse_predicted_label("I think C.", valid_labels=valid, label_to_text=label_to_text)[0] == "C"
+    assert parse_predicted_label("the answer is b", valid_labels=valid, label_to_text=label_to_text)[0] == "B"
     assert parse_predicted_label("Option B", valid_labels=valid, label_to_text=label_to_text)[0] == "B"
     assert parse_predicted_label("", valid_labels=valid, label_to_text=label_to_text)[0] is None
 
