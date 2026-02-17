@@ -29,5 +29,18 @@ fi
 # 1) Prepare code/data/repo once (skip if already done)
 make setup-from-scratch
 
-# 2) Run full benchmark (entire dataset)
-make eval-mcq-order-audioflamingo-full
+# Set FULL_BENCHMARK=1 to run without --limit.
+FULL_BENCHMARK="${FULL_BENCHMARK:-0}"
+
+if [ "${FULL_BENCHMARK}" = "1" ]; then
+  make eval-mcq-order-audioflamingo-full \
+    WANDB_PROJECT="${WANDB_PROJECT:-tacobelal}" \
+    WANDB_ENTITY="${WANDB_ENTITY:-}" \
+    WANDB_RUN_NAME="${WANDB_RUN_NAME:-af3_mcq_order_full_a40}"
+else
+  make eval-mcq-order-audioflamingo-smoke \
+    AF_SMOKE_LIMIT="${AF_SMOKE_LIMIT:-100}" \
+    WANDB_PROJECT="${WANDB_PROJECT:-tacobelal}" \
+    WANDB_ENTITY="${WANDB_ENTITY:-}" \
+    WANDB_RUN_NAME="${WANDB_RUN_NAME:-af3_mcq_order_smoke_a40}"
+fi
