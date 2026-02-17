@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from utils.evaluate_mcq_order_qwen2_audio import (
+    _extract_completion_ids,
     build_prompt,
     evaluate_qwen2_audio_outputs,
     parse_predicted_label,
@@ -69,3 +70,45 @@ def test_evaluate_qwen2_audio_outputs_handles_missing_and_invalid() -> None:
     assert second.predicted_label == "INVALID"
     assert second.parse_status == "missing"
     assert second.is_correct is False
+
+
+def test_extract_completion_ids_prefers_input_ids_when_attention_sum_exceeds_generated() -> None:
+    generated_row = [0, 1, 2, 3, 4, 5, 6]
+    input_ids_row = [10, 11, 12, 13, 14]
+    attention_mask_row = [1] * 9
+
+    completion_ids = _extract_completion_ids(
+        generated_row,
+        input_ids_row=input_ids_row,
+        attention_mask_row=attention_mask_row,
+    )
+
+    assert completion_ids == [5, 6]
+
+
+def test_extract_completion_ids_falls_back_to_attention_sum_when_input_len_invalid() -> None:
+    generated_row = [0, 1, 2, 3, 4, 5, 6]
+    input_ids_row = [10, 11, 12, 13, 14, 15, 16, 17, 18]
+    attention_mask_row = [1, 1, 1, 1, 1, 0, 0]
+
+    completion_ids = _extract_completion_ids(
+        generated_row,
+        input_ids_row=input_ids_row,
+        attention_mask_row=attention_mask_row,
+    )
+
+    assert completion_ids == [5, 6]
+
+
+def test_extract_completion_ids_returns_empty_when_no_valid_start_exists() -> None:
+    generated_row = [0, 1, 2]
+    input_ids_row = [10, 11, 12, 13]
+    attention_mask_row = [1, 1, 1, 1, 1]
+
+    completion_ids = _extract_completion_ids(
+        generated_row,
+        input_ids_row=input_ids_row,
+        attention_mask_row=attention_mask_row,
+    )
+
+    assert completion_ids == []

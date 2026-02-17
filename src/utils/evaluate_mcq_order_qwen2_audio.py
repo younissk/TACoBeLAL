@@ -243,6 +243,57 @@ def _load_audio_file(path: Path, *, sampling_rate: int) -> Any:
     return audio
 
 
+def _length_of_token_like(row: Any) -> int:
+    if hasattr(row, "shape"):
+        shape = getattr(row, "shape")
+        if len(shape) > 0:
+            return int(shape[-1])
+    return len(row)
+
+
+def _sum_attention_like(row: Any) -> int:
+    if hasattr(row, "sum"):
+        total = row.sum()
+        if hasattr(total, "item"):
+            return int(total.item())
+        return int(total)
+    return int(sum(int(value) for value in row))
+
+
+def _extract_completion_ids(
+    generated_row: Any,
+    *,
+    input_ids_row: Any | None,
+    attention_mask_row: Any | None,
+) -> list[int]:
+    generated_len = _length_of_token_like(generated_row)
+    candidate_starts: list[int] = []
+
+    if input_ids_row is not None:
+        candidate_starts.append(_length_of_token_like(input_ids_row))
+    if attention_mask_row is not None:
+        candidate_starts.append(_sum_attention_like(attention_mask_row))
+
+    valid_starts = sorted(
+        {
+            start
+            for start in candidate_starts
+            if isinstance(start, int) and 0 <= start <= generated_len
+        },
+        reverse=True,
+    )
+    start = valid_starts[0] if valid_starts else generated_len
+
+    completion = generated_row[start:]
+    if hasattr(completion, "detach"):
+        completion = completion.detach()
+    if hasattr(completion, "cpu"):
+        completion = completion.cpu()
+    if hasattr(completion, "tolist"):
+        return completion.tolist()
+    return [int(token_id) for token_id in completion]
+
+
 def run_qwen2_audio_inference(
     *,
     examples: list[MCQOrderExample],
@@ -336,13 +387,13 @@ def run_qwen2_audio_inference(
                 generated_ids = model.generate(**batch_inputs, **generation_kwargs)
 
             attention_mask = batch_inputs.get("attention_mask")
+            input_ids = batch_inputs.get("input_ids")
             for index, example in enumerate(batch_examples):
-                if attention_mask is not None:
-                    prompt_len = int(attention_mask[index].sum().item())
-                else:
-                    prompt_len = int(batch_inputs["input_ids"][index].shape[-1])
-
-                completion_ids = generated_ids[index][prompt_len:].detach().cpu().tolist()
+                completion_ids = _extract_completion_ids(
+                    generated_ids[index],
+                    input_ids_row=input_ids[index] if input_ids is not None else None,
+                    attention_mask_row=attention_mask[index] if attention_mask is not None else None,
+                )
                 predicted_text = processor.decode(
                     completion_ids,
                     skip_special_tokens=True,
