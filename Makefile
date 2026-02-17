@@ -13,12 +13,20 @@
 	eval-mcq-order-llama \
 	eval-mcq-order-qwen2-audio-smoke \
 	eval-mcq-order-qwen2-audio-full \
+	eval-mcq-order-qwen2-audio-no-audio-smoke \
+	eval-mcq-order-qwen2-audio-no-audio-full \
 	eval-mcq-order-qwen2-5-omni-smoke \
 	eval-mcq-order-qwen2-5-omni-full \
+	eval-mcq-order-qwen2-5-omni-no-audio-smoke \
+	eval-mcq-order-qwen2-5-omni-no-audio-full \
 	eval-mcq-order-voxtral-smoke \
 	eval-mcq-order-voxtral-full \
+	eval-mcq-order-voxtral-no-audio-smoke \
+	eval-mcq-order-voxtral-no-audio-full \
 	eval-mcq-order-audioflamingo-smoke \
 	eval-mcq-order-audioflamingo-full \
+	eval-mcq-order-audioflamingo-no-audio-smoke \
+	eval-mcq-order-audioflamingo-no-audio-full \
 	test
 
 DATA_DIR ?= data
@@ -174,6 +182,35 @@ eval-mcq-order-audioflamingo-full:
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 
+eval-mcq-order-audioflamingo-no-audio-smoke:
+	uv sync --extra tracking
+	uv run python src/utils/evaluate_mcq_order_audioflamingo.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--audioflamingo-repo $(AF_HOME) \
+		--model-base $(AF_MODEL_BASE) \
+		--num-gpus $(AF_NUM_GPUS) \
+		--batch-size $(AF_BATCH_SIZE) \
+		--max-new-tokens $(AF_MAX_NEW_TOKENS) \
+		--disable-audio \
+		--limit $(AF_SMOKE_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-audioflamingo-no-audio-full:
+	uv sync --extra tracking
+	uv run python src/utils/evaluate_mcq_order_audioflamingo.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--audioflamingo-repo $(AF_HOME) \
+		--model-base $(AF_MODEL_BASE) \
+		--num-gpus $(AF_NUM_GPUS) \
+		--batch-size $(AF_BATCH_SIZE) \
+		--max-new-tokens $(AF_MAX_NEW_TOKENS) \
+		--disable-audio \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
 eval-mcq-order-qwen2-audio-smoke:
 	uv sync --extra tracking
 	uv run python src/utils/evaluate_mcq_order_qwen2_audio.py \
@@ -198,6 +235,35 @@ eval-mcq-order-qwen2-audio-full:
 		--max-new-tokens $(QWEN2_AUDIO_MAX_NEW_TOKENS) \
 		--dtype $(QWEN2_AUDIO_DTYPE) \
 		--device-map $(QWEN2_AUDIO_DEVICE_MAP) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-qwen2-audio-no-audio-smoke:
+	uv sync --extra tracking
+	uv run python src/utils/evaluate_mcq_order_qwen2_audio.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(QWEN2_AUDIO_MODEL_ID) \
+		--batch-size $(QWEN2_AUDIO_BATCH_SIZE) \
+		--max-new-tokens $(QWEN2_AUDIO_MAX_NEW_TOKENS) \
+		--dtype $(QWEN2_AUDIO_DTYPE) \
+		--device-map $(QWEN2_AUDIO_DEVICE_MAP) \
+		--disable-audio \
+		--limit $(QWEN2_AUDIO_SMOKE_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-qwen2-audio-no-audio-full:
+	uv sync --extra tracking
+	uv run python src/utils/evaluate_mcq_order_qwen2_audio.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(QWEN2_AUDIO_MODEL_ID) \
+		--batch-size $(QWEN2_AUDIO_BATCH_SIZE) \
+		--max-new-tokens $(QWEN2_AUDIO_MAX_NEW_TOKENS) \
+		--dtype $(QWEN2_AUDIO_DTYPE) \
+		--device-map $(QWEN2_AUDIO_DEVICE_MAP) \
+		--disable-audio \
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 
@@ -230,6 +296,37 @@ eval-mcq-order-qwen2-5-omni-full:
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 
+eval-mcq-order-qwen2-5-omni-no-audio-smoke:
+	uv sync --extra tracking
+	uv run --with "$(QWEN2_5_OMNI_TRANSFORMERS)" python src/utils/evaluate_mcq_order_qwen2_5_omni.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(QWEN2_5_OMNI_MODEL_ID) \
+		--batch-size $(QWEN2_5_OMNI_BATCH_SIZE) \
+		--max-new-tokens $(QWEN2_5_OMNI_MAX_NEW_TOKENS) \
+		--dtype $(QWEN2_5_OMNI_DTYPE) \
+		--device-map $(QWEN2_5_OMNI_DEVICE_MAP) \
+		$(QWEN2_5_OMNI_ATTN_ARG) \
+		--disable-audio \
+		--limit $(QWEN2_5_OMNI_SMOKE_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-qwen2-5-omni-no-audio-full:
+	uv sync --extra tracking
+	uv run --with "$(QWEN2_5_OMNI_TRANSFORMERS)" python src/utils/evaluate_mcq_order_qwen2_5_omni.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(QWEN2_5_OMNI_MODEL_ID) \
+		--batch-size $(QWEN2_5_OMNI_BATCH_SIZE) \
+		--max-new-tokens $(QWEN2_5_OMNI_MAX_NEW_TOKENS) \
+		--dtype $(QWEN2_5_OMNI_DTYPE) \
+		--device-map $(QWEN2_5_OMNI_DEVICE_MAP) \
+		$(QWEN2_5_OMNI_ATTN_ARG) \
+		--disable-audio \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
 eval-mcq-order-voxtral-smoke:
 	uv sync --extra tracking
 	uv run --with "$(VOXTRAL_TRANSFORMERS)" python src/utils/evaluate_mcq_order_voxtral.py \
@@ -256,6 +353,37 @@ eval-mcq-order-voxtral-full:
 		--dtype $(VOXTRAL_DTYPE) \
 		--device-map $(VOXTRAL_DEVICE_MAP) \
 		$(VOXTRAL_ATTN_ARG) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-voxtral-no-audio-smoke:
+	uv sync --extra tracking
+	uv run --with "$(VOXTRAL_TRANSFORMERS)" python src/utils/evaluate_mcq_order_voxtral.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(VOXTRAL_MODEL_ID) \
+		--batch-size $(VOXTRAL_BATCH_SIZE) \
+		--max-new-tokens $(VOXTRAL_MAX_NEW_TOKENS) \
+		--dtype $(VOXTRAL_DTYPE) \
+		--device-map $(VOXTRAL_DEVICE_MAP) \
+		$(VOXTRAL_ATTN_ARG) \
+		--disable-audio \
+		--limit $(VOXTRAL_SMOKE_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-voxtral-no-audio-full:
+	uv sync --extra tracking
+	uv run --with "$(VOXTRAL_TRANSFORMERS)" python src/utils/evaluate_mcq_order_voxtral.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(VOXTRAL_MODEL_ID) \
+		--batch-size $(VOXTRAL_BATCH_SIZE) \
+		--max-new-tokens $(VOXTRAL_MAX_NEW_TOKENS) \
+		--dtype $(VOXTRAL_DTYPE) \
+		--device-map $(VOXTRAL_DEVICE_MAP) \
+		$(VOXTRAL_ATTN_ARG) \
+		--disable-audio \
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 

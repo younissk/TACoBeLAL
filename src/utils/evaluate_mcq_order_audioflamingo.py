@@ -31,7 +31,7 @@ except ImportError:  # pragma: no cover - enables direct script execution
     from wandb_tracker import WandbTracker
 
 console = Console()
-MODEL_NAME = "audio-flamingo-3"
+BASE_MODEL_NAME = "audio-flamingo-3"
 
 
 @dataclass(frozen=True)
@@ -125,6 +125,10 @@ def _safe_name(value: str, max_len: int = 120) -> str:
     return sanitized[:max_len]
 
 
+def _resolve_model_name(*, use_audio: bool = True) -> str:
+    return BASE_MODEL_NAME if use_audio else f"{BASE_MODEL_NAME}-no-audio"
+
+
 def build_prompt(example: MCQOrderExample) -> str:
     options_text = "\n".join(f"{option.label}. {option.text}" for option in example.options)
     labels_text = ", ".join(option.label for option in example.options)
@@ -190,13 +194,21 @@ def _normalize_output_id_path(value: str) -> str:
     return str(Path(value).absolute())
 
 
+def _normalize_output_id(value: str) -> str:
+    if value.startswith("text::"):
+        return value
+    return _normalize_output_id_path(value)
+
+
 def prepare_audioflamingo_input(
     examples: list[MCQOrderExample],
     *,
-    audio_root: Path,
+    audio_root: Path | None,
     work_dir: Path,
+    use_audio: bool,
 ) -> tuple[Path, Path, dict[str, Any]]:
     work_dir = work_dir.resolve()
+    work_dir.mkdir(parents=True, exist_ok=True)
     links_dir = work_dir / "audio_links"
     links_dir.mkdir(parents=True, exist_ok=True)
 
@@ -214,26 +226,37 @@ def prepare_audioflamingo_input(
     with progress:
         task = progress.add_task("Preparing AudioFlamingo input", total=len(examples))
         for idx, example in enumerate(examples):
-            source_audio = (audio_root / example.audio_filename).resolve()
-            if not source_audio.exists():
-                missing_audio.append(str(source_audio))
-                progress.advance(task, 1)
-                continue
-
-            extension = source_audio.suffix or ".wav"
-            link_name = f"{idx:06d}_{_safe_name(example.example_id)}{extension}"
-            link_path = links_dir / link_name
-            _create_audio_link(source_audio, link_path)
             key = str(idx)
+            if use_audio:
+                if audio_root is None:
+                    raise ValueError("audio_root is required when use_audio=True.")
+                source_audio = (audio_root / example.audio_filename).resolve()
+                if not source_audio.exists():
+                    missing_audio.append(str(source_audio))
+                    progress.advance(task, 1)
+                    continue
 
-            data[key] = {
-                "name": link_name,
-                "prompt": build_prompt(example),
-                "output": example.answer_label,
-            }
+                extension = source_audio.suffix or ".wav"
+                link_name = f"{idx:06d}_{_safe_name(example.example_id)}{extension}"
+                link_path = links_dir / link_name
+                _create_audio_link(source_audio, link_path)
 
-            mapping[_normalize_output_id_path(str(link_path))] = {
+                data[key] = {
+                    "name": link_name,
+                    "prompt": build_prompt(example),
+                    "output": example.answer_label,
+                }
+                mapped_output_id = _normalize_output_id_path(str(link_path))
+            else:
+                mapped_output_id = f"text::{example.example_id}"
+                data[key] = {
+                    "prompt": build_prompt(example),
+                    "output": example.answer_label,
+                }
+
+            mapping[mapped_output_id] = {
                 "index": idx,
+                "fallback_output_id": key,
                 "example_id": example.example_id,
                 "audio_filename": example.audio_filename,
                 "question": example.question,
@@ -253,7 +276,7 @@ def prepare_audioflamingo_input(
         )
 
     af_payload = {
-        "dataset_path": str(audio_root),
+        "dataset_path": str(audio_root) if audio_root is not None else str(work_dir),
         "split": "test",
         "split_path": str(links_dir),
         "flamingo_task": TASK_ID_MCQ_ORDER,
@@ -347,6 +370,7 @@ def evaluate_audioflamingo_outputs(
     *,
     mapping: dict[str, Any],
     raw_outputs: list[dict[str, Any]],
+    model_name: str,
     model_base: str,
     tracker: WandbTracker | None = None,
 ) -> tuple[list[Decision], int, int]:
@@ -354,7 +378,7 @@ def evaluate_audioflamingo_outputs(
     for row in raw_outputs:
         output_id = row.get("id")
         if isinstance(output_id, str):
-            outputs_by_id[_normalize_output_id_path(output_id)] = row
+            outputs_by_id[_normalize_output_id(output_id)] = row
 
     decisions: list[Decision] = []
     invalid_count = 0
@@ -371,6 +395,14 @@ def evaluate_audioflamingo_outputs(
         parse_status = "missing"
         predicted_label: str | None = None
         row = outputs_by_id.get(mapped_id)
+        if row is None:
+            fallback_output_id = metadata.get("fallback_output_id")
+            if isinstance(fallback_output_id, str):
+                row = outputs_by_id.get(fallback_output_id)
+        if row is None:
+            row_index = metadata.get("index")
+            if isinstance(row_index, int) and 0 <= row_index < len(raw_outputs):
+                row = raw_outputs[row_index]
         if row is None:
             missing_count += 1
         else:
@@ -392,7 +424,7 @@ def evaluate_audioflamingo_outputs(
         decisions.append(
             Decision(
                 task_id=TASK_ID_MCQ_ORDER,
-                model_name=MODEL_NAME,
+                model_name=model_name,
                 model_base=model_base,
                 example_id=metadata["example_id"],
                 audio_filename=metadata["audio_filename"],
@@ -700,8 +732,8 @@ def _print_summary(metrics: RunMetrics, run_dir: Path) -> None:
     console.print(table)
 
 
-def _create_run_dir(results_root: Path, run_id: str) -> Path:
-    base = results_root / "mcq-order" / MODEL_NAME
+def _create_run_dir(results_root: Path, run_id: str, *, model_name: str) -> Path:
+    base = results_root / "mcq-order" / model_name
     candidate = base / run_id
     if not candidate.exists():
         candidate.mkdir(parents=True, exist_ok=False)
@@ -778,6 +810,11 @@ def main(
         "--think-mode",
         help="Enable AF3 think mode (higher compute, slower).",
     ),
+    use_audio: bool = typer.Option(
+        True,
+        "--use-audio/--disable-audio",
+        help="Use model audio input. Disable for text-only probing with the same wrapper.",
+    ),
     keep_workdir: bool = typer.Option(
         True,
         "--keep-workdir/--cleanup-workdir",
@@ -822,6 +859,10 @@ def main(
     if not examples:
         raise typer.BadParameter("No examples found to evaluate.")
 
+    model_name = _resolve_model_name(use_audio=use_audio)
+    tags = ["mcq-order", model_name]
+    if not use_audio:
+        tags.append("no-audio")
     tracker = WandbTracker(
         enabled=wandb,
         project=wandb_project,
@@ -839,13 +880,14 @@ def main(
             "batch_size": batch_size,
             "max_new_tokens": max_new_tokens,
             "think_mode": think_mode,
+            "use_audio": use_audio,
         },
-        tags=["mcq-order", MODEL_NAME],
+        tags=tags,
     )
 
     started_at = datetime.now(UTC)
     run_id = started_at.strftime("%Y%m%d_%H%M%S")
-    run_dir = _create_run_dir(results_root, run_id)
+    run_dir = _create_run_dir(results_root, run_id, model_name=model_name)
     work_dir = run_dir / "workdir"
     af_output_dir = run_dir / "audioflamingo_outputs"
     work_dir.mkdir(parents=True, exist_ok=True)
@@ -854,8 +896,9 @@ def main(
         console.print(f"[bold]Preparing {len(examples)} examples for Audio Flamingo...[/bold]")
         input_json_path, mapping_json_path, mapping = prepare_audioflamingo_input(
             examples,
-            audio_root=audio_root,
+            audio_root=audio_root if use_audio else None,
             work_dir=work_dir,
+            use_audio=use_audio,
         )
         tracker.log({"stage/prepare_complete": 1, "stage/examples_prepared": len(mapping)})
         console.print(f"[green]Prepared input JSON:[/green] {input_json_path}")
@@ -890,6 +933,7 @@ def main(
         decisions, invalid_count, missing_count = evaluate_audioflamingo_outputs(
             mapping=mapping,
             raw_outputs=raw_outputs,
+            model_name=model_name,
             model_base=model_base,
             tracker=tracker,
         )
@@ -906,7 +950,7 @@ def main(
         metrics = RunMetrics(
             run_id=run_dir.name,
             task_id=TASK_ID_MCQ_ORDER,
-            model_name=MODEL_NAME,
+            model_name=model_name,
             model_base=model_base,
             dataset_path=str(dataset),
             audio_root=str(audio_root),
@@ -942,6 +986,7 @@ def main(
             "batch_size": batch_size,
             "max_new_tokens": max_new_tokens,
             "think_mode": think_mode,
+            "use_audio": use_audio,
         }
         _write_json(run_dir / "run_config.json", config_payload)
 

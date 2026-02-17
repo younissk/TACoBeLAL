@@ -36,6 +36,15 @@ def test_build_prompt_contains_audio_token_and_options() -> None:
     assert "Return only the option label" in prompt
 
 
+def test_build_prompt_without_audio_token_when_disabled() -> None:
+    prompt = build_prompt(_example("ex-1"), use_audio=False)
+    assert "<|audio_bos|><|AUDIO|><|audio_eos|>" not in prompt
+    assert "What happens immediately after X?" in prompt
+    assert "A. Option A" in prompt
+    assert "B. Option B" in prompt
+    assert "Return only the option label" in prompt
+
+
 def test_parse_predicted_label() -> None:
     valid = {"A", "B", "C"}
     label_to_text = {"A": "Option A", "B": "Option B", "C": "None"}

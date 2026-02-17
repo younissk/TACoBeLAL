@@ -143,12 +143,20 @@ make eval-mcq-order-random
 make eval-mcq-order-openai
 make eval-mcq-order-qwen2-audio-smoke
 make eval-mcq-order-qwen2-audio-full
+make eval-mcq-order-qwen2-audio-no-audio-smoke
+make eval-mcq-order-qwen2-audio-no-audio-full
 make eval-mcq-order-qwen2-5-omni-smoke
 make eval-mcq-order-qwen2-5-omni-full
+make eval-mcq-order-qwen2-5-omni-no-audio-smoke
+make eval-mcq-order-qwen2-5-omni-no-audio-full
 make eval-mcq-order-voxtral-smoke
 make eval-mcq-order-voxtral-full
+make eval-mcq-order-voxtral-no-audio-smoke
+make eval-mcq-order-voxtral-no-audio-full
 make eval-mcq-order-audioflamingo-smoke
 make eval-mcq-order-audioflamingo-full
+make eval-mcq-order-audioflamingo-no-audio-smoke
+make eval-mcq-order-audioflamingo-no-audio-full
 ```
 
 All standard evaluation targets now log to W&B by default.
@@ -235,6 +243,12 @@ Override Make variables when needed:
 make eval-mcq-order-audioflamingo-smoke AF_NUM_GPUS=1 AF_BATCH_SIZE=3 AF_SMOKE_LIMIT=200
 ```
 
+No-audio ablation (same wrapper, text-only prompt path):
+
+```bash
+make eval-mcq-order-audioflamingo-no-audio-smoke
+```
+
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_audioflamingo_a40.slurm`
 - `scripts/slurm/eval_mcq_order_text_llm_a40.slurm`
@@ -268,6 +282,12 @@ make eval-mcq-order-qwen2-audio-smoke \
   QWEN2_AUDIO_BATCH_SIZE=1 \
   QWEN2_AUDIO_DTYPE=bfloat16 \
   QWEN2_AUDIO_SMOKE_LIMIT=200
+```
+
+No-audio ablation (same wrapper, no audio input):
+
+```bash
+make eval-mcq-order-qwen2-audio-no-audio-smoke
 ```
 
 SLURM template for cluster runs:
@@ -308,6 +328,12 @@ make eval-mcq-order-qwen2-5-omni-smoke \
   QWEN2_5_OMNI_SMOKE_LIMIT=200
 ```
 
+No-audio ablation (same wrapper, no audio input):
+
+```bash
+make eval-mcq-order-qwen2-5-omni-no-audio-smoke
+```
+
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_qwen2_5_omni_a40.slurm`
 
@@ -345,6 +371,20 @@ make eval-mcq-order-voxtral-smoke \
   VOXTRAL_ATTN=flash_attention_2 \
   VOXTRAL_SMOKE_LIMIT=200
 ```
+
+No-audio ablation (same wrapper, no audio input):
+
+```bash
+make eval-mcq-order-voxtral-no-audio-smoke
+```
+
+### No-audio naming convention for LALM wrappers
+
+When running any audio-capable wrapper with `--disable-audio` (or the `*-no-audio-*` Make targets), run artifacts use a `-no-audio` suffix in `model_name`, for example:
+- `qwen2-audio-7b-instruct-no-audio`
+- `qwen2.5-omni-7b-no-audio`
+- `voxtral-mini-3b-2507-no-audio`
+- `audio-flamingo-3-no-audio`
 
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_voxtral_a40.slurm`

@@ -121,15 +121,17 @@ def _safe_name(value: str, max_len: int = 120) -> str:
     return sanitized[:max_len]
 
 
-def _resolve_model_name(model_base: str) -> str:
-    return _safe_name(model_base.strip().split("/")[-1].lower())
+def _resolve_model_name(model_base: str, *, use_audio: bool = True) -> str:
+    model_name = _safe_name(model_base.strip().split("/")[-1].lower())
+    return model_name if use_audio else f"{model_name}-no-audio"
 
 
-def build_prompt(example: MCQOrderExample) -> str:
+def build_prompt(example: MCQOrderExample, *, use_audio: bool = True) -> str:
     options_text = "\n".join(f"{option.label}. {option.text}" for option in example.options)
     labels_text = ", ".join(option.label for option in example.options)
+    audio_prefix = "<|audio_bos|><|AUDIO|><|audio_eos|>\n" if use_audio else ""
     return (
-        "<|audio_bos|><|AUDIO|><|audio_eos|>\n"
+        f"{audio_prefix}"
         f"{example.question}\n\n"
         "Choose exactly one option.\n"
         f"{options_text}\n\n"
@@ -298,6 +300,7 @@ def run_qwen2_audio_inference(
     *,
     examples: list[MCQOrderExample],
     audio_root: Path,
+    use_audio: bool,
     model_base: str,
     batch_size: int,
     max_new_tokens: int,
@@ -357,19 +360,27 @@ def run_qwen2_audio_inference(
             batch_audio_arrays: list[Any] = []
 
             for example in batch_examples:
-                source_audio = (audio_root / example.audio_filename).resolve()
-                if not source_audio.exists():
-                    raise FileNotFoundError(f"Audio file not found: {source_audio}")
-                batch_audio_arrays.append(_load_audio_file(source_audio, sampling_rate=sampling_rate))
-                batch_prompts.append(build_prompt(example))
+                if use_audio:
+                    source_audio = (audio_root / example.audio_filename).resolve()
+                    if not source_audio.exists():
+                        raise FileNotFoundError(f"Audio file not found: {source_audio}")
+                    batch_audio_arrays.append(_load_audio_file(source_audio, sampling_rate=sampling_rate))
+                batch_prompts.append(build_prompt(example, use_audio=use_audio))
 
-            batch_inputs = processor(
-                text=batch_prompts,
-                audios=batch_audio_arrays,
-                sampling_rate=sampling_rate,
-                padding=True,
-                return_tensors="pt",
-            )
+            if use_audio:
+                batch_inputs = processor(
+                    text=batch_prompts,
+                    audios=batch_audio_arrays,
+                    sampling_rate=sampling_rate,
+                    padding=True,
+                    return_tensors="pt",
+                )
+            else:
+                batch_inputs = processor(
+                    text=batch_prompts,
+                    padding=True,
+                    return_tensors="pt",
+                )
             batch_inputs = {key: value.to(input_device) for key, value in batch_inputs.items()}
 
             generation_kwargs: dict[str, Any] = {
@@ -856,6 +867,11 @@ def main(
         "--hf-token",
         help="Optional Hugging Face token (otherwise use HF_TOKEN/HUGGINGFACE_HUB_TOKEN).",
     ),
+    use_audio: bool = typer.Option(
+        True,
+        "--use-audio/--disable-audio",
+        help="Use model audio input. Disable for text-only probing with the same wrapper.",
+    ),
     dry_run: bool = typer.Option(
         False,
         "--dry-run",
@@ -895,9 +911,13 @@ def main(
     if not examples:
         raise typer.BadParameter("No examples found to evaluate.")
 
-    _validate_audio_files(examples, audio_root=audio_root)
+    if use_audio:
+        _validate_audio_files(examples, audio_root=audio_root)
 
-    model_name = _resolve_model_name(model_base)
+    model_name = _resolve_model_name(model_base, use_audio=use_audio)
+    tags = ["mcq-order", "qwen2-audio", model_name]
+    if not use_audio:
+        tags.append("no-audio")
     tracker = WandbTracker(
         enabled=wandb,
         project=wandb_project,
@@ -916,8 +936,9 @@ def main(
             "device_map": device_map,
             "dtype": dtype,
             "trust_remote_code": trust_remote_code,
+            "use_audio": use_audio,
         },
-        tags=["mcq-order", "qwen2-audio", model_name],
+        tags=tags,
     )
 
     started_at = datetime.now(UTC)
@@ -937,6 +958,7 @@ def main(
             "device_map": device_map,
             "dtype": dtype,
             "trust_remote_code": trust_remote_code,
+            "use_audio": use_audio,
         }
         _write_json(run_dir / "run_config.json", config_payload)
 
@@ -949,6 +971,7 @@ def main(
         raw_outputs, inference_elapsed = run_qwen2_audio_inference(
             examples=examples,
             audio_root=audio_root,
+            use_audio=use_audio,
             model_base=model_base,
             batch_size=batch_size,
             max_new_tokens=max_new_tokens,

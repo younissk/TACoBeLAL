@@ -46,3 +46,16 @@ def test_build_conversation_contains_audio_and_text_content() -> None:
     assert user_content[0]["path"] == str(audio_path)
     assert user_content[1]["type"] == "text"
     assert "Return only the option label" in user_content[1]["text"]
+
+
+def test_build_conversation_without_audio_content_when_disabled() -> None:
+    example = _example("ex-3")
+    conversation = build_conversation(example, None, use_audio=False)
+
+    assert len(conversation) == 2
+    assert conversation[1]["role"] == "user"
+    user_content = conversation[1]["content"]
+    assert isinstance(user_content, list)
+    assert len(user_content) == 1
+    assert user_content[0]["type"] == "text"
+    assert "Return only the option label" in user_content[0]["text"]
