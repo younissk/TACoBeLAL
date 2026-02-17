@@ -15,6 +15,8 @@
 	eval-mcq-order-qwen2-audio-full \
 	eval-mcq-order-qwen2-5-omni-smoke \
 	eval-mcq-order-qwen2-5-omni-full \
+	eval-mcq-order-voxtral-smoke \
+	eval-mcq-order-voxtral-full \
 	eval-mcq-order-audioflamingo-smoke \
 	eval-mcq-order-audioflamingo-full \
 	test
@@ -50,6 +52,16 @@ QWEN2_5_OMNI_ATTN ?=
 QWEN2_5_OMNI_SMOKE_LIMIT ?= 100
 QWEN2_5_OMNI_TRANSFORMERS ?= transformers>=4.57.0
 QWEN2_5_OMNI_ATTN_ARG := $(if $(QWEN2_5_OMNI_ATTN),--attn-implementation $(QWEN2_5_OMNI_ATTN),)
+
+VOXTRAL_MODEL_ID ?= mistralai/Voxtral-Mini-3B-2507
+VOXTRAL_BATCH_SIZE ?= 2
+VOXTRAL_MAX_NEW_TOKENS ?= 16
+VOXTRAL_DTYPE ?= float16
+VOXTRAL_DEVICE_MAP ?= auto
+VOXTRAL_ATTN ?=
+VOXTRAL_SMOKE_LIMIT ?= 100
+VOXTRAL_TRANSFORMERS ?= transformers>=4.57.0
+VOXTRAL_ATTN_ARG := $(if $(VOXTRAL_ATTN),--attn-implementation $(VOXTRAL_ATTN),)
 
 QWEN_MODEL_ID ?= Qwen/Qwen2.5-7B-Instruct
 LLAMA_MODEL_ID ?= meta-llama/Llama-3.1-8B-Instruct
@@ -215,6 +227,35 @@ eval-mcq-order-qwen2-5-omni-full:
 		--dtype $(QWEN2_5_OMNI_DTYPE) \
 		--device-map $(QWEN2_5_OMNI_DEVICE_MAP) \
 		$(QWEN2_5_OMNI_ATTN_ARG) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-voxtral-smoke:
+	uv sync --extra tracking
+	uv run --with "$(VOXTRAL_TRANSFORMERS)" python src/utils/evaluate_mcq_order_voxtral.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(VOXTRAL_MODEL_ID) \
+		--batch-size $(VOXTRAL_BATCH_SIZE) \
+		--max-new-tokens $(VOXTRAL_MAX_NEW_TOKENS) \
+		--dtype $(VOXTRAL_DTYPE) \
+		--device-map $(VOXTRAL_DEVICE_MAP) \
+		$(VOXTRAL_ATTN_ARG) \
+		--limit $(VOXTRAL_SMOKE_LIMIT) \
+		--results-root $(RESULTS_DIR) \
+		$(WAND_ARGS)
+
+eval-mcq-order-voxtral-full:
+	uv sync --extra tracking
+	uv run --with "$(VOXTRAL_TRANSFORMERS)" python src/utils/evaluate_mcq_order_voxtral.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--model-base $(VOXTRAL_MODEL_ID) \
+		--batch-size $(VOXTRAL_BATCH_SIZE) \
+		--max-new-tokens $(VOXTRAL_MAX_NEW_TOKENS) \
+		--dtype $(VOXTRAL_DTYPE) \
+		--device-map $(VOXTRAL_DEVICE_MAP) \
+		$(VOXTRAL_ATTN_ARG) \
 		--results-root $(RESULTS_DIR) \
 		$(WAND_ARGS)
 
