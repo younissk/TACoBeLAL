@@ -4,6 +4,18 @@
 /logs
 /wandb
 
+data/audio/
+audio/
+*.wav
+*.mp3
+*.flac
+*.aac
+*.ogg
+*.m4a
+*.wma
+*.aiff
+*.alac
+
 # Python bytecode & build
 __pycache__/
 *.py[cod]

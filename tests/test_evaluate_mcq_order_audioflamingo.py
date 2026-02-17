@@ -103,7 +103,7 @@ def test_evaluate_audioflamingo_outputs_handles_missing_and_invalid() -> None:
     assert decisions[0].is_correct is False
 
 
-def test_prepare_audioflamingo_input_without_audio_links_in_text_only_mode(tmp_path: Path) -> None:
+def test_prepare_audioflamingo_input_without_audio_uses_dummy_noise_links(tmp_path: Path) -> None:
     examples = [_example("ex-1"), _example("ex-2", answer_label="A")]
     input_json_path, mapping_json_path, mapping = prepare_audioflamingo_input(
         examples,
@@ -115,8 +115,9 @@ def test_prepare_audioflamingo_input_without_audio_links_in_text_only_mode(tmp_p
     payload = json.loads(input_json_path.read_text(encoding="utf-8"))
     assert len(payload["data"]) == 2
     first_item = payload["data"]["0"]
-    assert "name" not in first_item
+    assert "name" in first_item
     assert "prompt" in first_item
     assert len(mapping) == 2
-    assert all(key.startswith("text::") for key in mapping)
+    assert all(key.endswith(".wav") for key in mapping)
+    assert (tmp_path / "work" / "dummy_noise.wav").exists()
     assert mapping_json_path.exists()

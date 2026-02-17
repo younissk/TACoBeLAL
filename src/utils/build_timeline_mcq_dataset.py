@@ -42,6 +42,10 @@ class BuildStats:
     audios_total: int = 0
     audios_removed_too_few_events: int = 0
     audios_kept: int = 0
+    questions_dropped_onset_tie_base: int = 0
+    questions_dropped_tiebreak_answer: int = 0
+    questions_dropped_repeat_ambiguity: int = 0
+    questions_dropped_overlap_ambiguity: int = 0
     questions_written: int = 0
 
 
@@ -268,15 +272,72 @@ def _build_example(
     }
 
 
+def _has_onset_tie(events: List[Event], target_event_index: int, epsilon: float) -> bool:
+    target = events[target_event_index]
+    for event in events:
+        if event.index == target_event_index:
+            continue
+        if abs(event.onset - target.onset) <= epsilon:
+            return True
+    return False
+
+
+def _answer_relies_on_tiebreak(
+    events: List[Event],
+    *,
+    base_event_index: int,
+    next_event_index: int,
+    epsilon: float,
+) -> bool:
+    base_event = events[base_event_index]
+    next_event = events[next_event_index]
+    for event in events:
+        if event.index == next_event_index:
+            continue
+        if event.onset <= base_event.onset + epsilon:
+            continue
+        if abs(event.onset - next_event.onset) <= epsilon:
+            return True
+    return False
+
+
 def _iter_examples(
     grouped_events: Dict[str, List[Event]],
     seed: int,
     no_event_text: str,
+    onset_tie_epsilon: float,
+    stats: BuildStats,
 ) -> Iterator[Dict[str, Any]]:
     rng = random.Random(seed)
     for audio_filename in sorted(grouped_events):
         events = grouped_events[audio_filename]
         for base_event_index in range(len(events)):
+            base_event = events[base_event_index]
+            if _has_onset_tie(events, base_event_index, onset_tie_epsilon):
+                stats.questions_dropped_onset_tie_base += 1
+                continue
+            if base_event.occurrence_count > 1:
+                stats.questions_dropped_repeat_ambiguity += 1
+                continue
+
+            next_event_index = base_event_index + 1 if base_event_index + 1 < len(events) else None
+            if next_event_index is not None:
+                next_event = events[next_event_index]
+                if _answer_relies_on_tiebreak(
+                    events,
+                    base_event_index=base_event_index,
+                    next_event_index=next_event_index,
+                    epsilon=onset_tie_epsilon,
+                ):
+                    stats.questions_dropped_tiebreak_answer += 1
+                    continue
+                if next_event.occurrence_count > 1:
+                    stats.questions_dropped_repeat_ambiguity += 1
+                    continue
+                if next_event.onset < base_event.offset + onset_tie_epsilon:
+                    stats.questions_dropped_overlap_ambiguity += 1
+                    continue
+
             yield _build_example(
                 audio_filename=audio_filename,
                 events=events,
@@ -303,6 +364,7 @@ def _print_summary(
     output_jsonl: Path,
     min_duration: float,
     min_events_per_audio: int,
+    onset_tie_epsilon: float,
     seed: int,
 ) -> None:
     table = Table(title="Timeline MCQ build summary", show_header=True, header_style="bold")
@@ -313,6 +375,7 @@ def _print_summary(
     table.add_row("Output JSONL", str(output_jsonl))
     table.add_row("Min event duration (s)", str(min_duration))
     table.add_row("Min events per audio", str(min_events_per_audio))
+    table.add_row("Onset tie epsilon (s)", str(onset_tie_epsilon))
     table.add_row("Random seed", str(seed))
     table.add_row("Rows read", str(stats.rows_total))
     table.add_row("Rows dropped (invalid time)", str(stats.rows_invalid_time))
@@ -323,6 +386,10 @@ def _print_summary(
     table.add_row("Audios after row filter", str(stats.audios_total))
     table.add_row("Audios dropped (< min events)", str(stats.audios_removed_too_few_events))
     table.add_row("Audios kept", str(stats.audios_kept))
+    table.add_row("Questions dropped (base onset tie)", str(stats.questions_dropped_onset_tie_base))
+    table.add_row("Questions dropped (answer tie-break)", str(stats.questions_dropped_tiebreak_answer))
+    table.add_row("Questions dropped (repeated-event ambiguity)", str(stats.questions_dropped_repeat_ambiguity))
+    table.add_row("Questions dropped (overlap ambiguity)", str(stats.questions_dropped_overlap_ambiguity))
     table.add_row("Questions written", str(stats.questions_written))
     console.print(table)
 
@@ -356,6 +423,12 @@ def main(
         help="Drop audios with fewer events than this after filtering.",
         min=1,
     ),
+    onset_tie_epsilon: float = typer.Option(
+        0.05,
+        "--onset-tie-epsilon",
+        help="Drop questions with onset ties within this epsilon (seconds).",
+        min=0.0,
+    ),
     seed: int = typer.Option(
         7,
         "--seed",
@@ -385,6 +458,8 @@ def main(
             grouped_events=grouped_events,
             seed=seed,
             no_event_text=no_event_text,
+            onset_tie_epsilon=onset_tie_epsilon,
+            stats=stats,
         ),
         output_jsonl=output_jsonl,
     )
@@ -395,6 +470,7 @@ def main(
         output_jsonl=output_jsonl,
         min_duration=min_duration,
         min_events_per_audio=min_events_per_audio,
+        onset_tie_epsilon=onset_tie_epsilon,
         seed=seed,
     )
 
