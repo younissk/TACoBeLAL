@@ -284,7 +284,10 @@ def _extract_completion_ids(
         },
         reverse=True,
     )
-    start = valid_starts[0] if valid_starts else generated_len
+    # Some transformer/model combinations return only newly generated ids
+    # (without the prompt prefix). In that case prompt-based starts are invalid:
+    # fall back to decoding the entire generated row.
+    start = valid_starts[0] if valid_starts else 0
 
     completion = generated_row[start:]
     if hasattr(completion, "detach"):

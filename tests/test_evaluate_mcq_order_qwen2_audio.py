@@ -109,7 +109,7 @@ def test_extract_completion_ids_falls_back_to_attention_sum_when_input_len_inval
     assert completion_ids == [5, 6]
 
 
-def test_extract_completion_ids_returns_empty_when_no_valid_start_exists() -> None:
+def test_extract_completion_ids_returns_full_generated_when_no_valid_start_exists() -> None:
     generated_row = [0, 1, 2]
     input_ids_row = [10, 11, 12, 13]
     attention_mask_row = [1, 1, 1, 1, 1]
@@ -120,4 +120,4 @@ def test_extract_completion_ids_returns_empty_when_no_valid_start_exists() -> No
         attention_mask_row=attention_mask_row,
     )
 
-    assert completion_ids == []
+    assert completion_ids == [0, 1, 2]
