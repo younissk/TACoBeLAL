@@ -1,0 +1,20 @@
+{
+  "run_id": "20260217_112310",
+  "task_id": "MCQ-ORDER",
+  "model_name": "audio-flamingo-3-no-audio",
+  "model_base": "nvidia/audio-flamingo-3",
+  "dataset_path": "data/mcq_event_timeline_strong.jsonl",
+  "audio_root": "data/audio",
+  "audioflamingo_repo": "external/audio-flamingo",
+  "examples": 1000,
+  "correct": 272,
+  "accuracy": 0.272,
+  "parse_invalid": 0,
+  "missing_predictions": 0,
+  "elapsed_seconds": 352.89232,
+  "average_latency_ms": 352.89232,
+  "started_at_utc": "2026-02-17T11:23:10.366645+00:00",
+  "finished_at_utc": "2026-02-17T11:29:04.675906+00:00",
+  "decisions_path": "results/mcq-order/audio-flamingo-3-no-audio/20260217_112310/decisions.jsonl",
+  "raw_outputs_path": "results/mcq-order/audio-flamingo-3-no-audio/20260217_112310/raw_model_outputs.jsonl"
+}
