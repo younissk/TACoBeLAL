@@ -33,7 +33,7 @@ This builds `data/mcq_event_timeline_strong.jsonl` from strong annotations with:
 
 ```bash
 make setup-from-scratch
-```
+``` 
 
 This target:
 - installs local dev + llm + tracking extras (`uv sync --extra dev --extra llm --extra tracking`)
