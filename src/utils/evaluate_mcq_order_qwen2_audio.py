@@ -139,6 +139,19 @@ def build_prompt(example: MCQOrderExample, *, use_audio: bool = True) -> str:
     )
 
 
+def build_conversation(
+    example: MCQOrderExample, audio_path: Path | None, *, use_audio: bool = True
+) -> list[dict[str, Any]]:
+    user_content: list[dict[str, str]] = []
+    if use_audio:
+        if audio_path is None:
+            raise ValueError("audio_path is required when use_audio=True.")
+        # Qwen2-Audio chat template expects audio entries in the content.
+        user_content.append({"type": "audio", "audio_url": str(audio_path)})
+    user_content.append({"type": "text", "text": build_prompt(example, use_audio=False)})
+    return [{"role": "user", "content": user_content}]
+
+
 def _normalize_prediction_text(value: str) -> str:
     normalized = value.strip().lower()
     normalized = re.sub(r"\s+", " ", normalized)
@@ -361,6 +374,7 @@ def run_qwen2_audio_inference(
             batch_examples = examples[offset : offset + batch_size]
             batch_prompts: list[str] = []
             batch_audio_arrays: list[Any] = []
+            use_chat_template = hasattr(processor, "apply_chat_template")
 
             for example in batch_examples:
                 if use_audio:
@@ -368,7 +382,20 @@ def run_qwen2_audio_inference(
                     if not source_audio.exists():
                         raise FileNotFoundError(f"Audio file not found: {source_audio}")
                     batch_audio_arrays.append(_load_audio_file(source_audio, sampling_rate=sampling_rate))
-                batch_prompts.append(build_prompt(example, use_audio=use_audio))
+                if use_chat_template:
+                    conversation = build_conversation(
+                        example,
+                        source_audio if use_audio else None,
+                        use_audio=use_audio,
+                    )
+                    prompt = processor.apply_chat_template(
+                        conversation,
+                        add_generation_prompt=True,
+                        tokenize=False,
+                    )
+                else:
+                    prompt = build_prompt(example, use_audio=use_audio)
+                batch_prompts.append(prompt)
 
             if use_audio:
                 batch_inputs = processor(

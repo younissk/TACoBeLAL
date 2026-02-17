@@ -1,0 +1,163 @@
+{
+  "examples": 100,
+  "correct": 31,
+  "accuracy": 0.31,
+  "labels": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "answer_distribution": [
+    {
+      "label": "A",
+      "count": 33,
+      "rate": 0.33
+    },
+    {
+      "label": "B",
+      "count": 35,
+      "rate": 0.35
+    },
+    {
+      "label": "C",
+      "count": 14,
+      "rate": 0.14
+    },
+    {
+      "label": "D",
+      "count": 13,
+      "rate": 0.13
+    },
+    {
+      "label": "E",
+      "count": 5,
+      "rate": 0.05
+    }
+  ],
+  "prediction_distribution": [
+    {
+      "label": "A",
+      "count": 12,
+      "rate": 0.12
+    },
+    {
+      "label": "B",
+      "count": 33,
+      "rate": 0.33
+    },
+    {
+      "label": "C",
+      "count": 44,
+      "rate": 0.44
+    },
+    {
+      "label": "D",
+      "count": 9,
+      "rate": 0.09
+    },
+    {
+      "label": "E",
+      "count": 2,
+      "rate": 0.02
+    }
+  ],
+  "by_answer_label": [
+    {
+      "label": "A",
+      "support": 33,
+      "correct": 5,
+      "accuracy": 0.15151515151515152,
+      "predicted_count": 12,
+      "prediction_rate": 0.12
+    },
+    {
+      "label": "B",
+      "support": 35,
+      "correct": 16,
+      "accuracy": 0.45714285714285713,
+      "predicted_count": 33,
+      "prediction_rate": 0.33
+    },
+    {
+      "label": "C",
+      "support": 14,
+      "correct": 8,
+      "accuracy": 0.5714285714285714,
+      "predicted_count": 44,
+      "prediction_rate": 0.44
+    },
+    {
+      "label": "D",
+      "support": 13,
+      "correct": 2,
+      "accuracy": 0.15384615384615385,
+      "predicted_count": 9,
+      "prediction_rate": 0.09
+    },
+    {
+      "label": "E",
+      "support": 5,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 2,
+      "prediction_rate": 0.02
+    }
+  ],
+  "by_n_options": [
+    {
+      "n_options": 2,
+      "examples": 22,
+      "correct": 11,
+      "accuracy": 0.5
+    },
+    {
+      "n_options": 3,
+      "examples": 30,
+      "correct": 9,
+      "accuracy": 0.3
+    },
+    {
+      "n_options": 4,
+      "examples": 22,
+      "correct": 5,
+      "accuracy": 0.22727272727272727
+    },
+    {
+      "n_options": 5,
+      "examples": 20,
+      "correct": 6,
+      "accuracy": 0.3
+    },
+    {
+      "n_options": 6,
+      "examples": 6,
+      "correct": 0,
+      "accuracy": 0.0
+    }
+  ],
+  "by_answer_type": [
+    {
+      "answer_type": "event",
+      "examples": 69,
+      "correct": 26,
+      "accuracy": 0.37681159420289856
+    },
+    {
+      "answer_type": "none",
+      "examples": 31,
+      "correct": 5,
+      "accuracy": 0.16129032258064516
+    }
+  ],
+  "parse_status": [
+    {
+      "parse_status": "exact-label",
+      "count": 100,
+      "rate": 1.0
+    }
+  ],
+  "answer_entropy": 2.053773817264922,
+  "prediction_entropy": 1.8415674679696776
+}
