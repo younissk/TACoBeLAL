@@ -5,6 +5,10 @@
 	download-dataset \
 	extract-audio \
 	build-mcq-dataset \
+	build-mcq-relation-dataset \
+	build-mcq-safety-dataset \
+	run-benchmark \
+	debug-mcq-bundle \
 	download-audioflamingo \
 	setup-from-scratch \
 	eval-mcq-order-random \
@@ -32,8 +36,32 @@
 DATA_DIR ?= data
 RESULTS_DIR ?= results
 MCQ_DATASET ?= $(DATA_DIR)/mcq_event_timeline_strong.jsonl
+MCQ_RELATION_DATASET ?= $(DATA_DIR)/mcq_relation_timeline_strong.jsonl
+MCQ_SAFETY_DATASET ?= $(DATA_DIR)/mcq_safety_presence_100.jsonl
 AUDIO_ROOT ?= $(DATA_DIR)/audio
 AUDIO_ZIP ?= $(DATA_DIR)/audio.zip
+
+BENCH_TASK ?= mcq-order
+BENCH_MODEL ?= random
+BENCH_SAMPLES ?= 100
+BENCH_RESULTS_ROOT ?= $(RESULTS_DIR)
+BENCH_USE_AUDIO ?= 1
+BENCH_PREPARE_DATA ?= 1
+BENCH_INSTALL_DEPS ?= 0
+BENCH_WANDB ?= 1
+BENCH_WANDB_PROJECT ?= $(WANDB_PROJECT)
+BENCH_WANDB_ENTITY ?= $(WANDB_ENTITY)
+BENCH_WANDB_RUN_NAME ?=
+BENCH_WANDB_LOG_EVERY ?= $(WANDB_LOG_EVERY)
+BENCH_ARGS ?=
+
+BENCH_SAMPLES_ARG := $(if $(BENCH_SAMPLES),--samples $(BENCH_SAMPLES),)
+BENCH_USE_AUDIO_ARG := $(if $(filter 1 true yes,$(BENCH_USE_AUDIO)),--use-audio,--disable-audio)
+BENCH_PREPARE_DATA_ARG := $(if $(filter 1 true yes,$(BENCH_PREPARE_DATA)),--prepare-data,--no-prepare-data)
+BENCH_INSTALL_DEPS_ARG := $(if $(filter 1 true yes,$(BENCH_INSTALL_DEPS)),--install-deps,--no-install-deps)
+BENCH_WANDB_ARG := $(if $(filter 1 true yes,$(BENCH_WANDB)),--wandb,--no-wandb)
+BENCH_WANDB_ENTITY_ARG := $(if $(strip $(BENCH_WANDB_ENTITY)),--wandb-entity $(BENCH_WANDB_ENTITY),)
+BENCH_WANDB_RUN_NAME_ARG := $(if $(strip $(BENCH_WANDB_RUN_NAME)),--wandb-run-name $(BENCH_WANDB_RUN_NAME),)
 
 AF_REPO_URL ?= https://github.com/NVIDIA/audio-flamingo.git
 AF_BRANCH ?= audio_flamingo_3
@@ -111,6 +139,35 @@ extract-audio:
 
 build-mcq-dataset:
 	uv run python src/utils/build_timeline_mcq_dataset.py --input $(DATA_DIR)/annotations_strong.csv --output $(MCQ_DATASET)
+
+build-mcq-relation-dataset:
+	uv run python src/utils/build_relation_mcq_dataset.py --input $(DATA_DIR)/annotations_strong.csv --output $(MCQ_RELATION_DATASET)
+
+build-mcq-safety-dataset:
+	uv run python src/utils/build_safety_check_dataset.py --input $(DATA_DIR)/annotations_strong.csv --output $(MCQ_SAFETY_DATASET)
+
+run-benchmark:
+	uv run python src/utils/run_benchmark.py \
+		--task $(BENCH_TASK) \
+		--model $(BENCH_MODEL) \
+		$(BENCH_SAMPLES_ARG) \
+		--results-root $(BENCH_RESULTS_ROOT) \
+		$(BENCH_USE_AUDIO_ARG) \
+		$(BENCH_PREPARE_DATA_ARG) \
+		$(BENCH_INSTALL_DEPS_ARG) \
+		$(BENCH_WANDB_ARG) \
+		--wandb-project $(BENCH_WANDB_PROJECT) \
+		$(BENCH_WANDB_ENTITY_ARG) \
+		$(BENCH_WANDB_RUN_NAME_ARG) \
+		--wandb-log-every $(BENCH_WANDB_LOG_EVERY) \
+		$(BENCH_ARGS)
+
+debug-mcq-bundle:
+	uv run python src/utils/debug_mcq_underperformance.py \
+		--results-root $(RESULTS_DIR)/mcq-order \
+		--dataset $(MCQ_DATASET) \
+		--output-dir $(RESULTS_DIR)/mcq-order/debug_bundle \
+		--top-k-review 200
 
 download-audioflamingo:
 	uv run python src/utils/setup_audioflamingo.py --repo-url $(AF_REPO_URL) --branch $(AF_BRANCH) --destination $(AF_HOME)

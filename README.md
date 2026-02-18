@@ -17,6 +17,8 @@ The following will be assessed through Multiple Choice Question (MCQ) tasks:
 ### Task ID
 
 - `MCQ-ORDER`
+- `MCQ-RELATION`
+- `MCQ-SAFETY`
 
 ### Build MCQ-ORDER dataset
 
@@ -28,6 +30,141 @@ This builds `data/mcq_event_timeline_strong.jsonl` from strong annotations with:
 - event filtering by minimum duration
 - per-audio filtering by minimum event count
 - randomized answer option ordering
+
+### Build MCQ-RELATION dataset
+
+```bash
+make build-mcq-relation-dataset
+```
+
+This builds `data/mcq_relation_timeline_strong.jsonl` from strong annotations with:
+- the same row/event/audio filtering pipeline as `MCQ-ORDER`
+- pairwise Event A vs Event B questions
+- fixed relation options:
+  - `A starts before B`
+  - `A starts after B`
+  - `A overlaps B`
+  - `A and B start at the same time`
+  - `cannot be determined`
+- deterministic option ordering controlled by `--seed`
+- default quality caps (`--max-pairs-per-audio 4`, `--max-questions 12000`)
+- optional relation-balanced global sampling (`--balance-relations`)
+
+Deterministic rebuild example:
+
+```bash
+uv run python src/utils/build_relation_mcq_dataset.py \
+  --input data/annotations_strong.csv \
+  --output data/mcq_relation_timeline_strong.jsonl \
+  --seed 7 \
+  --same-start-epsilon 0.05 \
+  --include-start-same-time
+```
+
+Quality rules implemented:
+- exact timestamps are never included in question/options text
+- near-start ties are filtered unless the `start at the same time` option is enabled
+- quality-over-quantity defaults keep only top-quality pairs deterministically
+
+### Build MCQ-SAFETY dataset
+
+```bash
+make build-mcq-safety-dataset
+```
+
+This builds `data/mcq_safety_presence_100.jsonl` from strong annotations with:
+- exactly 100 audios / 100 questions by default
+- exactly 50 `True` and 50 `False` answers
+- one binary question per audio:
+  - `Is this event in the audio: "{event}"?`
+- answer options randomized between `True` and `False` labels for bias control
+- negatives sampled from other audios and rejected if normalized text matches target audio events
+
+### Unified benchmark launcher (task/model/samples)
+
+Use one target for all benchmark combinations:
+
+```bash
+make run-benchmark \
+  BENCH_TASK=mcq-order \
+  BENCH_MODEL=random \
+  BENCH_SAMPLES=200
+```
+
+Swap task/model/sample count without changing scripts:
+
+```bash
+make run-benchmark BENCH_TASK=mcq-relation BENCH_MODEL=llm-qwen BENCH_SAMPLES=500
+make run-benchmark BENCH_TASK=mcq-order BENCH_MODEL=qwen2-audio BENCH_SAMPLES=100
+make run-benchmark BENCH_TASK=mcq-order BENCH_MODEL=audioflamingo BENCH_SAMPLES=100 BENCH_USE_AUDIO=0
+make run-benchmark BENCH_TASK=mcq-safety BENCH_MODEL=random BENCH_SAMPLES=100
+```
+
+Useful flags:
+- `BENCH_SAMPLES=0` for full dataset
+- `BENCH_PREPARE_DATA=1` to auto run data prep steps
+- `BENCH_INSTALL_DEPS=1` to auto run needed `install-*` targets
+- `BENCH_ARGS='--dry-run'` to print planned commands only
+
+Direct CLI equivalent:
+
+```bash
+uv run python src/utils/run_benchmark.py --task mcq-order --model qwen2-audio --samples 100
+```
+
+Generic SLURM entrypoint:
+
+```bash
+sbatch --export=ALL,BENCH_TASK=mcq-relation,BENCH_MODEL=qwen2-audio,BENCH_SAMPLES=500 \
+  scripts/slurm/run_benchmark_a40.slurm
+```
+
+Dedicated safety-check SLURM launcher (one model per job):
+
+```bash
+sbatch --export=ALL,BENCH_MODEL=qwen2-audio scripts/slurm/eval_mcq_safety_a40.slurm
+sbatch --export=ALL,BENCH_MODEL=qwen2-5-omni scripts/slurm/eval_mcq_safety_a40.slurm
+sbatch --export=ALL,BENCH_MODEL=voxtral scripts/slurm/eval_mcq_safety_a40.slurm
+sbatch --export=ALL,BENCH_MODEL=audioflamingo scripts/slurm/eval_mcq_safety_a40.slurm
+```
+
+### Underperformance debug workflow (human-in-the-loop)
+
+Build a complete debug bundle (CSVs + plots) from current `MCQ-ORDER` runs:
+
+```bash
+make debug-mcq-bundle
+```
+
+This writes to `results/mcq-order/debug_bundle/`:
+- `latest_runs.csv` / `run_registry_enriched.csv`
+- `latest_decisions_long.csv`
+- `latest_decisions_with_slices.csv` (adds per-example ambiguity slices)
+- `audio_ablation_pairs.csv` (when audio vs no-audio pairs exist)
+- `model_baselines.csv` / `answer_type_diagnostics.csv`
+- `audioflamingo_id_integrity.csv` (if latest AudioFlamingo runs exist)
+- `human_review_queue.csv` and `human_review_queue_topk.csv`
+- plots:
+  - `plot_accuracy_by_model.png`
+  - `plot_invalid_missing_rates.png`
+  - `plot_accuracy_by_option_count.png`
+  - `plot_prediction_bias.png`
+  - `plot_accuracy_by_answer_type.png`
+  - `plot_model_vs_baselines.png`
+  - `plot_none_calibration.png`
+  - `plot_audio_ablation_accuracy.png` (if pairs exist)
+
+Interactive notebook for review sessions:
+
+```bash
+jupyter notebook notebooks/mcq_underperformance_debug.ipynb
+```
+
+The notebook includes:
+- full debug plan/checklist
+- auto-built diagnostics from latest runs
+- human triage queue with per-example question/options/predictions
+- helper to inspect specific examples and play local audio (`data/audio/...`)
 
 ### One-command setup from scratch
 
@@ -252,6 +389,7 @@ make eval-mcq-order-audioflamingo-no-audio-smoke
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_audioflamingo_a40.slurm`
 - `scripts/slurm/eval_mcq_order_text_llm_a40.slurm`
+- `scripts/slurm/run_benchmark_a40.slurm` (generic launcher: choose task/model/samples via env vars)
 
 ### Run audio-capable LALM baseline (Qwen2-Audio)
 
@@ -292,6 +430,7 @@ make eval-mcq-order-qwen2-audio-no-audio-smoke
 
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_qwen2_audio_a40.slurm`
+- `scripts/slurm/run_benchmark_a40.slurm`
 
 ### Run audio-capable LALM baseline (Qwen2.5-Omni)
 
@@ -336,6 +475,7 @@ make eval-mcq-order-qwen2-5-omni-no-audio-smoke
 
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_qwen2_5_omni_a40.slurm`
+- `scripts/slurm/run_benchmark_a40.slurm`
 
 ### Run audio-capable LALM baseline (Voxtral)
 
@@ -388,9 +528,28 @@ When running any audio-capable wrapper with `--disable-audio` (or the `*-no-audi
 
 SLURM template for cluster runs:
 - `scripts/slurm/eval_mcq_order_voxtral_a40.slurm`
+- `scripts/slurm/run_benchmark_a40.slurm`
 
 ## Task B: Temporal grounding
 
 - Give the model the audio plus a query caption, and ask it to output onset and offset times.
 
 Why this is important: MCQ can also just be shallow guessing, so it should be compared to an LLM guessing the answer, without even looking at the audio.
+
+
+
+
+
+# TODOs
+
+- [ ] Fragestellung vereinfachung (z.b. Ist dieses event in der Audio erhalten? -> Testet pipeline für sanity check) (ESC 50 https://www.kaggle.com/datasets/mmoreaux/environmental-sound-classification-50)
+- [ ] Bessere Qualität von Daten (Durch LLM, Manual tagging) -> Schauen ob text gleich ist (Beep, Beep) -> Vlt Similarites (BERT, CLAP -> Embedding + similiarity)
+- [ ] Manual tagging -> Dokumentation
+- [ ] Recheck parsing
+- [ ] OPTIONAL: Reasonging + Output (sowie ReAct??)
+
+
+If all is good in the pipeline
+- Easier questions and see if the events are really different
+- Every quetion should have the same amount of answers
+- 

@@ -1,0 +1,17 @@
+{
+  "run_id": "20260217_150324",
+  "task_id": "MCQ-ORDER",
+  "model_name": "random",
+  "model_metadata": {
+    "seed": 7
+  },
+  "dataset_path": "data/mcq_event_timeline_strong.jsonl",
+  "started_at_utc": "2026-02-17T15:03:24.308421+00:00",
+  "finished_at_utc": "2026-02-17T15:03:24.310940+00:00",
+  "examples": 1000,
+  "correct": 299,
+  "accuracy": 0.299,
+  "elapsed_seconds": 0.002282,
+  "average_latency_ms": 0.000527,
+  "decisions_path": "results/mcq-order/random/20260217_150324/decisions.jsonl"
+}

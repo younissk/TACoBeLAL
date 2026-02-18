@@ -1,0 +1,49 @@
+{
+  "results_root": "results/mcq-order",
+  "dataset_path": "data/mcq_event_timeline_strong.jsonl",
+  "output_dir": "results/mcq-order/debug_bundle",
+  "latest_runs_count": 5,
+  "latest_models": [
+    "audio-flamingo-3",
+    "audio-flamingo-3-no-audio",
+    "qwen2-audio-7b-instruct",
+    "qwen2-audio-7b-instruct-no-audio",
+    "random"
+  ],
+  "random_accuracy": 0.299,
+  "audio_ablation_pairs": [
+    {
+      "pair_name": "audio-flamingo-3__vs__audio-flamingo-3-no-audio",
+      "audio_model": "audio-flamingo-3",
+      "no_audio_model": "audio-flamingo-3-no-audio",
+      "examples": 1000,
+      "audio_accuracy": 0.194,
+      "no_audio_accuracy": 0.272,
+      "prediction_agreement": 0.667,
+      "both_correct": 141,
+      "audio_only_correct": 53,
+      "no_audio_only_correct": 131,
+      "both_wrong": 675
+    },
+    {
+      "pair_name": "qwen2-audio-7b-instruct__vs__qwen2-audio-7b-instruct-no-audio",
+      "audio_model": "qwen2-audio-7b-instruct",
+      "no_audio_model": "qwen2-audio-7b-instruct-no-audio",
+      "examples": 1000,
+      "audio_accuracy": 0.177,
+      "no_audio_accuracy": 0.239,
+      "prediction_agreement": 0.622,
+      "both_correct": 119,
+      "audio_only_correct": 58,
+      "no_audio_only_correct": 120,
+      "both_wrong": 703
+    }
+  ],
+  "review_queue_rows": 2000,
+  "models_below_expected_random": [
+    "audio-flamingo-3-no-audio",
+    "qwen2-audio-7b-instruct-no-audio",
+    "audio-flamingo-3",
+    "qwen2-audio-7b-instruct"
+  ]
+}

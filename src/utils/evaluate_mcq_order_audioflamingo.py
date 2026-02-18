@@ -214,10 +214,25 @@ def _normalize_output_id_path(value: str) -> str:
     return str(Path(value).absolute())
 
 
-def _normalize_output_id(value: str) -> str:
+def _output_id_candidates(value: str) -> list[str]:
+    """Return robust lookup keys for output IDs across different host roots."""
     if value.startswith("text::"):
-        return value
-    return _normalize_output_id_path(value)
+        return [value]
+
+    path = Path(value)
+    candidates: list[str] = []
+    seen: set[str] = set()
+
+    def _add(item: str) -> None:
+        if item and item not in seen:
+            seen.add(item)
+            candidates.append(item)
+
+    _add(_normalize_output_id_path(value))
+    _add(str(path))
+    _add(path.as_posix())
+    _add(path.name)
+    return candidates
 
 
 def prepare_audioflamingo_input(
@@ -404,7 +419,8 @@ def evaluate_audioflamingo_outputs(
     for row in raw_outputs:
         output_id = row.get("id")
         if isinstance(output_id, str):
-            outputs_by_id[_normalize_output_id(output_id)] = row
+            for candidate in _output_id_candidates(output_id):
+                outputs_by_id[candidate] = row
 
     decisions: list[Decision] = []
     invalid_count = 0
@@ -420,7 +436,11 @@ def evaluate_audioflamingo_outputs(
         raw_prediction = ""
         parse_status = "missing"
         predicted_label: str | None = None
-        row = outputs_by_id.get(mapped_id)
+        row = None
+        for candidate in _output_id_candidates(mapped_id):
+            row = outputs_by_id.get(candidate)
+            if row is not None:
+                break
         if row is None:
             fallback_output_id = metadata.get("fallback_output_id")
             if isinstance(fallback_output_id, str):

@@ -121,3 +121,43 @@ def test_prepare_audioflamingo_input_without_audio_uses_dummy_noise_links(tmp_pa
     assert all(key.endswith(".wav") for key in mapping)
     assert (tmp_path / "work" / "dummy_noise.wav").exists()
     assert mapping_json_path.exists()
+
+
+def test_evaluate_audioflamingo_outputs_matches_ids_across_host_roots() -> None:
+    ex = _example("ex-1")
+    mapped_id = "/Users/test/TACoBeLAL/results/workdir/audio_links/000001_ex-1.wav"
+    mapping = {
+        mapped_id: {
+            "index": 0,
+            "fallback_output_id": "0",
+            "example_id": ex.example_id,
+            "audio_filename": ex.audio_filename,
+            "question": ex.question,
+            "answer_label": ex.answer_label,
+            "answer_text": ex.answer_text,
+            "options": [
+                {"label": opt.label, "text": opt.text, "type": opt.option_type}
+                for opt in ex.options
+            ],
+        }
+    }
+
+    # Same basename as mapped_id, but different absolute root from another host.
+    raw_outputs = [
+        {
+            "id": "/home/cluster-user/TACoBeLAL/results/workdir/audio_links/000001_ex-1.wav",
+            "pred": "B",
+        }
+    ]
+
+    decisions, invalid_count, missing_count = evaluate_audioflamingo_outputs(
+        mapping=mapping,
+        raw_outputs=raw_outputs,
+        model_name="audio-flamingo-3",
+        model_base="nvidia/audio-flamingo-3",
+    )
+    assert len(decisions) == 1
+    assert invalid_count == 0
+    assert missing_count == 0
+    assert decisions[0].predicted_label == "B"
+    assert decisions[0].is_correct is True
