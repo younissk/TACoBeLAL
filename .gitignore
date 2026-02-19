@@ -16,6 +16,10 @@ audio/
 *.aiff
 *.alac
 
+# Never ignore jsonl files (ensure they're pushed)
+!*.jsonl
+!data/**/*.jsonl
+
 # Python bytecode & build
 __pycache__/
 *.py[cod]
