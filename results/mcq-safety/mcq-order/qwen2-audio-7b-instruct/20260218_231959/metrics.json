@@ -1,0 +1,19 @@
+{
+  "run_id": "20260218_231959",
+  "task_id": "MCQ-ORDER",
+  "model_name": "qwen2-audio-7b-instruct",
+  "model_base": "Qwen/Qwen2-Audio-7B-Instruct",
+  "dataset_path": "data/mcq_safety_presence_100.jsonl",
+  "audio_root": "data/audio",
+  "examples": 100,
+  "correct": 75,
+  "accuracy": 0.75,
+  "parse_invalid": 0,
+  "missing_predictions": 0,
+  "elapsed_seconds": 24.113492,
+  "average_latency_ms": 241.134917,
+  "started_at_utc": "2026-02-18T23:19:59.172188+00:00",
+  "finished_at_utc": "2026-02-18T23:20:43.913849+00:00",
+  "decisions_path": "results/mcq-safety/mcq-order/qwen2-audio-7b-instruct/20260218_231959/decisions.jsonl",
+  "raw_outputs_path": "results/mcq-safety/mcq-order/qwen2-audio-7b-instruct/20260218_231959/raw_model_outputs.jsonl"
+}

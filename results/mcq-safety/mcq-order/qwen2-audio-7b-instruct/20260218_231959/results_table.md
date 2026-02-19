@@ -1,0 +1,3 @@
+| Task ID | Model | Model Base | Examples | Correct | Accuracy | Parse Invalid | Missing | Elapsed (s) | Avg latency (ms) |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| MCQ-ORDER | qwen2-audio-7b-instruct | Qwen/Qwen2-Audio-7B-Instruct | 100 | 75 | 0.7500 | 0 | 0 | 24.1135 | 241.1349 |

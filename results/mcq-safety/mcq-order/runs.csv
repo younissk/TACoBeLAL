@@ -1,0 +1,3 @@
+run_id,task_id,model_name,examples,correct,accuracy,elapsed_seconds,average_latency_ms,started_at_utc,finished_at_utc,dataset_path,decisions_path
+20260218_231959,MCQ-ORDER,qwen2-audio-7b-instruct,100,75,0.75,24.113492,241.134917,2026-02-18T23:19:59.172188+00:00,2026-02-18T23:20:43.913849+00:00,data/mcq_safety_presence_100.jsonl,results/mcq-safety/mcq-order/qwen2-audio-7b-instruct/20260218_231959/decisions.jsonl
+20260218_232201,MCQ-ORDER,audio-flamingo-3,100,90,0.9,80.950214,809.502141,2026-02-18T23:22:01.829890+00:00,2026-02-18T23:23:22.821272+00:00,data/mcq_safety_presence_100.jsonl,results/mcq-safety/mcq-order/audio-flamingo-3/20260218_232201/decisions.jsonl

@@ -1,0 +1,100 @@
+{"id": "87594.mp3__safety_presence", "question": "Is this event in the audio: \"An energetic round of applause by the audience.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "540398.mp3__safety_presence", "question": "Is this event in the audio: \"An engine is running loudly and continuously.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "653967.mp3__safety_presence", "question": "Is this event in the audio: \"Steady, low-pitched engine sound with subtle mechanical movements.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "788872.mp3__safety_presence", "question": "Is this event in the audio: \"Loud distorted wind noise.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "506723.mp3__safety_presence", "question": "Is this event in the audio: \"A cat meowing in an inquisitive manner.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "776388.mp3__safety_presence", "question": "Is this event in the audio: \"A guitar plays a rhythmic pattern.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "668922.mp3__safety_presence", "question": "Is this event in the audio: \"A muffled car honks in the distance.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "399039.mp3__safety_presence", "question": "Is this event in the audio: \"Instruments playing sounds repeating in no particular rhythm or order.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "194680.mp3__safety_presence", "question": "Is this event in the audio: \"Voices of people talking in the distance.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "573289.mp3__safety_presence", "question": "Is this event in the audio: \"Strong wind blowing in nature.\"?", "gt_answer": "A", "pred": "A."}
+{"id": "55208.mp3__safety_presence", "question": "Is this event in the audio: \"Footsteps on a hard surface.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "713534.mp3__safety_presence", "question": "Is this event in the audio: \"A loud, energetic crowd cheers, shouts, and whistles in a large echoing space.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "370898.mp3__safety_presence", "question": "Is this event in the audio: \"A car engine idles and then powers off.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "148749.mp3__safety_presence", "question": "Is this event in the audio: \"A bag is being dragged on the floor nearby.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "163389.mp3__safety_presence", "question": "Is this event in the audio: \"An electronic guitar solo with a rhythmic pattern.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "97895.mp3__safety_presence", "question": "Is this event in the audio: \"A car engine rumbles quietly on the street.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "765433.mp3__safety_presence", "question": "Is this event in the audio: \"A gate creaks briefly with a sharp metallic sound.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "44207.mp3__safety_presence", "question": "Is this event in the audio: \"An electronic beep at a high pitch is played.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "735496.mp3__safety_presence", "question": "Is this event in the audio: \"Continuous synthetic musical beat.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "323143.mp3__safety_presence", "question": "Is this event in the audio: \"Sewing accompanied by a tika tik sound.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "665944.mp3__safety_presence", "question": "Is this event in the audio: \"Loud ringing of an old alarm clock continues.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "339307.mp3__safety_presence", "question": "Is this event in the audio: \"A large fan is running continuously.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "351141.mp3__safety_presence", "question": "Is this event in the audio: \"A humming sound.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "420445.mp3__safety_presence", "question": "Is this event in the audio: \"River sounds faintly audible in the background.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "123034.mp3__safety_presence", "question": "Is this event in the audio: \"A chainsaw running.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "78783.mp3__safety_presence", "question": "Is this event in the audio: \"An announcer is speaking in the distance.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "582364.mp3__safety_presence", "question": "Is this event in the audio: \"The sound of a river flowing in nature.\"?", "gt_answer": "B", "pred": "A"}
+{"id": "96859.mp3__safety_presence", "question": "Is this event in the audio: \"Continuous white noise in the background.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "405590.mp3__safety_presence", "question": "Is this event in the audio: \"An electronic city emergency siren sounds low and fades.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "424891.mp3__safety_presence", "question": "Is this event in the audio: \"An improvisational saxophone plays expressive, free-flowing melodies.\"?", "gt_answer": "A", "pred": "A."}
+{"id": "761030.mp3__safety_presence", "question": "Is this event in the audio: \"The constant sound of typing on a typewriter.\"?", "gt_answer": "A", "pred": "False"}
+{"id": "654404.mp3__safety_presence", "question": "Is this event in the audio: \"A piano plays rhythmically, creating happy music.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "382892.mp3__safety_presence", "question": "Is this event in the audio: \"Waves crashing rhythmically onto the shore.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "81800.mp3__safety_presence", "question": "Is this event in the audio: \"Wood crackling in a fire.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "185225.mp3__safety_presence", "question": "Is this event in the audio: \"People talk quietly and laugh.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "509051.mp3__safety_presence", "question": "Is this event in the audio: \"A parrot emits a quiet high-pitched scream.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "330284.mp3__safety_presence", "question": "Is this event in the audio: \"Rain falling with footsteps.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "368475.mp3__safety_presence", "question": "Is this event in the audio: \"A swinging lamp produces a metallic sound nearby.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "57047.mp3__safety_presence", "question": "Is this event in the audio: \"Repetitive sound of a recording device being submerged in and removed from water.\"?", "gt_answer": "A", "pred": "A."}
+{"id": "622446.mp3__safety_presence", "question": "Is this event in the audio: \"An ambulance is driving away.\"?", "gt_answer": "A", "pred": "False"}
+{"id": "26807.mp3__safety_presence", "question": "Is this event in the audio: \"People applauding steadily with a moderate tone.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "219030.mp3__safety_presence", "question": "Is this event in the audio: \"A deep, frequent sound gradually getting quieter.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "739142.mp3__safety_presence", "question": "Is this event in the audio: \"A bamboo wind chime sways in the wind, clicking faintly and repeatedly.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "634488.mp3__safety_presence", "question": "Is this event in the audio: \"An explosion occurs suddenly, and the noise fades away rapidly.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "778368.mp3__safety_presence", "question": "Is this event in the audio: \"Heavy rain is falling continuously.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "537065.mp3__safety_presence", "question": "Is this event in the audio: \"A woman is speaking in a slightly raised voice.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "677541.mp3__safety_presence", "question": "Is this event in the audio: \"An inspiring song fragment with a laid-back groove at 80 beats per minute.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "523896.mp3__safety_presence", "question": "Is this event in the audio: \"A giant flock of various birds making noises in a forest.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "541920.mp3__safety_presence", "question": "Is this event in the audio: \"Farm noises.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "678543.mp3__safety_presence", "question": "Is this event in the audio: \"Flowing water creates a continuous, gentle, and natural sound.\"?", "gt_answer": "B", "pred": "A"}
+{"id": "449764.mp3__safety_presence", "question": "Is this event in the audio: \"Helicopter blades whir.\"?", "gt_answer": "B", "pred": "A"}
+{"id": "218184.mp3__safety_presence", "question": "Is this event in the audio: \"The siren sounds are approaching.\"?", "gt_answer": "B", "pred": "False"}
+{"id": "158515.mp3__safety_presence", "question": "Is this event in the audio: \"An electric drill whizzes.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "365961.mp3__safety_presence", "question": "Is this event in the audio: \"Audience laughter fades away.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "649014.mp3__safety_presence", "question": "Is this event in the audio: \"Rain starts abruptly at moderate to high intensity, with raindrops making clashing and splashing sounds.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "250059.mp3__safety_presence", "question": "Is this event in the audio: \"The siren of an emergency vehicle sounds outdoors in heavy wind.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "114284.mp3__safety_presence", "question": "Is this event in the audio: \"Heavy breathing.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "641267.mp3__safety_presence", "question": "Is this event in the audio: \"A fly buzzes repeatedly outdoors.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "437449.mp3__safety_presence", "question": "Is this event in the audio: \"A chainsaw cutting wood outdoors.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "785007.mp3__safety_presence", "question": "Is this event in the audio: \"Muffled sound of a bus driving by.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "82797.mp3__safety_presence", "question": "Is this event in the audio: \"A sheep bleats loudly once with a slight echo.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "613862.mp3__safety_presence", "question": "Is this event in the audio: \"Several sheep bleat clearly at close range against a rural background.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "622407.mp3__safety_presence", "question": "Is this event in the audio: \"A bird chirps.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "711217.mp3__safety_presence", "question": "Is this event in the audio: \"A dog barks repeatedly with increasing frequency.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "407082.mp3__safety_presence", "question": "Is this event in the audio: \"Street noise with vehicles.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "182793.mp3__safety_presence", "question": "Is this event in the audio: \"A person plays drums with a fast rhythm, starting quietly in the background and then getting louder.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "132156.mp3__safety_presence", "question": "Is this event in the audio: \"Water waves splashing onto stones.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "466469.mp3__safety_presence", "question": "Is this event in the audio: \"Resonant bell chimes from a church clock tower sound clear, loud, and reverberant with a steady pattern.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "212992.mp3__safety_presence", "question": "Is this event in the audio: \"A male narrator begins speaking in a serious tone and then quickly shifts to a goofy and exaggerated manner.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "591212.mp3__safety_presence", "question": "Is this event in the audio: \"A guitar is played once.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "376392.mp3__safety_presence", "question": "Is this event in the audio: \"Metallic tapping sounds nearby.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "253081.mp3__safety_presence", "question": "Is this event in the audio: \"A chicken clucks once.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "59818.mp3__safety_presence", "question": "Is this event in the audio: \"Wind blows loudly through trees during a storm.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "637234.mp3__safety_presence", "question": "Is this event in the audio: \"A washing machine operates with an uneven speed, producing an irregular mechanical hum and shifting cycles.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "690162.mp3__safety_presence", "question": "Is this event in the audio: \"Continuous ringing of cattle bells without a specific rhythm.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "703642.mp3__safety_presence", "question": "Is this event in the audio: \"Footsteps and voices in a crowd are combined with rhythmic hammering on an anvil, with music heard in the background, creating a lively and industrious atmosphere.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "119161.mp3__safety_presence", "question": "Is this event in the audio: \"A person coughs.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "579427.mp3__safety_presence", "question": "Is this event in the audio: \"Splashing sounds of a stream nearby.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "770084.mp3__safety_presence", "question": "Is this event in the audio: \"Trucks and other vehicles driving at high speed on the highway.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "780525.mp3__safety_presence", "question": "Is this event in the audio: \"A man grunts.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "650528.mp3__safety_presence", "question": "Is this event in the audio: \"Human making slurring, unusual noises.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "188910.mp3__safety_presence", "question": "Is this event in the audio: \"Technical feedback with a loud metallic noise fades in and then fades out.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "713522.mp3__safety_presence", "question": "Is this event in the audio: \"Continuous subtle crackling of fire burning.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "513486.mp3__safety_presence", "question": "Is this event in the audio: \"A muffled gong strikes once and fades.\"?", "gt_answer": "B", "pred": "A"}
+{"id": "784965.mp3__safety_presence", "question": "Is this event in the audio: \"Wind whistling with a hollow, airy sound.\"?", "gt_answer": "B", "pred": "A"}
+{"id": "609918.mp3__safety_presence", "question": "Is this event in the audio: \"A person sneezes repeatedly.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "141248.mp3__safety_presence", "question": "Is this event in the audio: \"A lawnmower noise increases in volume and then decreases.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "25301.mp3__safety_presence", "question": "Is this event in the audio: \"Quiet, steady background noise.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "668559.mp3__safety_presence", "question": "Is this event in the audio: \"A chainsaw ignition cord is pulled outdoors.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "320765.mp3__safety_presence", "question": "Is this event in the audio: \"A chicken cackles loudly and repeatedly.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "82469.mp3__safety_presence", "question": "Is this event in the audio: \"A continuous muffled wind sound starting softly and intensifying into a stronger, more forceful wind.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "272203.mp3__safety_presence", "question": "Is this event in the audio: \"A truck horn honks twice.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "650908.mp3__safety_presence", "question": "Is this event in the audio: \"A long beep.\"?", "gt_answer": "A", "pred": "False"}
+{"id": "26011.mp3__safety_presence", "question": "Is this event in the audio: \"A man is speaking during a radio show.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "553529.mp3__safety_presence", "question": "Is this event in the audio: \"An audience claps and cheers indoors.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "376553.mp3__safety_presence", "question": "Is this event in the audio: \"White noise.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "399251.mp3__safety_presence", "question": "Is this event in the audio: \"A large group of people is enthusiastically clapping and cheering in rhythmic waves.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "366604.mp3__safety_presence", "question": "Is this event in the audio: \"An aggressive dog is growling.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "692909.mp3__safety_presence", "question": "Is this event in the audio: \"A motorbike slows down, and the sound fades into the background.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "496267.mp3__safety_presence", "question": "Is this event in the audio: \"Hammer hitting nails rhythmically.\"?", "gt_answer": "A", "pred": "A"}

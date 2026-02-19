@@ -1,0 +1,508 @@
+{
+  "dataset_path": "data/audio",
+  "split": "test",
+  "split_path": "/home/fs73062/younissk01/TACoBeLAL/results/mcq-safety/mcq-order/audio-flamingo-3/20260218_232201/workdir/audio_links",
+  "flamingo_task": "MCQ-ORDER",
+  "data": {
+    "0": {
+      "name": "000000_87594.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An energetic round of applause by the audience.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "1": {
+      "name": "000001_540398.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An engine is running loudly and continuously.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "2": {
+      "name": "000002_653967.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Steady, low-pitched engine sound with subtle mechanical movements.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "3": {
+      "name": "000003_788872.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Loud distorted wind noise.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "4": {
+      "name": "000004_506723.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A cat meowing in an inquisitive manner.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "5": {
+      "name": "000005_776388.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A guitar plays a rhythmic pattern.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "6": {
+      "name": "000006_668922.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A muffled car honks in the distance.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "7": {
+      "name": "000007_399039.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Instruments playing sounds repeating in no particular rhythm or order.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "8": {
+      "name": "000008_194680.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Voices of people talking in the distance.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "9": {
+      "name": "000009_573289.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Strong wind blowing in nature.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "10": {
+      "name": "000010_55208.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Footsteps on a hard surface.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "11": {
+      "name": "000011_713534.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A loud, energetic crowd cheers, shouts, and whistles in a large echoing space.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "12": {
+      "name": "000012_370898.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A car engine idles and then powers off.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "13": {
+      "name": "000013_148749.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A bag is being dragged on the floor nearby.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "14": {
+      "name": "000014_163389.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An electronic guitar solo with a rhythmic pattern.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "15": {
+      "name": "000015_97895.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A car engine rumbles quietly on the street.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "16": {
+      "name": "000016_765433.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A gate creaks briefly with a sharp metallic sound.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "17": {
+      "name": "000017_44207.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An electronic beep at a high pitch is played.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "18": {
+      "name": "000018_735496.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Continuous synthetic musical beat.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "19": {
+      "name": "000019_323143.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Sewing accompanied by a tika tik sound.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "20": {
+      "name": "000020_665944.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Loud ringing of an old alarm clock continues.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "21": {
+      "name": "000021_339307.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A large fan is running continuously.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "22": {
+      "name": "000022_351141.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A humming sound.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "23": {
+      "name": "000023_420445.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"River sounds faintly audible in the background.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "24": {
+      "name": "000024_123034.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A chainsaw running.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "25": {
+      "name": "000025_78783.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An announcer is speaking in the distance.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "26": {
+      "name": "000026_582364.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"The sound of a river flowing in nature.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "27": {
+      "name": "000027_96859.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Continuous white noise in the background.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "28": {
+      "name": "000028_405590.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An electronic city emergency siren sounds low and fades.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "29": {
+      "name": "000029_424891.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An improvisational saxophone plays expressive, free-flowing melodies.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "30": {
+      "name": "000030_761030.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"The constant sound of typing on a typewriter.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "31": {
+      "name": "000031_654404.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A piano plays rhythmically, creating happy music.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "32": {
+      "name": "000032_382892.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Waves crashing rhythmically onto the shore.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "33": {
+      "name": "000033_81800.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Wood crackling in a fire.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "34": {
+      "name": "000034_185225.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"People talk quietly and laugh.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "35": {
+      "name": "000035_509051.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A parrot emits a quiet high-pitched scream.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "36": {
+      "name": "000036_330284.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Rain falling with footsteps.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "37": {
+      "name": "000037_368475.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A swinging lamp produces a metallic sound nearby.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "38": {
+      "name": "000038_57047.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Repetitive sound of a recording device being submerged in and removed from water.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "39": {
+      "name": "000039_622446.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An ambulance is driving away.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "40": {
+      "name": "000040_26807.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"People applauding steadily with a moderate tone.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "41": {
+      "name": "000041_219030.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A deep, frequent sound gradually getting quieter.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "42": {
+      "name": "000042_739142.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A bamboo wind chime sways in the wind, clicking faintly and repeatedly.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "43": {
+      "name": "000043_634488.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An explosion occurs suddenly, and the noise fades away rapidly.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "44": {
+      "name": "000044_778368.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Heavy rain is falling continuously.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "45": {
+      "name": "000045_537065.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A woman is speaking in a slightly raised voice.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "46": {
+      "name": "000046_677541.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An inspiring song fragment with a laid-back groove at 80 beats per minute.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "47": {
+      "name": "000047_523896.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A giant flock of various birds making noises in a forest.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "48": {
+      "name": "000048_541920.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Farm noises.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "49": {
+      "name": "000049_678543.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Flowing water creates a continuous, gentle, and natural sound.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "50": {
+      "name": "000050_449764.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Helicopter blades whir.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "51": {
+      "name": "000051_218184.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"The siren sounds are approaching.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "52": {
+      "name": "000052_158515.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An electric drill whizzes.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "53": {
+      "name": "000053_365961.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Audience laughter fades away.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "54": {
+      "name": "000054_649014.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Rain starts abruptly at moderate to high intensity, with raindrops making clashing and splashing sounds.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "55": {
+      "name": "000055_250059.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"The siren of an emergency vehicle sounds outdoors in heavy wind.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "56": {
+      "name": "000056_114284.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Heavy breathing.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "57": {
+      "name": "000057_641267.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A fly buzzes repeatedly outdoors.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "58": {
+      "name": "000058_437449.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A chainsaw cutting wood outdoors.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "59": {
+      "name": "000059_785007.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Muffled sound of a bus driving by.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "60": {
+      "name": "000060_82797.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A sheep bleats loudly once with a slight echo.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "61": {
+      "name": "000061_613862.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Several sheep bleat clearly at close range against a rural background.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "62": {
+      "name": "000062_622407.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A bird chirps.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "63": {
+      "name": "000063_711217.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A dog barks repeatedly with increasing frequency.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "64": {
+      "name": "000064_407082.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Street noise with vehicles.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "65": {
+      "name": "000065_182793.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A person plays drums with a fast rhythm, starting quietly in the background and then getting louder.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "66": {
+      "name": "000066_132156.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Water waves splashing onto stones.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "67": {
+      "name": "000067_466469.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Resonant bell chimes from a church clock tower sound clear, loud, and reverberant with a steady pattern.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "68": {
+      "name": "000068_212992.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A male narrator begins speaking in a serious tone and then quickly shifts to a goofy and exaggerated manner.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "69": {
+      "name": "000069_591212.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A guitar is played once.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "70": {
+      "name": "000070_376392.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Metallic tapping sounds nearby.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "71": {
+      "name": "000071_253081.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A chicken clucks once.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "72": {
+      "name": "000072_59818.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Wind blows loudly through trees during a storm.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "73": {
+      "name": "000073_637234.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A washing machine operates with an uneven speed, producing an irregular mechanical hum and shifting cycles.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "74": {
+      "name": "000074_690162.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Continuous ringing of cattle bells without a specific rhythm.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "75": {
+      "name": "000075_703642.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Footsteps and voices in a crowd are combined with rhythmic hammering on an anvil, with music heard in the background, creating a lively and industrious atmosphere.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "76": {
+      "name": "000076_119161.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A person coughs.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "77": {
+      "name": "000077_579427.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Splashing sounds of a stream nearby.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "78": {
+      "name": "000078_770084.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Trucks and other vehicles driving at high speed on the highway.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "79": {
+      "name": "000079_780525.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A man grunts.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "80": {
+      "name": "000080_650528.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Human making slurring, unusual noises.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "81": {
+      "name": "000081_188910.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Technical feedback with a loud metallic noise fades in and then fades out.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "82": {
+      "name": "000082_713522.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Continuous subtle crackling of fire burning.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "83": {
+      "name": "000083_513486.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A muffled gong strikes once and fades.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "84": {
+      "name": "000084_784965.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Wind whistling with a hollow, airy sound.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "85": {
+      "name": "000085_609918.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A person sneezes repeatedly.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "86": {
+      "name": "000086_141248.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A lawnmower noise increases in volume and then decreases.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "87": {
+      "name": "000087_25301.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Quiet, steady background noise.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "88": {
+      "name": "000088_668559.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A chainsaw ignition cord is pulled outdoors.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "89": {
+      "name": "000089_320765.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A chicken cackles loudly and repeatedly.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "90": {
+      "name": "000090_82469.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A continuous muffled wind sound starting softly and intensifying into a stronger, more forceful wind.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "91": {
+      "name": "000091_272203.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A truck horn honks twice.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "92": {
+      "name": "000092_650908.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A long beep.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "93": {
+      "name": "000093_26011.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A man is speaking during a radio show.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "94": {
+      "name": "000094_553529.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An audience claps and cheers indoors.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "95": {
+      "name": "000095_376553.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"White noise.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "96": {
+      "name": "000096_399251.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A large group of people is enthusiastically clapping and cheering in rhythmic waves.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "97": {
+      "name": "000097_366604.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"An aggressive dog is growling.\"?\n\nChoose exactly one option.\nA. False\nB. True\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "98": {
+      "name": "000098_692909.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"A motorbike slows down, and the sound fades into the background.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "B"
+    },
+    "99": {
+      "name": "000099_496267.mp3__safety_presence.mp3",
+      "prompt": "Is this event in the audio: \"Hammer hitting nails rhythmically.\"?\n\nChoose exactly one option.\nA. True\nB. False\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    }
+  }
+}
