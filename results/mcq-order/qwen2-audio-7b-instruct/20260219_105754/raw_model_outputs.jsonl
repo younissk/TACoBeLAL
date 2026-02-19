@@ -1,0 +1,51 @@
+{"id": "102876.mp3__0", "question": "What happens immediately after this event first appears: \"A solo trumpet plays a clean phrase in a jazz style.\"?", "gt_answer": "C", "pred": "C"}
+{"id": "102876.mp3__1", "question": "What happens immediately after this event first appears: \"A bright, rhythmic trumpet lick with a jazzy feel.\"?", "gt_answer": "C", "pred": "C"}
+{"id": "102876.mp3__2", "question": "What happens immediately after this event first appears: \"An upbeat, rhythmic trumpet lick played in a jazz style.\"?", "gt_answer": "C", "pred": "B"}
+{"id": "102876.mp3__3", "question": "What happens immediately after this event first appears: \"A rhythmic trumpet lick with added echo creating a wider and more ambient sound.\"?", "gt_answer": "A", "pred": "C"}
+{"id": "102876.mp3__4", "question": "What happens immediately after this event first appears: \"The trumpet lick is played louder with less echo and an added distinct extra note.\"?", "gt_answer": "D", "pred": "C"}
+{"id": "106819.mp3__2", "question": "What happens immediately after this event first appears: \"Someone is speaking indoors in German.\"?", "gt_answer": "A", "pred": "D"}
+{"id": "106819.mp3__3", "question": "What happens immediately after this event first appears: \"Multiple people laughing repeatedly.\"?", "gt_answer": "D", "pred": "A"}
+{"id": "108843.mp3__0", "question": "What happens immediately after this event first appears: \"Footsteps on a wood floor.\"?", "gt_answer": "D", "pred": "C"}
+{"id": "108843.mp3__2", "question": "What happens immediately after this event first appears: \"A cat is meowing.\"?", "gt_answer": "D", "pred": "D"}
+{"id": "108843.mp3__3", "question": "What happens immediately after this event first appears: \"A cat meows.\"?", "gt_answer": "A", "pred": "D"}
+{"id": "108843.mp3__4", "question": "What happens immediately after this event first appears: \"A cat is playing while moving around.\"?", "gt_answer": "D", "pred": "C"}
+{"id": "113321.mp3__1", "question": "What happens immediately after this event first appears: \"A motorcycle engine roars in traffic.\"?", "gt_answer": "D", "pred": "B"}
+{"id": "113321.mp3__2", "question": "What happens immediately after this event first appears: \"A motorcycle engine running in the distance amidst traffic.\"?", "gt_answer": "E", "pred": "D"}
+{"id": "113321.mp3__3", "question": "What happens immediately after this event first appears: \"A high-pitched squeaking noise occurs amid car traffic.\"?", "gt_answer": "D", "pred": "D"}
+{"id": "113321.mp3__4", "question": "What happens immediately after this event first appears: \"A car passes by loudly in traffic.\"?", "gt_answer": "E", "pred": "C"}
+{"id": "113326.mp3__2", "question": "What happens immediately after this event first appears: \"A pneumatic hiss sounds as the bus door opens, accompanied by the steady hum of the idling engine.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "113326.mp3__3", "question": "What happens immediately after this event first appears: \"The engine idles steadily.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "113352.mp3__3", "question": "What happens immediately after this event first appears: \"A loud motorbike engine running on the street.\"?", "gt_answer": "B", "pred": "C"}
+{"id": "113582.mp3__2", "question": "What happens immediately after this event first appears: \"The audience is clapping.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "113582.mp3__3", "question": "What happens immediately after this event first appears: \"An audience member is speaking.\"?", "gt_answer": "F", "pred": "C"}
+{"id": "115920.mp3__0", "question": "What happens immediately after this event first appears: \"People clapping.\"?", "gt_answer": "A", "pred": "A"}
+{"id": "115920.mp3__5", "question": "What happens immediately after this event first appears: \"Two men are speaking.\"?", "gt_answer": "D", "pred": "A"}
+{"id": "116769.mp3__2", "question": "What happens immediately after this event first appears: \"Irregular clapping with breaks in between.\"?", "gt_answer": "A", "pred": "D"}
+{"id": "116769.mp3__3", "question": "What happens immediately after this event first appears: \"Quiet and slow clapping.\"?", "gt_answer": "D", "pred": "B"}
+{"id": "120213.mp3__1", "question": "What happens immediately after this event first appears: \"A person coughs once indoors.\"?", "gt_answer": "C", "pred": "C"}
+{"id": "120213.mp3__3", "question": "What happens immediately after this event first appears: \"A person coughs four times indoors.\"?", "gt_answer": "D", "pred": "D"}
+{"id": "122065.mp3__1", "question": "What happens immediately after this event first appears: \"A train horn sounds in the distance.\"?", "gt_answer": "B", "pred": "B"}
+{"id": "122065.mp3__2", "question": "What happens immediately after this event first appears: \"A loud, high-pitched noise of a very fast passenger train passing by.\"?", "gt_answer": "A", "pred": "C"}
+{"id": "122065.mp3__3", "question": "What happens immediately after this event first appears: \"Gentle noise of a distant train with loud cricket sounds.\"?", "gt_answer": "D", "pred": "B"}
+{"id": "122088.mp3__3", "question": "What happens immediately after this event first appears: \"Thunder rolls, gradually decreasing in loudness.\"?", "gt_answer": "A", "pred": "D"}
+{"id": "124982.mp3__0", "question": "What happens immediately after this event first appears: \"Typing on plastic keyboard buttons accompanied by beeping sounds for each press.\"?", "gt_answer": "D", "pred": "D."}
+{"id": "124982.mp3__3", "question": "What happens immediately after this event first appears: \"The motor of an ATM runs while it counts money.\"?", "gt_answer": "B", "pred": "C."}
+{"id": "127288.mp3__5", "question": "What happens immediately after this event first appears: \"A very loud, muffled sound.\"?", "gt_answer": "F", "pred": "B"}
+{"id": "127990.mp3__1", "question": "What happens immediately after this event first appears: \"An animal is eating, making munching sounds.\"?", "gt_answer": "C", "pred": "D"}
+{"id": "129654.mp3__3", "question": "What happens immediately after this event first appears: \"Drums are hitting loudly in a repeating pattern.\"?", "gt_answer": "D", "pred": "C"}
+{"id": "130127.mp3__3", "question": "What happens immediately after this event first appears: \"A car is braking with squeaky tires.\"?", "gt_answer": "D", "pred": "E"}
+{"id": "130127.mp3__4", "question": "What happens immediately after this event first appears: \"People singing and yelling in the distance.\"?", "gt_answer": "C", "pred": "C"}
+{"id": "132385.mp3__3", "question": "What happens immediately after this event first appears: \"A small motorized machine is turning off.\"?", "gt_answer": "C", "pred": "C"}
+{"id": "136424.mp3__2", "question": "What happens immediately after this event first appears: \"A woman is yelling.\"?", "gt_answer": "A", "pred": "C"}
+{"id": "137010.mp3__2", "question": "What happens immediately after this event first appears: \"A woman is making an announcement.\"?", "gt_answer": "A", "pred": "C"}
+{"id": "137010.mp3__3", "question": "What happens immediately after this event first appears: \"A person is dialing a phone.\"?", "gt_answer": "A", "pred": "B"}
+{"id": "137836.mp3__4", "question": "What happens immediately after this event first appears: \"A man is speaking in an unrecognizable language.\"?", "gt_answer": "E", "pred": "E"}
+{"id": "14.mp3__1", "question": "What happens immediately after this event first appears: \"A man is laughing.\"?", "gt_answer": "B", "pred": "D"}
+{"id": "140602.mp3__4", "question": "What happens immediately after this event first appears: \"A plane pilot is speaking through a loudspeaker.\"?", "gt_answer": "A", "pred": "D"}
+{"id": "141529.mp3__3", "question": "What happens immediately after this event first appears: \"Someone utters a brief, disappointed sound in a quiet, shocked tone.\"?", "gt_answer": "A", "pred": "C"}
+{"id": "141529.mp3__4", "question": "What happens immediately after this event first appears: \"Someone blows softly into a microphone, creating an airy whoosh.\"?", "gt_answer": "E", "pred": "B"}
+{"id": "141710.mp3__3", "question": "What happens immediately after this event first appears: \"Multiple single notes are played swiftly on a guitar.\"?", "gt_answer": "B", "pred": "E"}
+{"id": "141710.mp3__4", "question": "What happens immediately after this event first appears: \"A single guitar note is played.\"?", "gt_answer": "B", "pred": "E"}
+{"id": "141717.mp3__0", "question": "What happens immediately after this event first appears: \"A guitar string is picked once, and the sound fades away.\"?", "gt_answer": "B", "pred": "C"}
+{"id": "146075.mp3__1", "question": "What happens immediately after this event first appears: \"An animal snorts loudly nearby.\"?", "gt_answer": "D", "pred": "D"}
+{"id": "146075.mp3__4", "question": "What happens immediately after this event first appears: \"An animal screams repeatedly nearby.\"?", "gt_answer": "A", "pred": "D"}

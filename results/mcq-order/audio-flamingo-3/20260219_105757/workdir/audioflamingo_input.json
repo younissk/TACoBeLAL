@@ -1,0 +1,263 @@
+{
+  "dataset_path": "data/audio",
+  "split": "test",
+  "split_path": "/home/fs73062/younissk01/TACoBeLAL/results/mcq-order/audio-flamingo-3/20260219_105757/workdir/audio_links",
+  "flamingo_task": "MCQ-ORDER",
+  "data": {
+    "0": {
+      "name": "000000_102876.mp3__0.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A solo trumpet plays a clean phrase in a jazz style.\"?\n\nChoose exactly one option.\nA. An upbeat, rhythmic trumpet lick played in a jazz style.\nB. A rhythmic trumpet lick with added echo creating a wider and more ambient sound.\nC. A bright, rhythmic trumpet lick with a jazzy feel.\nD. This is the last event, no immediate event after.\nE. The trumpet lick is played louder with less echo and an added distinct extra note.\n\nReturn only the option label from: A, B, C, D, E.",
+      "output": "C"
+    },
+    "1": {
+      "name": "000001_102876.mp3__1.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A bright, rhythmic trumpet lick with a jazzy feel.\"?\n\nChoose exactly one option.\nA. A solo trumpet plays a clean phrase in a jazz style.\nB. The trumpet lick is played louder with less echo and an added distinct extra note.\nC. An upbeat, rhythmic trumpet lick played in a jazz style.\nD. A rhythmic trumpet lick with added echo creating a wider and more ambient sound.\nE. This is the last event, no immediate event after.\n\nReturn only the option label from: A, B, C, D, E.",
+      "output": "C"
+    },
+    "2": {
+      "name": "000002_102876.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"An upbeat, rhythmic trumpet lick played in a jazz style.\"?\n\nChoose exactly one option.\nA. A solo trumpet plays a clean phrase in a jazz style.\nB. A bright, rhythmic trumpet lick with a jazzy feel.\nC. A rhythmic trumpet lick with added echo creating a wider and more ambient sound.\nD. The trumpet lick is played louder with less echo and an added distinct extra note.\nE. This is the last event, no immediate event after.\n\nReturn only the option label from: A, B, C, D, E.",
+      "output": "C"
+    },
+    "3": {
+      "name": "000003_102876.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A rhythmic trumpet lick with added echo creating a wider and more ambient sound.\"?\n\nChoose exactly one option.\nA. The trumpet lick is played louder with less echo and an added distinct extra note.\nB. An upbeat, rhythmic trumpet lick played in a jazz style.\nC. A bright, rhythmic trumpet lick with a jazzy feel.\nD. This is the last event, no immediate event after.\nE. A solo trumpet plays a clean phrase in a jazz style.\n\nReturn only the option label from: A, B, C, D, E.",
+      "output": "A"
+    },
+    "4": {
+      "name": "000004_102876.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"The trumpet lick is played louder with less echo and an added distinct extra note.\"?\n\nChoose exactly one option.\nA. A rhythmic trumpet lick with added echo creating a wider and more ambient sound.\nB. A bright, rhythmic trumpet lick with a jazzy feel.\nC. An upbeat, rhythmic trumpet lick played in a jazz style.\nD. This is the last event, no immediate event after.\nE. A solo trumpet plays a clean phrase in a jazz style.\n\nReturn only the option label from: A, B, C, D, E.",
+      "output": "D"
+    },
+    "5": {
+      "name": "000005_106819.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Someone is speaking indoors in German.\"?\n\nChoose exactly one option.\nA. Multiple people laughing repeatedly.\nC. This is the last event, no immediate event after.\nD. A person is laughing repeatedly.\n\nReturn only the option label from: A, C, D.",
+      "output": "A"
+    },
+    "6": {
+      "name": "000006_106819.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Multiple people laughing repeatedly.\"?\n\nChoose exactly one option.\nA. A person is laughing repeatedly.\nC. A person is speaking German indoors.\nD. This is the last event, no immediate event after.\n\nReturn only the option label from: A, C, D.",
+      "output": "D"
+    },
+    "7": {
+      "name": "000007_108843.mp3__0.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Footsteps on a wood floor.\"?\n\nChoose exactly one option.\nA. A cat meows.\nB. This is the last event, no immediate event after.\nC. A cat is playing while moving around.\nD. A cat meowing.\n\nReturn only the option label from: A, B, C, D.",
+      "output": "D"
+    },
+    "8": {
+      "name": "000008_108843.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A cat is meowing.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nC. A cat is playing while moving around.\nD. A cat meows.\nE. Footsteps on a wood floor.\n\nReturn only the option label from: A, C, D, E.",
+      "output": "D"
+    },
+    "9": {
+      "name": "000009_108843.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A cat meows.\"?\n\nChoose exactly one option.\nA. A cat is playing while moving around.\nB. This is the last event, no immediate event after.\nC. Footsteps on a wood floor.\nD. A cat is meowing.\n\nReturn only the option label from: A, B, C, D.",
+      "output": "A"
+    },
+    "10": {
+      "name": "000010_108843.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A cat is playing while moving around.\"?\n\nChoose exactly one option.\nA. A cat is meowing.\nB. A cat meows.\nC. Footsteps on a wood floor.\nD. This is the last event, no immediate event after.\n\nReturn only the option label from: A, B, C, D.",
+      "output": "D"
+    },
+    "11": {
+      "name": "000011_113321.mp3__1.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A motorcycle engine roars in traffic.\"?\n\nChoose exactly one option.\nB. A car passes by loudly in traffic.\nC. A high-pitched squeaking noise occurs amid car traffic.\nD. A motorcycle engine running in the distance amidst traffic.\nE. This is the last event, no immediate event after.\n\nReturn only the option label from: B, C, D, E.",
+      "output": "D"
+    },
+    "12": {
+      "name": "000012_113321.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A motorcycle engine running in the distance amidst traffic.\"?\n\nChoose exactly one option.\nB. This is the last event, no immediate event after.\nD. A car passes by loudly in traffic.\nE. A high-pitched squeaking noise occurs amid car traffic.\n\nReturn only the option label from: B, D, E.",
+      "output": "E"
+    },
+    "13": {
+      "name": "000013_113321.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A high-pitched squeaking noise occurs amid car traffic.\"?\n\nChoose exactly one option.\nC. This is the last event, no immediate event after.\nD. A car passes by loudly in traffic.\nE. A motorcycle engine running in the distance amidst traffic.\n\nReturn only the option label from: C, D, E.",
+      "output": "D"
+    },
+    "14": {
+      "name": "000014_113321.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A car passes by loudly in traffic.\"?\n\nChoose exactly one option.\nA. A high-pitched squeaking noise occurs amid car traffic.\nC. A motorcycle engine running in the distance amidst traffic.\nE. This is the last event, no immediate event after.\n\nReturn only the option label from: A, C, E.",
+      "output": "E"
+    },
+    "15": {
+      "name": "000015_113326.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A pneumatic hiss sounds as the bus door opens, accompanied by the steady hum of the idling engine.\"?\n\nChoose exactly one option.\nA. The engine idles steadily.\nC. This is the last event, no immediate event after.\n\nReturn only the option label from: A, C.",
+      "output": "A"
+    },
+    "16": {
+      "name": "000016_113326.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"The engine idles steadily.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nB. A pneumatic hiss sounds as the bus door opens, accompanied by the steady hum of the idling engine.\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "17": {
+      "name": "000017_113352.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A loud motorbike engine running on the street.\"?\n\nChoose exactly one option.\nB. This is the last event, no immediate event after.\nC. Cars rapidly passing by on a busy street.\n\nReturn only the option label from: B, C.",
+      "output": "B"
+    },
+    "18": {
+      "name": "000018_113582.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"The audience is clapping.\"?\n\nChoose exactly one option.\nA. An audience member is speaking.\nB. The audience cheers wildly.\nD. This is the last event, no immediate event after.\nF. The audience is yelling.\n\nReturn only the option label from: A, B, D, F.",
+      "output": "A"
+    },
+    "19": {
+      "name": "000019_113582.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"An audience member is speaking.\"?\n\nChoose exactly one option.\nB. This is the last event, no immediate event after.\nC. The audience cheers wildly.\nE. The audience is clapping.\nF. The audience is yelling.\n\nReturn only the option label from: B, C, E, F.",
+      "output": "F"
+    },
+    "20": {
+      "name": "000020_115920.mp3__0.mp3",
+      "prompt": "What happens immediately after this event first appears: \"People clapping.\"?\n\nChoose exactly one option.\nA. Rhythmic clapping from several people.\nB. This is the last event, no immediate event after.\nD. Unrhythmic clapping from several people.\nE. A man speaks.\nF. A woman is yelling.\n\nReturn only the option label from: A, B, D, E, F.",
+      "output": "A"
+    },
+    "21": {
+      "name": "000021_115920.mp3__5.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Two men are speaking.\"?\n\nChoose exactly one option.\nA. Rhythmic clapping from several people.\nC. A woman is yelling.\nD. This is the last event, no immediate event after.\nE. Unrhythmic clapping from several people.\nF. People clapping.\n\nReturn only the option label from: A, C, D, E, F.",
+      "output": "D"
+    },
+    "22": {
+      "name": "000022_116769.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Irregular clapping with breaks in between.\"?\n\nChoose exactly one option.\nA. Quiet and slow clapping.\nC. This is the last event, no immediate event after.\nD. Only a few people are clapping quickly.\n\nReturn only the option label from: A, C, D.",
+      "output": "A"
+    },
+    "23": {
+      "name": "000023_116769.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Quiet and slow clapping.\"?\n\nChoose exactly one option.\nB. Irregular clapping with breaks in between.\nC. Only a few people are clapping quickly.\nD. This is the last event, no immediate event after.\n\nReturn only the option label from: B, C, D.",
+      "output": "D"
+    },
+    "24": {
+      "name": "000024_120213.mp3__1.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A person coughs once indoors.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nC. A person coughs twice indoors.\n\nReturn only the option label from: A, C.",
+      "output": "C"
+    },
+    "25": {
+      "name": "000025_120213.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A person coughs four times indoors.\"?\n\nChoose exactly one option.\nA. A person sniffs once indoors.\nD. This is the last event, no immediate event after.\n\nReturn only the option label from: A, D.",
+      "output": "D"
+    },
+    "26": {
+      "name": "000026_122065.mp3__1.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A train horn sounds in the distance.\"?\n\nChoose exactly one option.\nB. A loud, high-pitched noise of a very fast passenger train passing by.\nC. Gentle noise of a distant train with loud cricket sounds.\nD. This is the last event, no immediate event after.\n\nReturn only the option label from: B, C, D.",
+      "output": "B"
+    },
+    "27": {
+      "name": "000027_122065.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A loud, high-pitched noise of a very fast passenger train passing by.\"?\n\nChoose exactly one option.\nA. Gentle noise of a distant train with loud cricket sounds.\nC. A train horn sounds in the distance.\nD. This is the last event, no immediate event after.\n\nReturn only the option label from: A, C, D.",
+      "output": "A"
+    },
+    "28": {
+      "name": "000028_122065.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Gentle noise of a distant train with loud cricket sounds.\"?\n\nChoose exactly one option.\nA. Clear and loud cricket sounds in the background.\nB. A loud, high-pitched noise of a very fast passenger train passing by.\nC. A train horn sounds in the distance.\nD. This is the last event, no immediate event after.\n\nReturn only the option label from: A, B, C, D.",
+      "output": "D"
+    },
+    "29": {
+      "name": "000029_122088.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Thunder rolls, gradually decreasing in loudness.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nD. Thunder rolls loudly.\n\nReturn only the option label from: A, D.",
+      "output": "A"
+    },
+    "30": {
+      "name": "000030_124982.mp3__0.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Typing on plastic keyboard buttons accompanied by beeping sounds for each press.\"?\n\nChoose exactly one option.\nA. The motor of an ATM runs while it counts money.\nB. A barcode scanner or cashier machine beeps.\nC. This is the last event, no immediate event after.\nD. Pressing a plastic button on a cashier machine, which beeps when pressed.\n\nReturn only the option label from: A, B, C, D.",
+      "output": "D"
+    },
+    "31": {
+      "name": "000031_124982.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"The motor of an ATM runs while it counts money.\"?\n\nChoose exactly one option.\nA. A barcode scanner or cashier machine beeps.\nB. This is the last event, no immediate event after.\nC. Pressing a plastic button on a cashier machine, which beeps when pressed.\nD. Typing on plastic keyboard buttons accompanied by beeping sounds for each press.\n\nReturn only the option label from: A, B, C, D.",
+      "output": "B"
+    },
+    "32": {
+      "name": "000032_127288.mp3__5.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A very loud, muffled sound.\"?\n\nChoose exactly one option.\nA. A man coughs.\nB. The sound of a paper bag being opened.\nC. A man is speaking quietly in the background.\nF. This is the last event, no immediate event after.\n\nReturn only the option label from: A, B, C, F.",
+      "output": "F"
+    },
+    "33": {
+      "name": "000033_127990.mp3__1.mp3",
+      "prompt": "What happens immediately after this event first appears: \"An animal is eating, making munching sounds.\"?\n\nChoose exactly one option.\nB. This is the last event, no immediate event after.\nC. Birds tweeting.\nD. An animal grunts or squeals repeatedly.\n\nReturn only the option label from: B, C, D.",
+      "output": "C"
+    },
+    "34": {
+      "name": "000034_129654.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Drums are hitting loudly in a repeating pattern.\"?\n\nChoose exactly one option.\nB. A drum kit plays a fast, rhythmic, repeating pattern.\nC. Big drums hit loudly in a repeating pattern indoors.\nD. Hi-hats hit with a metallic sound in a fading pattern.\nE. This is the last event, no immediate event after.\n\nReturn only the option label from: B, C, D, E.",
+      "output": "D"
+    },
+    "35": {
+      "name": "000035_130127.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A car is braking with squeaky tires.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nD. People singing and yelling in the distance.\nE. A car is approaching.\n\nReturn only the option label from: A, D, E.",
+      "output": "D"
+    },
+    "36": {
+      "name": "000036_130127.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"People singing and yelling in the distance.\"?\n\nChoose exactly one option.\nA. A car is driving in the background.\nC. This is the last event, no immediate event after.\nE. A car is braking with squeaky tires.\n\nReturn only the option label from: A, C, E.",
+      "output": "C"
+    },
+    "37": {
+      "name": "000037_132385.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A small motorized machine is turning off.\"?\n\nChoose exactly one option.\nB. A small motorized machine is scratching or cutting something.\nC. This is the last event, no immediate event after.\nD. A small motor runs continuously after being turned on.\n\nReturn only the option label from: B, C, D.",
+      "output": "C"
+    },
+    "38": {
+      "name": "000038_136424.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A woman is yelling.\"?\n\nChoose exactly one option.\nA. A woman is speaking.\nC. This is the last event, no immediate event after.\n\nReturn only the option label from: A, C.",
+      "output": "A"
+    },
+    "39": {
+      "name": "000039_137010.mp3__2.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A woman is making an announcement.\"?\n\nChoose exactly one option.\nA. A person is dialing a phone.\nC. This is the last event, no immediate event after.\n\nReturn only the option label from: A, C.",
+      "output": "A"
+    },
+    "40": {
+      "name": "000040_137010.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A person is dialing a phone.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nB. A woman is making an announcement.\n\nReturn only the option label from: A, B.",
+      "output": "A"
+    },
+    "41": {
+      "name": "000041_137836.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A man is speaking in an unrecognizable language.\"?\n\nChoose exactly one option.\nB. This is the last event, no immediate event after.\nE. A hammer strikes a metallic object in a steady rhythm, producing a high-pitched metallic sound that echoes in a room.\n\nReturn only the option label from: B, E.",
+      "output": "E"
+    },
+    "42": {
+      "name": "000042_14.mp3__1.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A man is laughing.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nB. Music is playing in the background.\nD. A man laughs.\n\nReturn only the option label from: A, B, D.",
+      "output": "B"
+    },
+    "43": {
+      "name": "000043_140602.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A plane pilot is speaking through a loudspeaker.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nD. A person is speaking indistinctly.\n\nReturn only the option label from: A, D.",
+      "output": "A"
+    },
+    "44": {
+      "name": "000044_141529.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Someone utters a brief, disappointed sound in a quiet, shocked tone.\"?\n\nChoose exactly one option.\nA. Someone blows softly into a microphone, creating an airy whoosh.\nB. An alarm gradually increases in volume until it reaches a steady, repetitive tone.\nC. A loud thunderclap strikes nearby, echoing and gradually fading out.\nD. A calm rainstorm with soft, steady raindrops and gentle wind.\nE. This is the last event, no immediate event after.\n\nReturn only the option label from: A, B, C, D, E.",
+      "output": "A"
+    },
+    "45": {
+      "name": "000045_141529.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Someone blows softly into a microphone, creating an airy whoosh.\"?\n\nChoose exactly one option.\nA. A calm rainstorm with soft, steady raindrops and gentle wind.\nB. An alarm gradually increases in volume until it reaches a steady, repetitive tone.\nC. Someone utters a brief, disappointed sound in a quiet, shocked tone.\nD. A loud thunderclap strikes nearby, echoing and gradually fading out.\nE. This is the last event, no immediate event after.\n\nReturn only the option label from: A, B, C, D, E.",
+      "output": "E"
+    },
+    "46": {
+      "name": "000046_141710.mp3__3.mp3",
+      "prompt": "What happens immediately after this event first appears: \"Multiple single notes are played swiftly on a guitar.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nB. A single guitar note is played.\nD. A quiet chord is played on a guitar.\nE. A loud chord is played on a guitar.\n\nReturn only the option label from: A, B, D, E.",
+      "output": "B"
+    },
+    "47": {
+      "name": "000047_141710.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A single guitar note is played.\"?\n\nChoose exactly one option.\nA. A quiet chord is played on a guitar.\nB. This is the last event, no immediate event after.\nD. A loud chord is played on a guitar.\nE. A couple of single guitar notes are played.\n\nReturn only the option label from: A, B, D, E.",
+      "output": "B"
+    },
+    "48": {
+      "name": "000048_141717.mp3__0.mp3",
+      "prompt": "What happens immediately after this event first appears: \"A guitar string is picked once, and the sound fades away.\"?\n\nChoose exactly one option.\nA. Guitar chords being played with some fading in the middle.\nB. Guitar chords being played in sequence.\nC. This is the last event, no immediate event after.\n\nReturn only the option label from: A, B, C.",
+      "output": "B"
+    },
+    "49": {
+      "name": "000049_146075.mp3__1.mp3",
+      "prompt": "What happens immediately after this event first appears: \"An animal snorts loudly nearby.\"?\n\nChoose exactly one option.\nA. A lion roars loudly and repeatedly nearby.\nB. This is the last event, no immediate event after.\nC. An animal screams repeatedly nearby.\nD. A pig grunts loudly and repeatedly outdoors.\n\nReturn only the option label from: A, B, C, D.",
+      "output": "D"
+    },
+    "50": {
+      "name": "000050_146075.mp3__4.mp3",
+      "prompt": "What happens immediately after this event first appears: \"An animal screams repeatedly nearby.\"?\n\nChoose exactly one option.\nA. This is the last event, no immediate event after.\nB. A lion roars loudly and repeatedly nearby.\nD. A pig grunts loudly and repeatedly outdoors.\nE. An animal snorts loudly nearby.\n\nReturn only the option label from: A, B, D, E.",
+      "output": "A"
+    }
+  }
+}
