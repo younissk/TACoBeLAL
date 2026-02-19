@@ -31,6 +31,104 @@ This builds `data/mcq_event_timeline_strong.jsonl` from strong annotations with:
 - per-audio filtering by minimum event count
 - randomized answer option ordering
 
+### Manual Good/Bad review UI (human-in-the-loop)
+
+Launch a local UI to review one MCQ at a time (audio + question/options):
+
+```bash
+make review-mcq-dataset
+```
+
+Default behavior:
+- semantic dedupe is disabled by default (it can be re-enabled if needed)
+- only shows examples with option count in `[4, 6]` (override with `MCQ_REVIEW_MIN_OPTIONS` and `MCQ_REVIEW_MAX_OPTIONS`)
+- only two labels: `Good` and `Bad`
+- optional manual event-option deletion per question before saving (`Good`/`Bad`) when dedupe misses edge cases
+- keyboard shortcuts: `g` -> `Good`, `b` -> `Bad`
+- top progress counters: reviewed / good / bad
+- compact card-based UI (single-example workflow, audio/timeline/actions on top, question/options below)
+- real-time persistence on every click to:
+  - `results/mcq-order/review/manual_good_bad_labels.jsonl`
+- loads latest per-model run from `results/mcq-order/runs.csv` and adds model pills next to options based on predicted labels (excluding `random` and `*-no-audio` models)
+
+Example override:
+
+```bash
+make review-mcq-dataset \
+  MCQ_REVIEW_MIN_OPTIONS=5 \
+  MCQ_REVIEW_MAX_OPTIONS=6 \
+  MCQ_REVIEW_SEMANTIC_DEDUPE=1 \
+  MCQ_REVIEW_SIMILARITY_THRESHOLD=0.90 \
+  MCQ_REVIEW_PORT=7861
+```
+
+#### Methodology: building the curated Good/Bad dataset
+
+We create the curated split with a human-in-the-loop protocol on top of `MCQ-ORDER`:
+
+1. Start from `data/mcq_event_timeline_strong.jsonl`.
+2. (Optional) remove semantically near-duplicate `event` options within each question using sentence embeddings (default model `sentence-transformers/all-MiniLM-L6-v2`, cosine threshold `0.88`).
+3. Pre-filter candidate questions by option count (default `[4, 6]`).
+4. Review one question at a time in a local UI with:
+   - original audio playback (`data/audio/<audio_filename>`)
+   - question + options + gold answer
+   - optional manual deletion of non-gold event options for that question
+   - model prediction pills per option, loaded from `results/mcq-order/runs.csv` + each run's `decisions.jsonl`
+5. Annotate each example with exactly one binary label:
+   - `Good`
+   - `Bad`
+6. Persist each click immediately (append-only JSONL + flush/fsync) to avoid progress loss if the process/browser crashes.
+
+Label log format (saved to `results/mcq-order/review/manual_good_bad_labels.jsonl`):
+- `id` (example id, e.g. `100476.mp3__0`)
+- `label` (`good` or `bad`)
+- `audio_filename`
+- `deleted_option_keys` / `deleted_options` (manual per-question option deletions, if any)
+- `timestamp_utc`
+
+Important reproducibility note:
+- the label log is append-only, so if an example is re-labeled later, the **latest entry for that `id` is authoritative**.
+
+Optional materialization of final curated files (latest label wins):
+
+```bash
+uv run python - <<'PY'
+import json
+from pathlib import Path
+
+dataset_path = Path("data/mcq_event_timeline_strong.jsonl")
+labels_path = Path("results/mcq-order/review/manual_good_bad_labels.jsonl")
+out_good = Path("data/mcq_event_timeline_strong_good.jsonl")
+out_bad = Path("data/mcq_event_timeline_strong_bad.jsonl")
+
+labels = {}
+with labels_path.open("r", encoding="utf-8") as f:
+    for line in f:
+        row = json.loads(line)
+        i = row.get("id")
+        l = str(row.get("label", "")).strip().lower()
+        if i and l in {"good", "bad"}:
+            labels[i] = l
+
+good_count = bad_count = 0
+with dataset_path.open("r", encoding="utf-8") as src, \
+     out_good.open("w", encoding="utf-8") as fg, \
+     out_bad.open("w", encoding="utf-8") as fb:
+    for line in src:
+        row = json.loads(line)
+        lbl = labels.get(row.get("id"))
+        if lbl == "good":
+            fg.write(json.dumps(row, ensure_ascii=True) + "\n")
+            good_count += 1
+        elif lbl == "bad":
+            fb.write(json.dumps(row, ensure_ascii=True) + "\n")
+            bad_count += 1
+
+print(f"wrote good={good_count} -> {out_good}")
+print(f"wrote bad={bad_count} -> {out_bad}")
+PY
+```
+
 ### Build MCQ-RELATION dataset
 
 ```bash

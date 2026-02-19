@@ -5,6 +5,7 @@
 	download-dataset \
 	extract-audio \
 	build-mcq-dataset \
+	review-mcq-dataset \
 	build-mcq-relation-dataset \
 	build-mcq-safety-dataset \
 	run-benchmark \
@@ -40,6 +41,16 @@ MCQ_RELATION_DATASET ?= $(DATA_DIR)/mcq_relation_timeline_strong.jsonl
 MCQ_SAFETY_DATASET ?= $(DATA_DIR)/mcq_safety_presence_100.jsonl
 AUDIO_ROOT ?= $(DATA_DIR)/audio
 AUDIO_ZIP ?= $(DATA_DIR)/audio.zip
+MCQ_REVIEW_LABELS ?= $(RESULTS_DIR)/mcq-order/review/manual_good_bad_labels.jsonl
+MCQ_REVIEW_MIN_OPTIONS ?= 4
+MCQ_REVIEW_MAX_OPTIONS ?= 6
+MCQ_REVIEW_SEMANTIC_DEDUPE ?= 0
+MCQ_REVIEW_SIMILARITY_MODEL ?= sentence-transformers/all-MiniLM-L6-v2
+MCQ_REVIEW_SIMILARITY_THRESHOLD ?= 0.88
+MCQ_REVIEW_SIMILARITY_BATCH ?= 64
+MCQ_REVIEW_HOST ?= 127.0.0.1
+MCQ_REVIEW_PORT ?= 7860
+MCQ_REVIEW_SEMANTIC_ARG := $(if $(filter 1 true yes,$(MCQ_REVIEW_SEMANTIC_DEDUPE)),--semantic-dedupe,--no-semantic-dedupe)
 
 BENCH_TASK ?= mcq-order
 BENCH_MODEL ?= random
@@ -139,6 +150,21 @@ extract-audio:
 
 build-mcq-dataset:
 	uv run python src/utils/build_timeline_mcq_dataset.py --input $(DATA_DIR)/annotations_strong.csv --output $(MCQ_DATASET)
+
+review-mcq-dataset:
+	uv run python src/utils/review_mcq_order_labels.py \
+		--dataset $(MCQ_DATASET) \
+		--audio-root $(AUDIO_ROOT) \
+		--runs-csv $(RESULTS_DIR)/mcq-order/runs.csv \
+		--labels-output $(MCQ_REVIEW_LABELS) \
+		--min-options $(MCQ_REVIEW_MIN_OPTIONS) \
+		--max-options $(MCQ_REVIEW_MAX_OPTIONS) \
+		$(MCQ_REVIEW_SEMANTIC_ARG) \
+		--similarity-model-id $(MCQ_REVIEW_SIMILARITY_MODEL) \
+		--similarity-threshold $(MCQ_REVIEW_SIMILARITY_THRESHOLD) \
+		--similarity-batch-size $(MCQ_REVIEW_SIMILARITY_BATCH) \
+		--host $(MCQ_REVIEW_HOST) \
+		--port $(MCQ_REVIEW_PORT)
 
 build-mcq-relation-dataset:
 	uv run python src/utils/build_relation_mcq_dataset.py --input $(DATA_DIR)/annotations_strong.csv --output $(MCQ_RELATION_DATASET)
