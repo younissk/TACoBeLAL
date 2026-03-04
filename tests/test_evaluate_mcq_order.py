@@ -14,8 +14,13 @@ from utils.mcq_order_models import (
 )
 
 
-def _example_payload(*, example_id: str, answer_label: str = "B") -> dict[str, object]:
-    return {
+def _example_payload(
+    *,
+    example_id: str,
+    answer_label: str = "B",
+    task_id: str | None = None,
+) -> dict[str, object]:
+    payload: dict[str, object] = {
         "id": example_id,
         "audio_filename": "a.mp3",
         "question": "What happens immediately after X?",
@@ -27,6 +32,9 @@ def _example_payload(*, example_id: str, answer_label: str = "B") -> dict[str, o
         "answer_label": answer_label,
         "answer_text": "Option B" if answer_label == "B" else "Option A",
     }
+    if task_id is not None:
+        payload["task_id"] = task_id
+    return payload
 
 
 def test_random_model_is_deterministic() -> None:
@@ -64,11 +72,23 @@ def test_load_examples_reads_valid_jsonl(tmp_path: Path) -> None:
     assert examples[0].example_id == "ex-1"
 
 
+def test_load_examples_preserves_dataset_task_id(tmp_path: Path) -> None:
+    dataset = tmp_path / "dataset.jsonl"
+    dataset.write_text(
+        json.dumps(_example_payload(example_id="ex-synth", task_id="MCQ-SYNTH-TIME")) + "\n",
+        encoding="utf-8",
+    )
+
+    examples = load_examples(dataset)
+    assert len(examples) == 1
+    assert examples[0].task_id == "MCQ-SYNTH-TIME"
+
+
 def test_main_writes_results_artifacts(tmp_path: Path) -> None:
     dataset = tmp_path / "dataset.jsonl"
     rows = [
-        _example_payload(example_id="ex-1", answer_label="B"),
-        _example_payload(example_id="ex-2", answer_label="A"),
+        _example_payload(example_id="ex-1", answer_label="B", task_id="MCQ-SYNTH-TIME"),
+        _example_payload(example_id="ex-2", answer_label="A", task_id="MCQ-SYNTH-TIME"),
     ]
     dataset.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
 
@@ -105,17 +125,17 @@ def test_main_writes_results_artifacts(tmp_path: Path) -> None:
     with open(decisions_path, "r", encoding="utf-8") as f:
         decisions = [json.loads(line) for line in f if line.strip()]
     assert len(decisions) == 2
-    assert all(row["task_id"] == TASK_ID_MCQ_ORDER for row in decisions)
+    assert all(row["task_id"] == "MCQ-SYNTH-TIME" for row in decisions)
     assert all("is_correct" in row for row in decisions)
 
     metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
-    assert metrics["task_id"] == TASK_ID_MCQ_ORDER
+    assert metrics["task_id"] == "MCQ-SYNTH-TIME"
     assert metrics["model_name"] == "random"
     assert metrics["examples"] == 2
     assert "model_metadata" in metrics
 
     table_content = table_path.read_text(encoding="utf-8")
-    assert "MCQ-ORDER" in table_content
+    assert "MCQ-SYNTH-TIME" in table_content
     assert "random" in table_content
 
     analysis = json.loads(analysis_path.read_text(encoding="utf-8"))

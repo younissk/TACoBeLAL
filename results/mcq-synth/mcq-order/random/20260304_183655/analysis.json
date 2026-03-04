@@ -1,0 +1,90 @@
+{
+  "task_id": "MCQ-SYNTH",
+  "model_name": "random",
+  "examples": 5,
+  "correct": 3,
+  "accuracy": 0.6,
+  "labels": [
+    "A",
+    "B",
+    "C"
+  ],
+  "answer_distribution": [
+    {
+      "label": "A",
+      "count": 2,
+      "rate": 0.4
+    },
+    {
+      "label": "B",
+      "count": 1,
+      "rate": 0.2
+    },
+    {
+      "label": "C",
+      "count": 2,
+      "rate": 0.4
+    }
+  ],
+  "prediction_distribution": [
+    {
+      "label": "A",
+      "count": 2,
+      "rate": 0.4
+    },
+    {
+      "label": "B",
+      "count": 2,
+      "rate": 0.4
+    },
+    {
+      "label": "C",
+      "count": 1,
+      "rate": 0.2
+    }
+  ],
+  "by_answer_label": [
+    {
+      "label": "A",
+      "support": 2,
+      "correct": 1,
+      "accuracy": 0.5,
+      "predicted_count": 2,
+      "prediction_rate": 0.4
+    },
+    {
+      "label": "B",
+      "support": 1,
+      "correct": 1,
+      "accuracy": 1.0,
+      "predicted_count": 2,
+      "prediction_rate": 0.4
+    },
+    {
+      "label": "C",
+      "support": 2,
+      "correct": 1,
+      "accuracy": 0.5,
+      "predicted_count": 1,
+      "prediction_rate": 0.2
+    }
+  ],
+  "by_n_options": [
+    {
+      "n_options": 3,
+      "examples": 5,
+      "correct": 3,
+      "accuracy": 0.6
+    }
+  ],
+  "by_answer_type": [
+    {
+      "answer_type": "event",
+      "examples": 5,
+      "correct": 3,
+      "accuracy": 0.6
+    }
+  ],
+  "answer_entropy": 1.5219280948873621,
+  "prediction_entropy": 1.5219280948873621
+}

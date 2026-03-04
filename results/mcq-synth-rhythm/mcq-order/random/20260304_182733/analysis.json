@@ -1,0 +1,71 @@
+{
+  "task_id": "MCQ-SYNTH-RHYTHM",
+  "model_name": "random",
+  "examples": 2,
+  "correct": 2,
+  "accuracy": 1.0,
+  "labels": [
+    "A",
+    "B"
+  ],
+  "answer_distribution": [
+    {
+      "label": "A",
+      "count": 1,
+      "rate": 0.5
+    },
+    {
+      "label": "B",
+      "count": 1,
+      "rate": 0.5
+    }
+  ],
+  "prediction_distribution": [
+    {
+      "label": "A",
+      "count": 1,
+      "rate": 0.5
+    },
+    {
+      "label": "B",
+      "count": 1,
+      "rate": 0.5
+    }
+  ],
+  "by_answer_label": [
+    {
+      "label": "A",
+      "support": 1,
+      "correct": 1,
+      "accuracy": 1.0,
+      "predicted_count": 1,
+      "prediction_rate": 0.5
+    },
+    {
+      "label": "B",
+      "support": 1,
+      "correct": 1,
+      "accuracy": 1.0,
+      "predicted_count": 1,
+      "prediction_rate": 0.5
+    }
+  ],
+  "by_n_options": [
+    {
+      "n_options": 2,
+      "examples": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    }
+  ],
+  "by_answer_type": [
+    {
+      "answer_type": "event",
+      "examples": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    }
+  ],
+  "answer_entropy": 1.0,
+  "prediction_entropy": 1.0
+}

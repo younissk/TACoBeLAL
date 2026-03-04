@@ -113,6 +113,16 @@ def load_examples(dataset_jsonl: Path, limit: int | None = None) -> list[MCQOrde
     return examples
 
 
+def resolve_dataset_task_id(examples: Iterable[MCQOrderExample], default: str = TASK_ID_MCQ_ORDER) -> str:
+    task_ids = {example.task_id for example in examples if example.task_id}
+    if not task_ids:
+        return default
+    if len(task_ids) > 1:
+        labels = ", ".join(sorted(task_ids))
+        raise ValueError(f"Dataset contains multiple task ids: {labels}")
+    return next(iter(task_ids))
+
+
 def evaluate(model: MCQOrderModel, examples: Iterable[MCQOrderExample]) -> tuple[list[Decision], float]:
     return evaluate_with_callback(model=model, examples=examples, callback=None)
 
@@ -145,7 +155,7 @@ def evaluate_with_callback(
             correct_so_far += 1
         decisions.append(
             Decision(
-                task_id=TASK_ID_MCQ_ORDER,
+                task_id=example.task_id,
                 model_name=model.model_name,
                 example_id=example.example_id,
                 audio_filename=example.audio_filename,
@@ -596,6 +606,7 @@ def main(
     examples = load_examples(dataset, limit=limit)
     if not examples:
         raise typer.BadParameter("No examples found in dataset.")
+    task_id = resolve_dataset_task_id(examples)
 
     tracker = WandbTracker(
         enabled=wandb,
@@ -604,7 +615,7 @@ def main(
         run_name=wandb_run_name,
         log_every=wandb_log_every,
         config={
-            "task_id": TASK_ID_MCQ_ORDER,
+            "task_id": task_id,
             "dataset": str(dataset),
             "model": model_instance.model_name,
             "model_config": model_instance.run_metadata(),
@@ -619,7 +630,7 @@ def main(
             "local_dtype": local_dtype,
             "local_trust_remote_code": local_trust_remote_code,
         },
-        tags=["mcq-order", model_instance.model_name],
+        tags=["mcq-order", task_id.lower(), model_instance.model_name],
     )
 
     try:
@@ -654,7 +665,7 @@ def main(
         _write_decisions(decisions_path, decisions)
 
         metrics = RunMetrics(
-            task_id=TASK_ID_MCQ_ORDER,
+            task_id=task_id,
             model_name=model_instance.model_name,
             model_metadata=model_instance.run_metadata(),
             examples=len(decisions),
@@ -673,7 +684,7 @@ def main(
         _write_results_table(run_dir / "results_table.md", metrics)
         _append_runs_csv(results_root / "mcq-order" / "runs.csv", metrics)
         analysis_payload = _build_analysis_payload(
-            task_id=TASK_ID_MCQ_ORDER,
+            task_id=task_id,
             model_name=model_instance.model_name,
             decisions=decisions,
         )

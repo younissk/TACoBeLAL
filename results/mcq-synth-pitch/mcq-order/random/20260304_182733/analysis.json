@@ -1,0 +1,71 @@
+{
+  "task_id": "MCQ-SYNTH-PITCH",
+  "model_name": "random",
+  "examples": 2,
+  "correct": 1,
+  "accuracy": 0.5,
+  "labels": [
+    "A",
+    "B"
+  ],
+  "answer_distribution": [
+    {
+      "label": "A",
+      "count": 0,
+      "rate": 0.0
+    },
+    {
+      "label": "B",
+      "count": 2,
+      "rate": 1.0
+    }
+  ],
+  "prediction_distribution": [
+    {
+      "label": "A",
+      "count": 1,
+      "rate": 0.5
+    },
+    {
+      "label": "B",
+      "count": 1,
+      "rate": 0.5
+    }
+  ],
+  "by_answer_label": [
+    {
+      "label": "A",
+      "support": 0,
+      "correct": 0,
+      "accuracy": 0.0,
+      "predicted_count": 1,
+      "prediction_rate": 0.5
+    },
+    {
+      "label": "B",
+      "support": 2,
+      "correct": 1,
+      "accuracy": 0.5,
+      "predicted_count": 1,
+      "prediction_rate": 0.5
+    }
+  ],
+  "by_n_options": [
+    {
+      "n_options": 3,
+      "examples": 2,
+      "correct": 1,
+      "accuracy": 0.5
+    }
+  ],
+  "by_answer_type": [
+    {
+      "answer_type": "event",
+      "examples": 2,
+      "correct": 1,
+      "accuracy": 0.5
+    }
+  ],
+  "answer_entropy": 0.0,
+  "prediction_entropy": 1.0
+}

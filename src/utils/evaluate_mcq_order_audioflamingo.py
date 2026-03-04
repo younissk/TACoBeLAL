@@ -25,11 +25,11 @@ from rich.progress import BarColumn, Progress, TaskProgressColumn, TextColumn, T
 from rich.table import Table
 
 try:
-    from .evaluate_mcq_order import load_examples
+    from .evaluate_mcq_order import load_examples, resolve_dataset_task_id
     from .mcq_order_models import MCQOrderExample, TASK_ID_MCQ_ORDER
     from .wandb_tracker import WandbTracker
 except ImportError:  # pragma: no cover - enables direct script execution
-    from evaluate_mcq_order import load_examples
+    from evaluate_mcq_order import load_examples, resolve_dataset_task_id
     from mcq_order_models import MCQOrderExample, TASK_ID_MCQ_ORDER
     from wandb_tracker import WandbTracker
 
@@ -298,6 +298,7 @@ def prepare_audioflamingo_input(
             mapping[mapped_output_id] = {
                 "index": idx,
                 "fallback_output_id": key,
+                "task_id": example.task_id,
                 "example_id": example.example_id,
                 "audio_filename": example.audio_filename,
                 "question": example.question,
@@ -320,7 +321,7 @@ def prepare_audioflamingo_input(
         "dataset_path": str(audio_root) if audio_root is not None else str(work_dir),
         "split": "test",
         "split_path": str(links_dir),
-        "flamingo_task": TASK_ID_MCQ_ORDER,
+        "flamingo_task": resolve_dataset_task_id(examples),
         "data": data,
     }
 
@@ -469,7 +470,7 @@ def evaluate_audioflamingo_outputs(
 
         decisions.append(
             Decision(
-                task_id=TASK_ID_MCQ_ORDER,
+                task_id=str(metadata.get("task_id", TASK_ID_MCQ_ORDER)),
                 model_name=model_name,
                 model_base=model_base,
                 example_id=metadata["example_id"],
@@ -904,9 +905,10 @@ def main(
     examples = load_examples(dataset, limit=limit)
     if not examples:
         raise typer.BadParameter("No examples found to evaluate.")
+    task_id = resolve_dataset_task_id(examples)
 
     model_name = _resolve_model_name(use_audio=use_audio)
-    tags = ["mcq-order", model_name]
+    tags = ["mcq-order", task_id.lower(), model_name]
     if not use_audio:
         tags.append("no-audio")
     tracker = WandbTracker(
@@ -916,7 +918,7 @@ def main(
         run_name=wandb_run_name,
         log_every=wandb_log_every,
         config={
-            "task_id": TASK_ID_MCQ_ORDER,
+            "task_id": task_id,
             "dataset": str(dataset),
             "audio_root": str(audio_root),
             "audioflamingo_repo": str(audioflamingo_repo),
@@ -995,7 +997,7 @@ def main(
 
         metrics = RunMetrics(
             run_id=run_dir.name,
-            task_id=TASK_ID_MCQ_ORDER,
+            task_id=task_id,
             model_name=model_name,
             model_base=model_base,
             dataset_path=str(dataset),
@@ -1022,7 +1024,7 @@ def main(
         _write_json(analysis_path, analysis_payload)
 
         config_payload = {
-            "task_id": TASK_ID_MCQ_ORDER,
+            "task_id": task_id,
             "dataset": str(dataset),
             "audio_root": str(audio_root),
             "audioflamingo_repo": str(audioflamingo_repo),

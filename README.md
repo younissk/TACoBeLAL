@@ -14,11 +14,69 @@ The following will be assessed through Multiple Choice Question (MCQ) tasks:
 - Duration comparison (Pick two regions with clearly different lengths. Ask which lasted longer)
 - to be continued...
 
+## Synthetic Benchmarks
+
+Synthetic MCQ benchmarks are the recommended path for controlled experiments. They generate both the audio and the labels from known latent variables and reuse the same evaluator JSONL contract as the original tasks.
+
+Synthetic benchmark families:
+
+- `mcq-synth`: aggregate benchmark combining all synthetic families and difficulties
+- `mcq-synth-time`: 3 tones, fixed pitch/loudness, varying onset and duration
+- `mcq-synth-pitch`: 3 tones, fixed timing/loudness, varying pitch
+- `mcq-synth-loudness`: 3 tones, fixed timing/pitch, varying loudness
+- `mcq-synth-rhythm`: 2 bursts, varying beep counts
+
+Build the single combined synthetic benchmark:
+
+```bash
+make build-mcq-synth-benchmark
+```
+
+With the default `SYNTH_SCENES=500`, this writes a combined benchmark with `6000` questions total
+(`4` families x `3` difficulties x `500` questions per split) to `data/mcq_synth_benchmark.jsonl`.
+
+Build one synthetic family:
+
+```bash
+make build-mcq-synth-time SYNTH_DIFFICULTY=easy SYNTH_SCENES=500
+make build-mcq-synth-pitch SYNTH_DIFFICULTY=medium SYNTH_SCENES=500
+make build-mcq-synth-loudness SYNTH_DIFFICULTY=hard SYNTH_SCENES=500
+make build-mcq-synth-rhythm SYNTH_DIFFICULTY=easy SYNTH_SCENES=500
+```
+
+Build the full synthetic suite:
+
+```bash
+make build-mcq-synth-all SYNTH_SCENES=500
+```
+
+Direct CLI example:
+
+```bash
+uv run python src/utils/build_synthetic_mcq_dataset.py \
+  --benchmark all \
+  --difficulty all \
+  --scenes-per-split 500 \
+  --seed 7
+```
+
+Outputs:
+
+- aggregate benchmark: `data/mcq_synth_benchmark.jsonl`
+- JSONL datasets: `data/mcq_synth_<family>_<difficulty>.jsonl`
+- audio: `data/audio/synthetic/<family>/<difficulty>/`
+- summaries: `data/synthetic/manifests/`
+
 ### Task ID
 
 - `MCQ-ORDER`
 - `MCQ-RELATION`
 - `MCQ-SAFETY`
+- `MCQ-SYNTH-TIME`
+- `MCQ-SYNTH-PITCH`
+- `MCQ-SYNTH-LOUDNESS`
+- `MCQ-SYNTH-RHYTHM`
+- `MCQ-SYNTH`
 
 ### Build MCQ-ORDER dataset
 
@@ -193,7 +251,12 @@ Swap task/model/sample count without changing scripts:
 
 ```bash
 make run-benchmark BENCH_TASK=mcq-relation BENCH_MODEL=llm-qwen BENCH_SAMPLES=500
+make run-benchmark BENCH_TASK=mcq-synth BENCH_MODEL=random BENCH_SAMPLES=500
 make run-benchmark BENCH_TASK=mcq-order BENCH_MODEL=qwen2-audio BENCH_SAMPLES=100
+make run-benchmark BENCH_TASK=mcq-synth-time BENCH_MODEL=random BENCH_SAMPLES=100
+make run-benchmark BENCH_TASK=mcq-synth-pitch BENCH_MODEL=random BENCH_SAMPLES=100
+make run-benchmark BENCH_TASK=mcq-synth-loudness BENCH_MODEL=random BENCH_SAMPLES=100
+make run-benchmark BENCH_TASK=mcq-synth-rhythm BENCH_MODEL=random BENCH_SAMPLES=100
 make run-benchmark BENCH_TASK=mcq-order BENCH_MODEL=audioflamingo BENCH_SAMPLES=100 BENCH_USE_AUDIO=0
 make run-benchmark BENCH_TASK=mcq-safety BENCH_MODEL=random BENCH_SAMPLES=100
 ```

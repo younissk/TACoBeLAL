@@ -1,0 +1,2 @@
+run_id,task_id,model_name,examples,correct,accuracy,elapsed_seconds,average_latency_ms,started_at_utc,finished_at_utc,dataset_path,decisions_path
+20260304_183655,MCQ-SYNTH,random,5,3,0.6,2.6e-05,0.001583,2026-03-04T18:36:55.158079+00:00,2026-03-04T18:36:55.158272+00:00,data/mcq_synth_benchmark.jsonl,results/mcq-synth/mcq-order/random/20260304_183655/decisions.jsonl

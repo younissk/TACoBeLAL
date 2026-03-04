@@ -22,6 +22,8 @@ class TaskSpec:
     key: str
     dataset_default: Path
     build_target: str
+    requires_download: bool = True
+    requires_audio_extract: bool = True
 
 
 @dataclass(frozen=True)
@@ -50,6 +52,41 @@ TASKS: dict[str, TaskSpec] = {
         key="mcq-safety",
         dataset_default=Path("data/mcq_safety_presence_100.jsonl"),
         build_target="build-mcq-safety-dataset",
+    ),
+    "mcq-synth": TaskSpec(
+        key="mcq-synth",
+        dataset_default=Path("data/mcq_synth_benchmark.jsonl"),
+        build_target="build-mcq-synth-benchmark",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-time": TaskSpec(
+        key="mcq-synth-time",
+        dataset_default=Path("data/mcq_synth_time_easy.jsonl"),
+        build_target="build-mcq-synth-time",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-pitch": TaskSpec(
+        key="mcq-synth-pitch",
+        dataset_default=Path("data/mcq_synth_pitch_easy.jsonl"),
+        build_target="build-mcq-synth-pitch",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-loudness": TaskSpec(
+        key="mcq-synth-loudness",
+        dataset_default=Path("data/mcq_synth_loudness_easy.jsonl"),
+        build_target="build-mcq-synth-loudness",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-rhythm": TaskSpec(
+        key="mcq-synth-rhythm",
+        dataset_default=Path("data/mcq_synth_rhythm_easy.jsonl"),
+        build_target="build-mcq-synth-rhythm",
+        requires_download=False,
+        requires_audio_extract=False,
     ),
 }
 
@@ -173,10 +210,11 @@ def _build_setup_targets(
             targets.append("install-llm")
 
     if prepare_data:
-        targets.append("download-dataset")
+        if task.requires_download:
+            targets.append("download-dataset")
         if dataset_is_default:
             targets.append(task.build_target)
-        if model.needs_audio_root and use_audio:
+        if model.needs_audio_root and use_audio and task.requires_audio_extract:
             targets.append("extract-audio")
         if model.needs_audioflamingo_repo:
             targets.append("download-audioflamingo")
@@ -332,7 +370,11 @@ def main(
     task: str = typer.Option(
         "mcq-order",
         "--task",
-        help="Benchmark task id (mcq-order|mcq-relation|mcq-safety).",
+        help=(
+            "Benchmark task id "
+            "(mcq-order|mcq-relation|mcq-safety|mcq-synth|mcq-synth-time|mcq-synth-pitch|"
+            "mcq-synth-loudness|mcq-synth-rhythm)."
+        ),
     ),
     model: str = typer.Option(
         "random",

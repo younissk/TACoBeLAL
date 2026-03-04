@@ -21,11 +21,11 @@ from rich.progress import BarColumn, Progress, TaskProgressColumn, TextColumn, T
 from rich.table import Table
 
 try:
-    from .evaluate_mcq_order import load_examples
+    from .evaluate_mcq_order import load_examples, resolve_dataset_task_id
     from .mcq_order_models import MCQOrderExample, TASK_ID_MCQ_ORDER
     from .wandb_tracker import WandbTracker
 except ImportError:  # pragma: no cover - enables direct script execution
-    from evaluate_mcq_order import load_examples
+    from evaluate_mcq_order import load_examples, resolve_dataset_task_id
     from mcq_order_models import MCQOrderExample, TASK_ID_MCQ_ORDER
     from wandb_tracker import WandbTracker
 
@@ -554,7 +554,7 @@ def evaluate_qwen2_audio_outputs(
 
         decisions.append(
             Decision(
-                task_id=TASK_ID_MCQ_ORDER,
+                task_id=example.task_id,
                 model_name=model_name,
                 model_base=model_base,
                 example_id=example.example_id,
@@ -993,12 +993,13 @@ def main(
     examples = load_examples(dataset, limit=limit)
     if not examples:
         raise typer.BadParameter("No examples found to evaluate.")
+    task_id = resolve_dataset_task_id(examples)
 
     if use_audio:
         _validate_audio_files(examples, audio_root=audio_root)
 
     model_name = _resolve_model_name(model_base, use_audio=use_audio)
-    tags = ["mcq-order", "qwen2-audio", model_name]
+    tags = ["mcq-order", task_id.lower(), "qwen2-audio", model_name]
     if not use_audio:
         tags.append("no-audio")
     tracker = WandbTracker(
@@ -1008,7 +1009,7 @@ def main(
         run_name=wandb_run_name,
         log_every=wandb_log_every,
         config={
-            "task_id": TASK_ID_MCQ_ORDER,
+            "task_id": task_id,
             "dataset": str(dataset),
             "audio_root": str(audio_root),
             "model_name": model_name,
@@ -1030,7 +1031,7 @@ def main(
 
     try:
         config_payload = {
-            "task_id": TASK_ID_MCQ_ORDER,
+            "task_id": task_id,
             "dataset": str(dataset),
             "audio_root": str(audio_root),
             "model_name": model_name,
@@ -1087,7 +1088,7 @@ def main(
 
         metrics = RunMetrics(
             run_id=run_dir.name,
-            task_id=TASK_ID_MCQ_ORDER,
+            task_id=task_id,
             model_name=model_name,
             model_base=model_base,
             dataset_path=str(dataset),

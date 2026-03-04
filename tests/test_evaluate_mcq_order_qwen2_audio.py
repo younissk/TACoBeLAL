@@ -13,7 +13,7 @@ from utils.evaluate_mcq_order_qwen2_audio import (
 from utils.mcq_order_models import MCQOrderExample
 
 
-def _example(example_id: str, *, answer_label: str = "B") -> MCQOrderExample:
+def _example(example_id: str, *, answer_label: str = "B", task_id: str | None = None) -> MCQOrderExample:
     payload: dict[str, object] = {
         "id": example_id,
         "audio_filename": "sample.mp3",
@@ -26,6 +26,8 @@ def _example(example_id: str, *, answer_label: str = "B") -> MCQOrderExample:
         "answer_label": answer_label,
         "answer_text": "Option B" if answer_label == "B" else "Option A",
     }
+    if task_id is not None:
+        payload["task_id"] = task_id
     return MCQOrderExample.from_json(payload)
 
 
@@ -117,6 +119,21 @@ def test_evaluate_qwen2_audio_outputs_handles_missing_and_invalid() -> None:
     assert second.predicted_label == "INVALID"
     assert second.parse_status == "missing"
     assert second.is_correct is False
+
+
+def test_evaluate_qwen2_audio_outputs_preserves_example_task_id() -> None:
+    ex = _example("ex-task", task_id="MCQ-SYNTH-PITCH")
+
+    decisions, invalid_count, missing_count = evaluate_qwen2_audio_outputs(
+        examples=[ex],
+        raw_outputs=[{"id": "ex-task", "pred": "B"}],
+        model_name="qwen2-audio-7b-instruct",
+        model_base="Qwen/Qwen2-Audio-7B-Instruct",
+    )
+
+    assert invalid_count == 0
+    assert missing_count == 0
+    assert decisions[0].task_id == "MCQ-SYNTH-PITCH"
 
 
 def test_extract_completion_ids_prefers_input_ids_when_attention_sum_exceeds_generated() -> None:

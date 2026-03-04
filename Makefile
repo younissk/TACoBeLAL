@@ -5,6 +5,12 @@
 	download-dataset \
 	extract-audio \
 	build-mcq-dataset \
+	build-mcq-synth-benchmark \
+	build-mcq-synth-time \
+	build-mcq-synth-pitch \
+	build-mcq-synth-loudness \
+	build-mcq-synth-rhythm \
+	build-mcq-synth-all \
 	review-mcq-dataset \
 	build-mcq-relation-dataset \
 	build-mcq-safety-dataset \
@@ -39,6 +45,11 @@ RESULTS_DIR ?= results
 MCQ_DATASET ?= $(DATA_DIR)/mcq_event_timeline_strong.jsonl
 MCQ_RELATION_DATASET ?= $(DATA_DIR)/mcq_relation_timeline_strong.jsonl
 MCQ_SAFETY_DATASET ?= $(DATA_DIR)/mcq_safety_presence_100.jsonl
+MCQ_SYNTH_BENCHMARK_DATASET ?= $(DATA_DIR)/mcq_synth_benchmark.jsonl
+MCQ_SYNTH_TIME_DATASET ?= $(DATA_DIR)/mcq_synth_time_easy.jsonl
+MCQ_SYNTH_PITCH_DATASET ?= $(DATA_DIR)/mcq_synth_pitch_easy.jsonl
+MCQ_SYNTH_LOUDNESS_DATASET ?= $(DATA_DIR)/mcq_synth_loudness_easy.jsonl
+MCQ_SYNTH_RHYTHM_DATASET ?= $(DATA_DIR)/mcq_synth_rhythm_easy.jsonl
 AUDIO_ROOT ?= $(DATA_DIR)/audio
 AUDIO_ZIP ?= $(DATA_DIR)/audio.zip
 MCQ_REVIEW_LABELS ?= $(RESULTS_DIR)/mcq-order/review/manual_good_bad_labels.jsonl
@@ -119,6 +130,10 @@ LOCAL_TEMPERATURE ?= 0.0
 LOCAL_TOP_P ?= 1.0
 LOCAL_LIMIT ?= 100
 LIMIT_ARG := $(if $(LOCAL_LIMIT),--limit $(LOCAL_LIMIT),)
+SYNTH_DIFFICULTY ?= easy
+SYNTH_SCENES ?= 500
+SYNTH_SEED ?= 7
+SYNTH_GENERATOR_VERSION ?= synth-v1
 
 WANDB_PROJECT ?= tacobelal
 WANDB_ENTITY ?=
@@ -171,6 +186,66 @@ build-mcq-relation-dataset:
 
 build-mcq-safety-dataset:
 	uv run python src/utils/build_safety_check_dataset.py --input $(DATA_DIR)/annotations_strong.csv --output $(MCQ_SAFETY_DATASET)
+
+build-mcq-synth-benchmark:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark all \
+		--difficulty all \
+		--scenes-per-split $(SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-time:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark time \
+		--difficulty $(SYNTH_DIFFICULTY) \
+		--scenes-per-split $(SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-pitch:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark pitch \
+		--difficulty $(SYNTH_DIFFICULTY) \
+		--scenes-per-split $(SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-loudness:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark loudness \
+		--difficulty $(SYNTH_DIFFICULTY) \
+		--scenes-per-split $(SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-rhythm:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark rhythm \
+		--difficulty $(SYNTH_DIFFICULTY) \
+		--scenes-per-split $(SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-all:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark all \
+		--difficulty all \
+		--scenes-per-split $(SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
 
 run-benchmark:
 	uv run python src/utils/run_benchmark.py \

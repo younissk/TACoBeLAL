@@ -18,6 +18,11 @@ def test_normalize_aliases() -> None:
     assert _normalize_task("mcq-order") == "mcq-order"
     assert _normalize_task("mcq-relation") == "mcq-relation"
     assert _normalize_task("mcq-safety") == "mcq-safety"
+    assert _normalize_task("mcq-synth") == "mcq-synth"
+    assert _normalize_task("mcq-synth-time") == "mcq-synth-time"
+    assert _normalize_task("mcq-synth-pitch") == "mcq-synth-pitch"
+    assert _normalize_task("mcq-synth-loudness") == "mcq-synth-loudness"
+    assert _normalize_task("mcq-synth-rhythm") == "mcq-synth-rhythm"
     assert _normalize_model("qwen") == "llm-qwen"
     assert _normalize_model("af3") == "audioflamingo"
 
@@ -50,6 +55,18 @@ def test_setup_targets_for_safety_default_dataset() -> None:
         dataset_is_default=True,
     )
     assert targets == ["download-dataset", "build-mcq-safety-dataset"]
+
+
+def test_setup_targets_for_synthetic_default_dataset_skip_download_and_extract() -> None:
+    targets = _build_setup_targets(
+        model=MODELS["qwen2-audio"],
+        task=TASKS["mcq-synth"],
+        prepare_data=True,
+        install_deps=False,
+        use_audio=True,
+        dataset_is_default=True,
+    )
+    assert targets == ["build-mcq-synth-benchmark"]
 
 
 def test_build_eval_command_random_relation() -> None:
@@ -132,3 +149,13 @@ def test_build_eval_command_omni_no_audio_uses_transformers_override() -> None:
     assert "--attn-implementation" in command and "flash_attention_2" in command
     assert "--wandb" in command
     assert "--hf-token" in command and "token" in command
+
+
+def test_synthetic_task_defaults() -> None:
+    assert TASKS["mcq-synth"].dataset_default == Path("data/mcq_synth_benchmark.jsonl")
+    assert TASKS["mcq-synth"].build_target == "build-mcq-synth-benchmark"
+    assert TASKS["mcq-synth-time"].dataset_default == Path("data/mcq_synth_time_easy.jsonl")
+    assert TASKS["mcq-synth-time"].build_target == "build-mcq-synth-time"
+    assert TASKS["mcq-synth-pitch"].dataset_default == Path("data/mcq_synth_pitch_easy.jsonl")
+    assert TASKS["mcq-synth-loudness"].dataset_default == Path("data/mcq_synth_loudness_easy.jsonl")
+    assert TASKS["mcq-synth-rhythm"].dataset_default == Path("data/mcq_synth_rhythm_easy.jsonl")

@@ -36,6 +36,10 @@ class MCQOrderExample:
 
     @classmethod
     def from_json(cls, payload: Mapping[str, Any], task_id: str = TASK_ID_MCQ_ORDER) -> "MCQOrderExample":
+        payload_task_id = payload.get("task_id")
+        if isinstance(payload_task_id, str) and payload_task_id.strip():
+            task_id = payload_task_id.strip()
+
         options_payload = payload.get("options")
         if not isinstance(options_payload, list) or not options_payload:
             raise ValueError("Each example must contain a non-empty 'options' list.")
@@ -146,7 +150,7 @@ def _format_mcq_prompt(example: MCQOrderExample) -> str:
     options_block = "\n".join(f"{option.label}. {option.text}" for option in example.options)
     valid_labels = ", ".join(option.label for option in example.options)
     return (
-        "You are evaluating a text-only MCQ question for task MCQ-ORDER.\n"
+        f"You are evaluating a text-only MCQ question for task {example.task_id}.\n"
         "Choose exactly one answer option label.\n"
         "Return only the label (e.g., A). No explanation.\n\n"
         f"Question:\n{example.question}\n\n"
