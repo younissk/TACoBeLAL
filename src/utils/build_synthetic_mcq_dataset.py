@@ -11,19 +11,44 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
+import numpy as np
 import typer
 from rich.console import Console
 from rich.table import Table
 
 try:
-    from .synthetic_audio import midi_to_hz, render_timeline, write_wav
+    from .synthetic_audio import (
+        midi_to_hz,
+        normalize_peak,
+        read_wav,
+        render_clip_timeline,
+        render_timeline,
+        resample_audio,
+        write_wav,
+    )
 except ImportError:  # pragma: no cover - enables direct script execution
-    from synthetic_audio import midi_to_hz, render_timeline, write_wav
+    from synthetic_audio import (
+        midi_to_hz,
+        normalize_peak,
+        read_wav,
+        render_clip_timeline,
+        render_timeline,
+        resample_audio,
+        write_wav,
+    )
 
 console = Console()
 
 BENCHMARKS = ("time", "pitch", "loudness", "rhythm")
-STANDALONE_BENCHMARKS = ("pitch_order_trivial",)
+STANDALONE_BENCHMARKS = (
+    "pitch_order_trivial",
+    "loudness_order_trivial",
+    "duration_order_trivial",
+    "count_beeps_trivial",
+    "gap_trivial",
+    "pattern_pitch_trivial",
+    "dog_car_order_trivial",
+)
 ALL_BENCHMARKS = BENCHMARKS + STANDALONE_BENCHMARKS
 DIFFICULTIES = ("easy", "medium", "hard")
 AGGREGATE_TASK_ID = "MCQ-SYNTH"
@@ -36,6 +61,12 @@ TASK_IDS = {
     "loudness": "MCQ-SYNTH-LOUDNESS",
     "rhythm": "MCQ-SYNTH-RHYTHM",
     "pitch_order_trivial": "MCQ-SYNTH-PITCH-ORDER-TRIVIAL",
+    "loudness_order_trivial": "MCQ-SYNTH-LOUDNESS-ORDER-TRIVIAL",
+    "duration_order_trivial": "MCQ-SYNTH-DURATION-ORDER-TRIVIAL",
+    "count_beeps_trivial": "MCQ-SYNTH-COUNT-BEEPS-TRIVIAL",
+    "gap_trivial": "MCQ-SYNTH-GAP-TRIVIAL",
+    "pattern_pitch_trivial": "MCQ-SYNTH-PATTERN-PITCH-TRIVIAL",
+    "dog_car_order_trivial": "MCQ-SYNTH-DOG-CAR-ORDER-TRIVIAL",
 }
 
 TASK_NAMES = {
@@ -44,6 +75,12 @@ TASK_NAMES = {
     "loudness": "synthetic_loudness_mcq",
     "rhythm": "synthetic_rhythm_mcq",
     "pitch_order_trivial": "synthetic_pitch_order_trivial_mcq",
+    "loudness_order_trivial": "synthetic_loudness_order_trivial_mcq",
+    "duration_order_trivial": "synthetic_duration_order_trivial_mcq",
+    "count_beeps_trivial": "synthetic_count_beeps_trivial_mcq",
+    "gap_trivial": "synthetic_gap_trivial_mcq",
+    "pattern_pitch_trivial": "synthetic_pattern_pitch_trivial_mcq",
+    "dog_car_order_trivial": "synthetic_dog_car_order_trivial_mcq",
 }
 
 TIME_WAVEFORMS = [
@@ -67,6 +104,13 @@ TIME_TEMPLATE_IDS = ("starts_first", "starts_last", "longest_duration", "shortes
 PITCH_TEMPLATE_IDS = ("highest_pitch", "lowest_pitch")
 LOUDNESS_TEMPLATE_IDS = ("loudest", "quietest")
 PITCH_ORDER_TRIVIAL_TEMPLATE_ID = "high_vs_low_first"
+LOUDNESS_ORDER_TRIVIAL_TEMPLATE_ID = "loud_vs_quiet_first"
+DURATION_ORDER_TRIVIAL_TEMPLATE_ID = "long_vs_short_first"
+COUNT_BEEPS_TRIVIAL_TEMPLATE_ID = "count_beeps"
+GAP_TRIVIAL_TEMPLATE_ID = "short_vs_long_pause"
+PATTERN_PITCH_TRIVIAL_TEMPLATE_ID = "pitch_pattern"
+DOG_CAR_ORDER_TRIVIAL_TEMPLATE_ID = "dog_vs_car_first"
+TRIVIAL_ASSET_ROOT = Path(__file__).resolve().parent / "assets" / "temporal_trivial"
 
 
 @dataclass(frozen=True)
@@ -150,6 +194,76 @@ def _write_jsonl(path: Path, rows: Iterable[dict[str, Any]]) -> int:
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:
     with open(path, "r", encoding="utf-8") as f:
         return [json.loads(line) for line in f if line.strip()]
+
+
+def _require_easy_only(benchmark: str, difficulty: str) -> None:
+    if difficulty != "easy":
+        raise ValueError(f"Benchmark '{benchmark}' only supports difficulty='easy'.")
+
+
+def _two_event_tone_scene(
+    *,
+    question: str,
+    question_template: str,
+    option_specs: dict[str, dict[str, Any]],
+    order: tuple[str, str],
+    onsets: tuple[float, float],
+    total_padding: float,
+    sample_rate: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    events: list[dict[str, Any]] = []
+    render_events: list[dict[str, float | str]] = []
+    for onset, key in zip(onsets, order):
+        spec = option_specs[key]
+        duration = float(spec["duration"])
+        dbfs = float(spec["dbfs"])
+        event = {
+            "key": key,
+            "text": str(spec["text"]),
+            "identity": str(spec.get("identity", key)),
+            "waveform": str(spec["waveform"]),
+            "onset": onset,
+            "duration": duration,
+            "offset": round(onset + duration, 3),
+            "pitch_hz": float(spec["pitch_hz"]),
+            "dbfs": dbfs,
+        }
+        events.append(event)
+        render_events.append(
+            {
+                "waveform": str(spec["waveform"]),
+                "pitch_hz": float(spec["pitch_hz"]),
+                "dbfs": dbfs,
+                "onset": onset,
+                "duration": duration,
+            }
+        )
+
+    total_duration = round(max(event["offset"] for event in events) + total_padding, 3)
+    waveform = render_timeline(
+        events=render_events,
+        total_duration_seconds=total_duration,
+        sample_rate=sample_rate,
+    )
+    option_defs = [{"key": key, "text": str(spec["text"]), "type": "event"} for key, spec in option_specs.items()]
+    return option_defs, {
+        "question": question,
+        "question_template": question_template,
+        "answer_key": order[0],
+        "scene": {
+            "duration_seconds": total_duration,
+            "events": events,
+        },
+        "waveform": waveform,
+    }
+
+
+def _load_bundled_asset(path: Path, *, sample_rate: int) -> tuple[np.ndarray, float]:
+    samples, source_rate = read_wav(path)
+    resampled = resample_audio(samples, source_rate=source_rate, target_rate=sample_rate)
+    normalized = normalize_peak(resampled)
+    duration = normalized.shape[0] / float(sample_rate)
+    return normalized, duration
 
 
 def _time_scene(
@@ -470,63 +584,305 @@ def _pitch_order_trivial_scene(
     sample_rate: int,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     del rng
-    if difficulty != "easy":
-        raise ValueError("Benchmark 'pitch_order_trivial' only supports difficulty='easy'.")
+    _require_easy_only("pitch_order_trivial", difficulty)
 
-    duration = 0.15
-    dbfs = -18.0
-    first_onset = 0.50
-    second_onset = 2.00
     order = ("high", "low") if scene_index % 2 == 0 else ("low", "high")
-
-    event_specs = {
-        "high": {"text": "the high beep", "pitch_hz": 880.0},
-        "low": {"text": "the low beep", "pitch_hz": 220.0},
+    option_specs = {
+        "high": {"text": "the high beep", "pitch_hz": 880.0, "duration": 0.15, "dbfs": -18.0, "waveform": "sine"},
+        "low": {"text": "the low beep", "pitch_hz": 220.0, "duration": 0.15, "dbfs": -18.0, "waveform": "sine"},
     }
+    return _two_event_tone_scene(
+        question="You will hear a high beep and a low beep. Which one happened first?",
+        question_template=PITCH_ORDER_TRIVIAL_TEMPLATE_ID,
+        option_specs=option_specs,
+        order=order,
+        onsets=(0.50, 2.00),
+        total_padding=0.40,
+        sample_rate=sample_rate,
+    )
+
+
+def _loudness_order_trivial_scene(
+    *,
+    rng: random.Random,
+    scene_index: int,
+    difficulty: str,
+    sample_rate: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    del rng
+    _require_easy_only("loudness_order_trivial", difficulty)
+
+    order = ("loud", "quiet") if scene_index % 2 == 0 else ("quiet", "loud")
+    option_specs = {
+        "loud": {"text": "the loud beep", "pitch_hz": 440.0, "duration": 0.15, "dbfs": -6.0, "waveform": "sine"},
+        "quiet": {"text": "the quiet beep", "pitch_hz": 440.0, "duration": 0.15, "dbfs": -24.0, "waveform": "sine"},
+    }
+    return _two_event_tone_scene(
+        question="You will hear a loud beep and a quiet beep. Which one happened first?",
+        question_template=LOUDNESS_ORDER_TRIVIAL_TEMPLATE_ID,
+        option_specs=option_specs,
+        order=order,
+        onsets=(0.50, 2.00),
+        total_padding=0.40,
+        sample_rate=sample_rate,
+    )
+
+
+def _duration_order_trivial_scene(
+    *,
+    rng: random.Random,
+    scene_index: int,
+    difficulty: str,
+    sample_rate: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    del rng
+    _require_easy_only("duration_order_trivial", difficulty)
+
+    order = ("long", "short") if scene_index % 2 == 0 else ("short", "long")
+    option_specs = {
+        "long": {"text": "the long beep", "pitch_hz": 440.0, "duration": 1.0, "dbfs": -18.0, "waveform": "sine"},
+        "short": {"text": "the short beep", "pitch_hz": 440.0, "duration": 0.1, "dbfs": -18.0, "waveform": "sine"},
+    }
+    return _two_event_tone_scene(
+        question="You will hear a long beep and a short beep. Which one happened first?",
+        question_template=DURATION_ORDER_TRIVIAL_TEMPLATE_ID,
+        option_specs=option_specs,
+        order=order,
+        onsets=(0.50, 2.00),
+        total_padding=0.40,
+        sample_rate=sample_rate,
+    )
+
+
+def _count_beeps_trivial_scene(
+    *,
+    rng: random.Random,
+    scene_index: int,
+    difficulty: str,
+    sample_rate: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    del rng
+    _require_easy_only("count_beeps_trivial", difficulty)
+
+    answer_key = ("one", "two", "three")[scene_index % 3]
+    count = {"one": 1, "two": 2, "three": 3}[answer_key]
+    duration = 0.15
+    gap = 1.0
+    total_duration = 4.3
+    sequence_duration = count * duration + max(0, count - 1) * gap
+    start = round((total_duration - sequence_duration) / 2.0, 3)
 
     events: list[dict[str, Any]] = []
     render_events: list[dict[str, float | str]] = []
-    for onset, key in zip((first_onset, second_onset), order):
-        spec = event_specs[key]
-        offset = round(onset + duration, 3)
+    for event_index in range(count):
+        onset = round(start + event_index * (duration + gap), 3)
         event = {
-            "key": key,
-            "text": spec["text"],
-            "identity": key,
+            "key": f"beep_{event_index + 1}",
+            "text": f"beep {event_index + 1}",
+            "identity": "beep",
             "waveform": "sine",
             "onset": onset,
             "duration": duration,
-            "offset": offset,
-            "pitch_hz": spec["pitch_hz"],
-            "dbfs": dbfs,
+            "offset": round(onset + duration, 3),
+            "pitch_hz": 440.0,
+            "dbfs": -18.0,
         }
         events.append(event)
         render_events.append(
             {
                 "waveform": "sine",
-                "pitch_hz": float(spec["pitch_hz"]),
-                "dbfs": dbfs,
+                "pitch_hz": 440.0,
+                "dbfs": -18.0,
                 "onset": onset,
                 "duration": duration,
             }
         )
 
-    total_duration = round(second_onset + duration + 0.40, 3)
     waveform = render_timeline(
         events=render_events,
         total_duration_seconds=total_duration,
         sample_rate=sample_rate,
     )
     return [
-        {"key": "high", "text": "the high beep", "type": "event"},
-        {"key": "low", "text": "the low beep", "type": "event"},
+        {"key": "one", "text": "one beep", "type": "count"},
+        {"key": "two", "text": "two beeps", "type": "count"},
+        {"key": "three", "text": "three beeps", "type": "count"},
     ], {
-        "question": "You will hear a high beep and a low beep. Which one happened first?",
-        "question_template": PITCH_ORDER_TRIVIAL_TEMPLATE_ID,
+        "question": "How many beeps did you hear?",
+        "question_template": COUNT_BEEPS_TRIVIAL_TEMPLATE_ID,
+        "answer_key": answer_key,
+        "scene": {
+            "duration_seconds": total_duration,
+            "events": events,
+            "count": count,
+            "gap_seconds": gap,
+        },
+        "waveform": waveform,
+    }
+
+
+def _gap_trivial_scene(
+    *,
+    rng: random.Random,
+    scene_index: int,
+    difficulty: str,
+    sample_rate: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    del rng
+    _require_easy_only("gap_trivial", difficulty)
+
+    answer_key = "short" if scene_index % 2 == 0 else "long"
+    gap_seconds = 0.2 if answer_key == "short" else 2.0
+    duration = 0.15
+    first_onset = 0.50
+    second_onset = round(first_onset + duration + gap_seconds, 3)
+    option_specs = {
+        "first": {"text": "the first beep", "pitch_hz": 440.0, "duration": duration, "dbfs": -18.0, "waveform": "sine"},
+        "second": {
+            "text": "the second beep",
+            "pitch_hz": 440.0,
+            "duration": duration,
+            "dbfs": -18.0,
+            "waveform": "sine",
+        },
+    }
+    _, payload = _two_event_tone_scene(
+        question="Was the pause between the two beeps short or long?",
+        question_template=GAP_TRIVIAL_TEMPLATE_ID,
+        option_specs=option_specs,
+        order=("first", "second"),
+        onsets=(first_onset, second_onset),
+        total_padding=0.40,
+        sample_rate=sample_rate,
+    )
+    payload["answer_key"] = answer_key
+    payload["scene"]["gap_seconds"] = gap_seconds
+    payload["options_override"] = [
+        {"key": "short", "text": "a short pause", "type": "gap"},
+        {"key": "long", "text": "a long pause", "type": "gap"},
+    ]
+    return payload.pop("options_override"), payload
+
+
+def _pattern_pitch_trivial_scene(
+    *,
+    rng: random.Random,
+    scene_index: int,
+    difficulty: str,
+    sample_rate: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    del rng
+    _require_easy_only("pattern_pitch_trivial", difficulty)
+
+    answer_key = "high_low_high" if scene_index % 2 == 0 else "low_high_low"
+    identities = ["high", "low", "high"] if answer_key == "high_low_high" else ["low", "high", "low"]
+    onsets = [0.5, 1.5, 2.5]
+    events: list[dict[str, Any]] = []
+    render_events: list[dict[str, float | str]] = []
+    for onset, identity in zip(onsets, identities):
+        pitch_hz = 880.0 if identity == "high" else 220.0
+        event = {
+            "key": f"{identity}_{len(events) + 1}",
+            "text": f"{identity} beep",
+            "identity": identity,
+            "waveform": "sine",
+            "onset": onset,
+            "duration": 0.15,
+            "offset": round(onset + 0.15, 3),
+            "pitch_hz": pitch_hz,
+            "dbfs": -18.0,
+        }
+        events.append(event)
+        render_events.append(
+            {
+                "waveform": "sine",
+                "pitch_hz": pitch_hz,
+                "dbfs": -18.0,
+                "onset": onset,
+                "duration": 0.15,
+            }
+        )
+
+    total_duration = 3.05
+    waveform = render_timeline(
+        events=render_events,
+        total_duration_seconds=total_duration,
+        sample_rate=sample_rate,
+    )
+    return [
+        {"key": "high_low_high", "text": "high-low-high", "type": "pattern"},
+        {"key": "low_high_low", "text": "low-high-low", "type": "pattern"},
+    ], {
+        "question": "Which pattern did you hear?",
+        "question_template": PATTERN_PITCH_TRIVIAL_TEMPLATE_ID,
+        "answer_key": answer_key,
+        "scene": {
+            "duration_seconds": total_duration,
+            "events": events,
+            "pattern": identities,
+        },
+        "waveform": waveform,
+    }
+
+
+def _dog_car_order_trivial_scene(
+    *,
+    rng: random.Random,
+    scene_index: int,
+    difficulty: str,
+    sample_rate: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    del rng
+    _require_easy_only("dog_car_order_trivial", difficulty)
+
+    dog_asset = TRIVIAL_ASSET_ROOT / "dog_bark.wav"
+    car_asset = TRIVIAL_ASSET_ROOT / "car_horn.wav"
+    dog_samples, dog_duration = _load_bundled_asset(dog_asset, sample_rate=sample_rate)
+    car_samples, car_duration = _load_bundled_asset(car_asset, sample_rate=sample_rate)
+    order = ("dog", "car") if scene_index % 2 == 0 else ("car", "dog")
+    first_onset = 0.5
+    second_onset = 0.5 + (dog_duration if order[0] == "dog" else car_duration) + 1.5
+
+    clip_specs = {
+        "dog": {"text": "the dog sound", "samples": dog_samples, "duration": dog_duration, "asset": dog_asset.name},
+        "car": {"text": "the car sound", "samples": car_samples, "duration": car_duration, "asset": car_asset.name},
+    }
+    events: list[dict[str, Any]] = []
+    clips: list[dict[str, float | np.ndarray]] = []
+    for onset, key in zip((first_onset, second_onset), order):
+        spec = clip_specs[key]
+        event = {
+            "key": key,
+            "text": spec["text"],
+            "identity": key,
+            "waveform": "asset",
+            "onset": round(onset, 3),
+            "duration": round(float(spec["duration"]), 3),
+            "offset": round(onset + float(spec["duration"]), 3),
+            "pitch_hz": None,
+            "dbfs": None,
+            "asset_filename": spec["asset"],
+        }
+        events.append(event)
+        clips.append({"samples": spec["samples"], "onset": onset})
+
+    total_duration = round(max(event["offset"] for event in events) + 0.40, 3)
+    waveform = render_clip_timeline(
+        clips=clips,
+        total_duration_seconds=total_duration,
+        sample_rate=sample_rate,
+    )
+    return [
+        {"key": "dog", "text": "the dog sound", "type": "event"},
+        {"key": "car", "text": "the car sound", "type": "event"},
+    ], {
+        "question": "You will hear a dog sound and a car sound. Which one happened first?",
+        "question_template": DOG_CAR_ORDER_TRIVIAL_TEMPLATE_ID,
         "answer_key": order[0],
         "scene": {
             "duration_seconds": total_duration,
             "events": events,
+            "gap_seconds": 1.5,
         },
         "waveform": waveform,
     }
@@ -559,6 +915,12 @@ def _build_split(
         "loudness": _loudness_scene,
         "rhythm": _rhythm_scene,
         "pitch_order_trivial": _pitch_order_trivial_scene,
+        "loudness_order_trivial": _loudness_order_trivial_scene,
+        "duration_order_trivial": _duration_order_trivial_scene,
+        "count_beeps_trivial": _count_beeps_trivial_scene,
+        "gap_trivial": _gap_trivial_scene,
+        "pattern_pitch_trivial": _pattern_pitch_trivial_scene,
+        "dog_car_order_trivial": _dog_car_order_trivial_scene,
     }[benchmark]
 
     for scene_index in range(scenes_per_split):
@@ -734,7 +1096,12 @@ def main(
     benchmark: str = typer.Option(
         "all",
         "--benchmark",
-        help="Benchmark family to build (time|pitch|loudness|rhythm|pitch_order_trivial|all).",
+        help=(
+            "Benchmark family to build "
+            "(time|pitch|loudness|rhythm|pitch_order_trivial|loudness_order_trivial|"
+            "duration_order_trivial|count_beeps_trivial|gap_trivial|pattern_pitch_trivial|"
+            "dog_car_order_trivial|all)."
+        ),
     ),
     difficulty: str = typer.Option(
         "all",
@@ -787,7 +1154,7 @@ def main(
         if invalid_difficulties:
             invalid = ", ".join(sorted(invalid_difficulties))
             raise typer.BadParameter(
-                f"Benchmark 'pitch_order_trivial' only supports difficulty='easy' (got: {invalid})."
+                f"Standalone trivial benchmarks only support difficulty='easy' (got: {invalid})."
             )
 
     summaries: list[SplitSummary] = []

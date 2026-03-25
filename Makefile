@@ -11,6 +11,12 @@
 	build-mcq-synth-loudness \
 	build-mcq-synth-rhythm \
 	build-mcq-synth-pitch-order-trivial \
+	build-mcq-synth-loudness-order-trivial \
+	build-mcq-synth-duration-order-trivial \
+	build-mcq-synth-count-beeps-trivial \
+	build-mcq-synth-gap-trivial \
+	build-mcq-synth-pattern-pitch-trivial \
+	build-mcq-synth-dog-car-order-trivial \
 	build-mcq-synth-all \
 	review-mcq-dataset \
 	build-mcq-relation-dataset \
@@ -52,6 +58,12 @@ MCQ_SYNTH_PITCH_DATASET ?= $(DATA_DIR)/mcq_synth_pitch_easy.jsonl
 MCQ_SYNTH_LOUDNESS_DATASET ?= $(DATA_DIR)/mcq_synth_loudness_easy.jsonl
 MCQ_SYNTH_RHYTHM_DATASET ?= $(DATA_DIR)/mcq_synth_rhythm_easy.jsonl
 MCQ_SYNTH_PITCH_ORDER_TRIVIAL_DATASET ?= $(DATA_DIR)/mcq_synth_pitch_order_trivial_easy.jsonl
+MCQ_SYNTH_LOUDNESS_ORDER_TRIVIAL_DATASET ?= $(DATA_DIR)/mcq_synth_loudness_order_trivial_easy.jsonl
+MCQ_SYNTH_DURATION_ORDER_TRIVIAL_DATASET ?= $(DATA_DIR)/mcq_synth_duration_order_trivial_easy.jsonl
+MCQ_SYNTH_COUNT_BEEPS_TRIVIAL_DATASET ?= $(DATA_DIR)/mcq_synth_count_beeps_trivial_easy.jsonl
+MCQ_SYNTH_GAP_TRIVIAL_DATASET ?= $(DATA_DIR)/mcq_synth_gap_trivial_easy.jsonl
+MCQ_SYNTH_PATTERN_PITCH_TRIVIAL_DATASET ?= $(DATA_DIR)/mcq_synth_pattern_pitch_trivial_easy.jsonl
+MCQ_SYNTH_DOG_CAR_ORDER_TRIVIAL_DATASET ?= $(DATA_DIR)/mcq_synth_dog_car_order_trivial_easy.jsonl
 AUDIO_ROOT ?= $(DATA_DIR)/audio
 AUDIO_ZIP ?= $(DATA_DIR)/audio.zip
 MCQ_REVIEW_LABELS ?= $(RESULTS_DIR)/mcq-order/review/manual_good_bad_labels.jsonl
@@ -134,6 +146,7 @@ LOCAL_LIMIT ?= 100
 LIMIT_ARG := $(if $(LOCAL_LIMIT),--limit $(LOCAL_LIMIT),)
 SYNTH_DIFFICULTY ?= easy
 SYNTH_SCENES ?= 500
+TRIVIAL_SYNTH_SCENES ?= 100
 SYNTH_SEED ?= 7
 SYNTH_GENERATOR_VERSION ?= synth-v1
 
@@ -243,7 +256,67 @@ build-mcq-synth-pitch-order-trivial:
 	uv run python src/utils/build_synthetic_mcq_dataset.py \
 		--benchmark pitch_order_trivial \
 		--difficulty easy \
-		--scenes-per-split $(SYNTH_SCENES) \
+		--scenes-per-split $(TRIVIAL_SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-loudness-order-trivial:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark loudness_order_trivial \
+		--difficulty easy \
+		--scenes-per-split $(TRIVIAL_SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-duration-order-trivial:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark duration_order_trivial \
+		--difficulty easy \
+		--scenes-per-split $(TRIVIAL_SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-count-beeps-trivial:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark count_beeps_trivial \
+		--difficulty easy \
+		--scenes-per-split $(TRIVIAL_SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-gap-trivial:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark gap_trivial \
+		--difficulty easy \
+		--scenes-per-split $(TRIVIAL_SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-pattern-pitch-trivial:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark pattern_pitch_trivial \
+		--difficulty easy \
+		--scenes-per-split $(TRIVIAL_SYNTH_SCENES) \
+		--seed $(SYNTH_SEED) \
+		--audio-root $(AUDIO_ROOT) \
+		--dataset-root $(DATA_DIR) \
+		--generator-version $(SYNTH_GENERATOR_VERSION)
+
+build-mcq-synth-dog-car-order-trivial:
+	uv run python src/utils/build_synthetic_mcq_dataset.py \
+		--benchmark dog_car_order_trivial \
+		--difficulty easy \
+		--scenes-per-split $(TRIVIAL_SYNTH_SCENES) \
 		--seed $(SYNTH_SEED) \
 		--audio-root $(AUDIO_ROOT) \
 		--dataset-root $(DATA_DIR) \

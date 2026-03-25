@@ -95,6 +95,48 @@ TASKS: dict[str, TaskSpec] = {
         requires_download=False,
         requires_audio_extract=False,
     ),
+    "mcq-synth-loudness-order-trivial": TaskSpec(
+        key="mcq-synth-loudness-order-trivial",
+        dataset_default=Path("data/mcq_synth_loudness_order_trivial_easy.jsonl"),
+        build_target="build-mcq-synth-loudness-order-trivial",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-duration-order-trivial": TaskSpec(
+        key="mcq-synth-duration-order-trivial",
+        dataset_default=Path("data/mcq_synth_duration_order_trivial_easy.jsonl"),
+        build_target="build-mcq-synth-duration-order-trivial",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-count-beeps-trivial": TaskSpec(
+        key="mcq-synth-count-beeps-trivial",
+        dataset_default=Path("data/mcq_synth_count_beeps_trivial_easy.jsonl"),
+        build_target="build-mcq-synth-count-beeps-trivial",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-gap-trivial": TaskSpec(
+        key="mcq-synth-gap-trivial",
+        dataset_default=Path("data/mcq_synth_gap_trivial_easy.jsonl"),
+        build_target="build-mcq-synth-gap-trivial",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-pattern-pitch-trivial": TaskSpec(
+        key="mcq-synth-pattern-pitch-trivial",
+        dataset_default=Path("data/mcq_synth_pattern_pitch_trivial_easy.jsonl"),
+        build_target="build-mcq-synth-pattern-pitch-trivial",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
+    "mcq-synth-dog-car-order-trivial": TaskSpec(
+        key="mcq-synth-dog-car-order-trivial",
+        dataset_default=Path("data/mcq_synth_dog_car_order_trivial_easy.jsonl"),
+        build_target="build-mcq-synth-dog-car-order-trivial",
+        requires_download=False,
+        requires_audio_extract=False,
+    ),
 }
 
 MODELS: dict[str, ModelSpec] = {
@@ -380,7 +422,10 @@ def main(
         help=(
             "Benchmark task id "
             "(mcq-order|mcq-relation|mcq-safety|mcq-synth|mcq-synth-time|mcq-synth-pitch|"
-            "mcq-synth-loudness|mcq-synth-rhythm|mcq-synth-pitch-order-trivial)."
+            "mcq-synth-loudness|mcq-synth-rhythm|mcq-synth-pitch-order-trivial|"
+            "mcq-synth-loudness-order-trivial|mcq-synth-duration-order-trivial|"
+            "mcq-synth-count-beeps-trivial|mcq-synth-gap-trivial|"
+            "mcq-synth-pattern-pitch-trivial|mcq-synth-dog-car-order-trivial)."
         ),
     ),
     model: str = typer.Option(

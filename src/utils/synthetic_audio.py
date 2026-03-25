@@ -109,6 +109,56 @@ def render_timeline(
     return waveform.astype(np.float32)
 
 
+def read_wav(path: Path) -> tuple[np.ndarray, int]:
+    """Read mono WAV data and return float32 samples plus sample rate."""
+    samples, sample_rate = sf.read(str(path), dtype="float32")
+    if samples.ndim > 1:
+        samples = np.mean(samples, axis=1)
+    return samples.astype(np.float32), int(sample_rate)
+
+
+def resample_audio(samples: np.ndarray, *, source_rate: int, target_rate: int) -> np.ndarray:
+    """Resample audio with linear interpolation for small bundled assets."""
+    if source_rate == target_rate:
+        return samples.astype(np.float32)
+    if samples.size == 0:
+        return samples.astype(np.float32)
+
+    duration_seconds = samples.shape[0] / float(source_rate)
+    target_size = max(1, int(round(duration_seconds * target_rate)))
+    source_times = np.linspace(0.0, duration_seconds, samples.shape[0], endpoint=False, dtype=np.float32)
+    target_times = np.linspace(0.0, duration_seconds, target_size, endpoint=False, dtype=np.float32)
+    return np.interp(target_times, source_times, samples).astype(np.float32)
+
+
+def normalize_peak(samples: np.ndarray, *, target_peak: float = TARGET_PEAK) -> np.ndarray:
+    """Scale samples to the requested peak while preserving relative shape."""
+    peak = float(np.max(np.abs(samples))) if samples.size else 0.0
+    if peak <= 0.0:
+        return samples.astype(np.float32)
+    return (samples * (target_peak / peak)).astype(np.float32)
+
+
+def render_clip_timeline(
+    *,
+    clips: list[dict[str, float | np.ndarray]],
+    total_duration_seconds: float,
+    sample_rate: int,
+) -> np.ndarray:
+    """Render a mono waveform from onset-timed sample clips."""
+    total_samples = max(1, int(round(total_duration_seconds * sample_rate)))
+    waveform = np.zeros(total_samples, dtype=np.float32)
+
+    for clip in clips:
+        samples = np.asarray(clip["samples"], dtype=np.float32)
+        onset = float(clip["onset"])
+        start = max(0, int(round(onset * sample_rate)))
+        end = min(total_samples, start + samples.shape[0])
+        waveform[start:end] += samples[: end - start]
+
+    return normalize_peak(waveform)
+
+
 def write_wav(path: Path, *, samples: np.ndarray, sample_rate: int) -> None:
     """Write a mono WAV file."""
     path.parent.mkdir(parents=True, exist_ok=True)

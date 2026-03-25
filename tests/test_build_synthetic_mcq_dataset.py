@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 from pathlib import Path
 
 import soundfile as sf
@@ -13,6 +14,21 @@ from utils.build_synthetic_mcq_dataset import main
 def _load_rows(path: Path) -> list[dict[str, object]]:
     with open(path, "r", encoding="utf-8") as f:
         return [json.loads(line) for line in f if line.strip()]
+
+
+def _build_standalone(tmp_path: Path, benchmark: str, *, scenes_per_split: int = 100) -> list[dict[str, object]]:
+    main(
+        benchmark=benchmark,
+        difficulty="easy",
+        scenes_per_split=scenes_per_split,
+        seed=7,
+        sample_rate=16000,
+        audio_root=tmp_path / "audio",
+        dataset_root=tmp_path / "data",
+        generator_version="synth-v1",
+    )
+    dataset_path = tmp_path / "data" / f"mcq_synth_{benchmark}_easy.jsonl"
+    return _load_rows(dataset_path)
 
 
 def test_build_synthetic_datasets_write_rows_and_audio(tmp_path: Path) -> None:
@@ -253,3 +269,191 @@ def test_pitch_order_trivial_generation_is_deterministic(tmp_path: Path) -> None
 
     assert first_dataset == second_dataset
     assert first_audio == second_audio
+
+
+def test_temporal_trivial_standalone_families_write_expected_rows(tmp_path: Path) -> None:
+    families = {
+        "loudness_order_trivial": "MCQ-SYNTH-LOUDNESS-ORDER-TRIVIAL",
+        "duration_order_trivial": "MCQ-SYNTH-DURATION-ORDER-TRIVIAL",
+        "count_beeps_trivial": "MCQ-SYNTH-COUNT-BEEPS-TRIVIAL",
+        "gap_trivial": "MCQ-SYNTH-GAP-TRIVIAL",
+        "pattern_pitch_trivial": "MCQ-SYNTH-PATTERN-PITCH-TRIVIAL",
+        "dog_car_order_trivial": "MCQ-SYNTH-DOG-CAR-ORDER-TRIVIAL",
+    }
+
+    for benchmark, task_id in families.items():
+        rows = _build_standalone(tmp_path, benchmark)
+        assert len(rows) == 100
+        assert {row["task_id"] for row in rows} == {task_id}
+        assert {row["benchmark_family"] for row in rows} == {benchmark}
+        assert {row["difficulty"] for row in rows} == {"easy"}
+        assert not (tmp_path / "data" / "mcq_synth_benchmark.jsonl").exists()
+
+        for row in rows:
+            audio_path = tmp_path / "audio" / str(row["audio_filename"])
+            assert audio_path.exists()
+            samples, sample_rate = sf.read(audio_path)
+            assert sample_rate == 16000
+            assert samples.size > 0
+
+
+def test_loudness_order_trivial_invariants(tmp_path: Path) -> None:
+    rows = _build_standalone(tmp_path, "loudness_order_trivial")
+    answers = Counter()
+    for row in rows:
+        assert len(row["options"]) == 2
+        assert {option["text"] for option in row["options"]} == {"the loud beep", "the quiet beep"}
+        assert row["question"] == "You will hear a loud beep and a quiet beep. Which one happened first?"
+        assert row["question_template"] == "loud_vs_quiet_first"
+        events = row["scene"]["events"]
+        assert len(events) == 2
+        assert [event["onset"] for event in events] == [0.5, 2.0]
+        assert {event["pitch_hz"] for event in events} == {440.0}
+        assert {event["duration"] for event in events} == {0.15}
+        assert {event["dbfs"] for event in events} == {-6.0, -24.0}
+        first_event = min(events, key=lambda event: event["onset"])
+        answers[first_event["identity"]] += 1
+        assert row["answer_text"] == first_event["text"]
+    assert answers == Counter({"loud": 50, "quiet": 50})
+
+
+def test_duration_order_trivial_invariants(tmp_path: Path) -> None:
+    rows = _build_standalone(tmp_path, "duration_order_trivial")
+    answers = Counter()
+    for row in rows:
+        assert len(row["options"]) == 2
+        assert {option["text"] for option in row["options"]} == {"the long beep", "the short beep"}
+        assert row["question"] == "You will hear a long beep and a short beep. Which one happened first?"
+        assert row["question_template"] == "long_vs_short_first"
+        events = row["scene"]["events"]
+        assert len(events) == 2
+        assert [event["onset"] for event in events] == [0.5, 2.0]
+        assert {event["pitch_hz"] for event in events} == {440.0}
+        assert {event["dbfs"] for event in events} == {-18.0}
+        assert {event["duration"] for event in events} == {1.0, 0.1}
+        first_event = min(events, key=lambda event: event["onset"])
+        answers[first_event["identity"]] += 1
+        assert row["answer_text"] == first_event["text"]
+    assert answers == Counter({"long": 50, "short": 50})
+
+
+def test_count_beeps_trivial_invariants(tmp_path: Path) -> None:
+    rows = _build_standalone(tmp_path, "count_beeps_trivial")
+    counts = Counter()
+    for row in rows:
+        assert len(row["options"]) == 3
+        assert {option["text"] for option in row["options"]} == {"one beep", "two beeps", "three beeps"}
+        assert row["question"] == "How many beeps did you hear?"
+        assert row["question_template"] == "count_beeps"
+        events = row["scene"]["events"]
+        observed_count = len(events)
+        counts[observed_count] += 1
+        assert row["scene"]["count"] == observed_count
+        assert row["scene"]["gap_seconds"] == 1.0
+        assert {event["pitch_hz"] for event in events} == {440.0}
+        assert {event["duration"] for event in events} == {0.15}
+        assert {event["dbfs"] for event in events} == {-18.0}
+        assert row["answer_text"] == {1: "one beep", 2: "two beeps", 3: "three beeps"}[observed_count]
+    assert counts == Counter({1: 34, 2: 33, 3: 33})
+
+
+def test_gap_trivial_invariants(tmp_path: Path) -> None:
+    rows = _build_standalone(tmp_path, "gap_trivial")
+    gaps = Counter()
+    for row in rows:
+        assert len(row["options"]) == 2
+        assert {option["text"] for option in row["options"]} == {"a short pause", "a long pause"}
+        assert row["question"] == "Was the pause between the two beeps short or long?"
+        assert row["question_template"] == "short_vs_long_pause"
+        events = row["scene"]["events"]
+        assert len(events) == 2
+        assert {event["pitch_hz"] for event in events} == {440.0}
+        assert {event["duration"] for event in events} == {0.15}
+        assert {event["dbfs"] for event in events} == {-18.0}
+        gap_seconds = round(events[1]["onset"] - events[0]["offset"], 3)
+        gaps[gap_seconds] += 1
+        assert row["scene"]["gap_seconds"] == gap_seconds
+        assert row["answer_text"] == {0.2: "a short pause", 2.0: "a long pause"}[gap_seconds]
+    assert gaps == Counter({0.2: 50, 2.0: 50})
+
+
+def test_pattern_pitch_trivial_invariants(tmp_path: Path) -> None:
+    rows = _build_standalone(tmp_path, "pattern_pitch_trivial")
+    patterns = Counter()
+    for row in rows:
+        assert len(row["options"]) == 2
+        assert {option["text"] for option in row["options"]} == {"high-low-high", "low-high-low"}
+        assert row["question"] == "Which pattern did you hear?"
+        assert row["question_template"] == "pitch_pattern"
+        events = row["scene"]["events"]
+        assert [event["onset"] for event in events] == [0.5, 1.5, 2.5]
+        assert {event["duration"] for event in events} == {0.15}
+        assert {event["dbfs"] for event in events} == {-18.0}
+        pattern = tuple(event["identity"] for event in events)
+        patterns[pattern] += 1
+        assert row["scene"]["pattern"] == list(pattern)
+        assert row["answer_text"] == "-".join(pattern)
+    assert patterns == Counter({("high", "low", "high"): 50, ("low", "high", "low"): 50})
+
+
+def test_dog_car_order_trivial_invariants(tmp_path: Path) -> None:
+    rows = _build_standalone(tmp_path, "dog_car_order_trivial")
+    answers = Counter()
+    for row in rows:
+        assert len(row["options"]) == 2
+        assert {option["text"] for option in row["options"]} == {"the dog sound", "the car sound"}
+        assert row["question"] == "You will hear a dog sound and a car sound. Which one happened first?"
+        assert row["question_template"] == "dog_vs_car_first"
+        events = row["scene"]["events"]
+        assert len(events) == 2
+        assert {event["identity"] for event in events} == {"dog", "car"}
+        assert {event["waveform"] for event in events} == {"asset"}
+        assert {event["asset_filename"] for event in events} == {"dog_bark.wav", "car_horn.wav"}
+        answers[events[0]["identity"]] += 1
+        assert round(events[1]["onset"] - events[0]["offset"], 3) == 1.5
+        assert row["scene"]["gap_seconds"] == 1.5
+        assert row["answer_text"] == events[0]["text"]
+    assert answers == Counter({"dog": 50, "car": 50})
+
+
+def test_new_trivial_families_generation_is_deterministic(tmp_path: Path) -> None:
+    benchmarks = [
+        "loudness_order_trivial",
+        "duration_order_trivial",
+        "count_beeps_trivial",
+        "gap_trivial",
+        "pattern_pitch_trivial",
+        "dog_car_order_trivial",
+    ]
+    for benchmark in benchmarks:
+        audio_root = tmp_path / benchmark / "audio"
+        dataset_root = tmp_path / benchmark / "data"
+        main(
+            benchmark=benchmark,
+            difficulty="easy",
+            scenes_per_split=4,
+            seed=11,
+            sample_rate=16000,
+            audio_root=audio_root,
+            dataset_root=dataset_root,
+            generator_version="synth-v1",
+        )
+        dataset_path = dataset_root / f"mcq_synth_{benchmark}_easy.jsonl"
+        first_dataset = dataset_path.read_text(encoding="utf-8")
+        first_audio = sorted((audio_root / "synthetic" / benchmark / "easy").glob("*.wav"))[0].read_bytes()
+
+        main(
+            benchmark=benchmark,
+            difficulty="easy",
+            scenes_per_split=4,
+            seed=11,
+            sample_rate=16000,
+            audio_root=audio_root,
+            dataset_root=dataset_root,
+            generator_version="synth-v1",
+        )
+        second_dataset = dataset_path.read_text(encoding="utf-8")
+        second_audio = sorted((audio_root / "synthetic" / benchmark / "easy").glob("*.wav"))[0].read_bytes()
+
+        assert first_dataset == second_dataset
+        assert first_audio == second_audio

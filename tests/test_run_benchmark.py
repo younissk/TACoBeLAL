@@ -24,6 +24,12 @@ def test_normalize_aliases() -> None:
     assert _normalize_task("mcq-synth-loudness") == "mcq-synth-loudness"
     assert _normalize_task("mcq-synth-rhythm") == "mcq-synth-rhythm"
     assert _normalize_task("mcq-synth-pitch-order-trivial") == "mcq-synth-pitch-order-trivial"
+    assert _normalize_task("mcq-synth-loudness-order-trivial") == "mcq-synth-loudness-order-trivial"
+    assert _normalize_task("mcq-synth-duration-order-trivial") == "mcq-synth-duration-order-trivial"
+    assert _normalize_task("mcq-synth-count-beeps-trivial") == "mcq-synth-count-beeps-trivial"
+    assert _normalize_task("mcq-synth-gap-trivial") == "mcq-synth-gap-trivial"
+    assert _normalize_task("mcq-synth-pattern-pitch-trivial") == "mcq-synth-pattern-pitch-trivial"
+    assert _normalize_task("mcq-synth-dog-car-order-trivial") == "mcq-synth-dog-car-order-trivial"
     assert _normalize_model("qwen") == "llm-qwen"
     assert _normalize_model("af3") == "audioflamingo"
 
@@ -164,6 +170,28 @@ def test_synthetic_task_defaults() -> None:
         "data/mcq_synth_pitch_order_trivial_easy.jsonl"
     )
     assert TASKS["mcq-synth-pitch-order-trivial"].build_target == "build-mcq-synth-pitch-order-trivial"
+    assert TASKS["mcq-synth-loudness-order-trivial"].dataset_default == Path(
+        "data/mcq_synth_loudness_order_trivial_easy.jsonl"
+    )
+    assert TASKS["mcq-synth-loudness-order-trivial"].build_target == "build-mcq-synth-loudness-order-trivial"
+    assert TASKS["mcq-synth-duration-order-trivial"].dataset_default == Path(
+        "data/mcq_synth_duration_order_trivial_easy.jsonl"
+    )
+    assert TASKS["mcq-synth-duration-order-trivial"].build_target == "build-mcq-synth-duration-order-trivial"
+    assert TASKS["mcq-synth-count-beeps-trivial"].dataset_default == Path(
+        "data/mcq_synth_count_beeps_trivial_easy.jsonl"
+    )
+    assert TASKS["mcq-synth-count-beeps-trivial"].build_target == "build-mcq-synth-count-beeps-trivial"
+    assert TASKS["mcq-synth-gap-trivial"].dataset_default == Path("data/mcq_synth_gap_trivial_easy.jsonl")
+    assert TASKS["mcq-synth-gap-trivial"].build_target == "build-mcq-synth-gap-trivial"
+    assert TASKS["mcq-synth-pattern-pitch-trivial"].dataset_default == Path(
+        "data/mcq_synth_pattern_pitch_trivial_easy.jsonl"
+    )
+    assert TASKS["mcq-synth-pattern-pitch-trivial"].build_target == "build-mcq-synth-pattern-pitch-trivial"
+    assert TASKS["mcq-synth-dog-car-order-trivial"].dataset_default == Path(
+        "data/mcq_synth_dog_car_order_trivial_easy.jsonl"
+    )
+    assert TASKS["mcq-synth-dog-car-order-trivial"].build_target == "build-mcq-synth-dog-car-order-trivial"
 
 
 def test_setup_targets_for_pitch_order_trivial_default_dataset() -> None:
@@ -176,3 +204,24 @@ def test_setup_targets_for_pitch_order_trivial_default_dataset() -> None:
         dataset_is_default=True,
     )
     assert targets == ["build-mcq-synth-pitch-order-trivial"]
+
+
+def test_setup_targets_for_new_temporal_trivial_default_datasets() -> None:
+    expected = {
+        "mcq-synth-loudness-order-trivial": "build-mcq-synth-loudness-order-trivial",
+        "mcq-synth-duration-order-trivial": "build-mcq-synth-duration-order-trivial",
+        "mcq-synth-count-beeps-trivial": "build-mcq-synth-count-beeps-trivial",
+        "mcq-synth-gap-trivial": "build-mcq-synth-gap-trivial",
+        "mcq-synth-pattern-pitch-trivial": "build-mcq-synth-pattern-pitch-trivial",
+        "mcq-synth-dog-car-order-trivial": "build-mcq-synth-dog-car-order-trivial",
+    }
+    for task_key, build_target in expected.items():
+        targets = _build_setup_targets(
+            model=MODELS["qwen2-audio"],
+            task=TASKS[task_key],
+            prepare_data=True,
+            install_deps=False,
+            use_audio=True,
+            dataset_is_default=True,
+        )
+        assert targets == [build_target]
