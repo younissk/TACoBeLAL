@@ -43,6 +43,11 @@ Run the sweep on SLURM:
 sbatch scripts/slurm/eval_mcq_synth_temporal_suite_a40.slurm
 ```
 
+## Simple HTML Viewer
+
+For a static GitHub Pages view of example audio + model answers, open:
+`docs/index.html` (it reads datasets and runs from `data/` and `results/`).
+
 ## Safety Benchmark
 
 The safety dataset builder remains for pipeline validation:

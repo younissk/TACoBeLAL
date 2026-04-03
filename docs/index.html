@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Temporal Trivial Audio Benchmarks</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #0f1115;
+        --card: #171a21;
+        --text: #e7e9ee;
+        --muted: #9aa3b2;
+        --accent: #77b2ff;
+        --border: #2a303b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "SF Pro Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        padding: 24px;
+      }
+      h1 {
+        margin: 0 0 8px 0;
+        font-size: 24px;
+      }
+      p {
+        margin: 0 0 16px 0;
+        color: var(--muted);
+      }
+      .controls {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      select {
+        background: var(--card);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 8px 10px;
+        border-radius: 6px;
+      }
+      .bench-grid {
+        display: grid;
+        gap: 16px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 16px;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .question {
+        margin: 10px 0;
+        font-weight: 600;
+      }
+      .answers {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      .answers th,
+      .answers td {
+        border-bottom: 1px solid var(--border);
+        padding: 6px 8px;
+        text-align: left;
+      }
+      .answers th {
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .pill {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: rgba(119, 178, 255, 0.15);
+        color: var(--accent);
+      }
+      audio {
+        width: 100%;
+        margin-top: 8px;
+      }
+      .error {
+        color: #ff8b8b;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Temporal Trivial Audio Benchmarks</h1>
+    <p>Each card shows a few examples with audio, the ground-truth answer, and model responses.</p>
+
+    <div class="controls">
+      <label for="benchmark">Benchmark</label>
+      <select id="benchmark"></select>
+      <label for="examples">Examples</label>
+      <select id="examples">
+        <option value="3">3</option>
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+      </select>
+      <span id="status" class="pill">Loading…</span>
+    </div>
+
+    <div id="grid" class="bench-grid"></div>
+
+    <script>
+      const AUDIO_ROOT = "../data/audio/";
+      const DATA_ROOT = "../data/";
+      const RESULTS_ROOT = "../results/";
+      const MODEL_LABELS = {
+        random: "Random",
+        "llm-qwen": "LLM Qwen",
+        "qwen2-audio-7b-instruct": "Qwen2-Audio",
+        "audio-flamingo-3": "Audio Flamingo",
+      };
+
+      const BENCHMARKS = [
+        {
+          key: "mcq-synth-pitch-order-trivial",
+          label: "Pitch Order",
+          dataset: "mcq_synth_pitch_order_trivial_easy.jsonl",
+          runs: "mcq-synth-pitch-order-trivial/mcq-order/runs.csv",
+        },
+        {
+          key: "mcq-synth-loudness-order-trivial",
+          label: "Loudness Order",
+          dataset: "mcq_synth_loudness_order_trivial_easy.jsonl",
+          runs: "mcq-synth-loudness-order-trivial/mcq-order/runs.csv",
+        },
+        {
+          key: "mcq-synth-duration-order-trivial",
+          label: "Duration Order",
+          dataset: "mcq_synth_duration_order_trivial_easy.jsonl",
+          runs: "mcq-synth-duration-order-trivial/mcq-order/runs.csv",
+        },
+        {
+          key: "mcq-synth-count-beeps-trivial",
+          label: "Count Beeps",
+          dataset: "mcq_synth_count_beeps_trivial_easy.jsonl",
+          runs: "mcq-synth-count-beeps-trivial/mcq-order/runs.csv",
+        },
+        {
+          key: "mcq-synth-gap-trivial",
+          label: "Gap Length",
+          dataset: "mcq_synth_gap_trivial_easy.jsonl",
+          runs: "mcq-synth-gap-trivial/mcq-order/runs.csv",
+        },
+        {
+          key: "mcq-synth-pattern-pitch-trivial",
+          label: "Pitch Pattern",
+          dataset: "mcq_synth_pattern_pitch_trivial_easy.jsonl",
+          runs: "mcq-synth-pattern-pitch-trivial/mcq-order/runs.csv",
+        },
+        {
+          key: "mcq-synth-dog-car-order-trivial",
+          label: "Dog vs Car",
+          dataset: "mcq_synth_dog_car_order_trivial_easy.jsonl",
+          runs: "mcq-synth-dog-car-order-trivial/mcq-order/runs.csv",
+        },
+      ];
+
+      const benchmarkSelect = document.getElementById("benchmark");
+      const exampleSelect = document.getElementById("examples");
+      const grid = document.getElementById("grid");
+      const status = document.getElementById("status");
+
+      function setStatus(text, isError = false) {
+        status.textContent = text;
+        status.classList.toggle("error", isError);
+      }
+
+      function parseCsv(text) {
+        const lines = text.trim().split("\n");
+        const header = lines.shift().split(",");
+        return lines
+          .filter((line) => line.trim().length)
+          .map((line) => {
+            const parts = line.split(",");
+            const row = {};
+            header.forEach((key, idx) => {
+              row[key] = parts[idx];
+            });
+            return row;
+          });
+      }
+
+      function parseJsonl(text) {
+        return text
+          .trim()
+          .split("\n")
+          .filter((line) => line.trim().length)
+          .map((line) => JSON.parse(line));
+      }
+
+      async function fetchText(path) {
+        const response = await fetch(path, { cache: "no-cache" });
+        if (!response.ok) {
+          throw new Error(`Failed to fetch ${path}`);
+        }
+        return response.text();
+      }
+
+      function pickLatestRuns(rows) {
+        const latest = {};
+        rows.forEach((row) => {
+          const model = row.model_name;
+          if (!latest[model] || latest[model].started_at_utc < row.started_at_utc) {
+            latest[model] = row;
+          }
+        });
+        return latest;
+      }
+
+      function pathFromRuns(decisionsPath) {
+        if (!decisionsPath) return null;
+        if (decisionsPath.startsWith("results/")) {
+          return "../" + decisionsPath;
+        }
+        return RESULTS_ROOT + decisionsPath;
+      }
+
+      async function loadBenchmark(benchmark, exampleCount) {
+        setStatus("Loading…");
+        grid.innerHTML = "";
+
+        const datasetText = await fetchText(DATA_ROOT + benchmark.dataset);
+        const dataset = parseJsonl(datasetText);
+        const runsText = await fetchText(RESULTS_ROOT + benchmark.runs);
+        const runs = parseCsv(runsText);
+        const latestRuns = pickLatestRuns(runs);
+
+        const decisionsByModel = {};
+        await Promise.all(
+          Object.keys(MODEL_LABELS).map(async (modelKey) => {
+            const run = latestRuns[modelKey];
+            if (!run) return;
+            const decisionsPath = pathFromRuns(run.decisions_path);
+            if (!decisionsPath) return;
+            const decisionsText = await fetchText(decisionsPath);
+            const decisions = parseJsonl(decisionsText);
+            decisionsByModel[modelKey] = new Map(
+              decisions.map((entry) => [entry.example_id, entry])
+            );
+          })
+        );
+
+        const slice = dataset.slice(0, exampleCount);
+        slice.forEach((example) => {
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const meta = document.createElement("div");
+          meta.className = "meta";
+          meta.innerHTML = `<span class="pill">${benchmark.label}</span><span>${example.id}</span>`;
+          card.appendChild(meta);
+
+          const question = document.createElement("div");
+          question.className = "question";
+          question.textContent = example.question;
+          card.appendChild(question);
+
+          const audio = document.createElement("audio");
+          audio.controls = true;
+          audio.src = AUDIO_ROOT + example.audio_filename;
+          card.appendChild(audio);
+
+          const answer = document.createElement("div");
+          answer.className = "meta";
+          answer.innerHTML = `<strong>Answer:</strong> ${example.answer_text}`;
+          card.appendChild(answer);
+
+          const table = document.createElement("table");
+          table.className = "answers";
+          table.innerHTML = `
+            <thead>
+              <tr><th>Model</th><th>Prediction</th><th>Correct</th></tr>
+            </thead>
+            <tbody></tbody>
+          `;
+          const tbody = table.querySelector("tbody");
+          Object.entries(MODEL_LABELS).forEach(([modelKey, label]) => {
+            const decision = decisionsByModel[modelKey]?.get(example.id);
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${label}</td>
+              <td>${decision ? decision.predicted_text : "—"}</td>
+              <td>${decision ? (decision.is_correct ? "yes" : "no") : "—"}</td>
+            `;
+            tbody.appendChild(row);
+          });
+          card.appendChild(table);
+
+          grid.appendChild(card);
+        });
+
+        setStatus("Loaded");
+      }
+
+      function init() {
+        BENCHMARKS.forEach((bench, idx) => {
+          const option = document.createElement("option");
+          option.value = idx;
+          option.textContent = bench.label;
+          benchmarkSelect.appendChild(option);
+        });
+        benchmarkSelect.value = "0";
+        benchmarkSelect.addEventListener("change", () => {
+          loadBenchmark(BENCHMARKS[benchmarkSelect.value], Number(exampleSelect.value)).catch(
+            (err) => setStatus(err.message, true)
+          );
+        });
+        exampleSelect.addEventListener("change", () => {
+          loadBenchmark(BENCHMARKS[benchmarkSelect.value], Number(exampleSelect.value)).catch(
+            (err) => setStatus(err.message, true)
+          );
+        });
+        loadBenchmark(BENCHMARKS[0], Number(exampleSelect.value)).catch((err) =>
+          setStatus(err.message, true)
+        );
+      }
+
+      init();
+    </script>
+  </body>
+</html>
