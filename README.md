@@ -1,15 +1,13 @@
-# TACoBeLAL (Temporal Trivial Suite)
+# Do LALMs reliably solve very easy temporal audio events? 
 
-This repository now focuses on one question: do LALMs reliably solve very easy temporal audio events? The answer from our temporal trivial suite is no — performance is near random across multiple models, even on intentionally simple order/count/gap tasks.
+The answer from our temporal trivial suite is no. Performance is near random across multiple models, even on intentionally simple order/count/gap tasks.
 
-## What Remains
+## This repo includes:
 
 - Temporal trivial benchmarks (7 families, 100 samples each)
 - Safety benchmark (to show the pipeline runs end-to-end)
 - Core runner + model evaluators (random, LLM Qwen, Qwen2-Audio, Audio Flamingo)
 - A short SLURM sweep for the full temporal suite
-
-Everything else has been removed from the repo.
 
 ## Temporal Trivial Suite
 
