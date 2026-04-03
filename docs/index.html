@@ -119,9 +119,8 @@
     <div id="grid" class="bench-grid"></div>
 
     <script>
-      const AUDIO_ROOT = "../data/audio/";
-      const DATA_ROOT = "../data/";
-      const RESULTS_ROOT = "../results/";
+      const AUDIO_ROOT = "./audio/";
+      const BUNDLE_PATH = "./data/temporal_bundle.json";
       const MODEL_LABELS = {
         random: "Random",
         "llm-qwen": "LLM Qwen",
@@ -129,50 +128,7 @@
         "audio-flamingo-3": "Audio Flamingo",
       };
 
-      const BENCHMARKS = [
-        {
-          key: "mcq-synth-pitch-order-trivial",
-          label: "Pitch Order",
-          dataset: "mcq_synth_pitch_order_trivial_easy.jsonl",
-          runs: "mcq-synth-pitch-order-trivial/mcq-order/runs.csv",
-        },
-        {
-          key: "mcq-synth-loudness-order-trivial",
-          label: "Loudness Order",
-          dataset: "mcq_synth_loudness_order_trivial_easy.jsonl",
-          runs: "mcq-synth-loudness-order-trivial/mcq-order/runs.csv",
-        },
-        {
-          key: "mcq-synth-duration-order-trivial",
-          label: "Duration Order",
-          dataset: "mcq_synth_duration_order_trivial_easy.jsonl",
-          runs: "mcq-synth-duration-order-trivial/mcq-order/runs.csv",
-        },
-        {
-          key: "mcq-synth-count-beeps-trivial",
-          label: "Count Beeps",
-          dataset: "mcq_synth_count_beeps_trivial_easy.jsonl",
-          runs: "mcq-synth-count-beeps-trivial/mcq-order/runs.csv",
-        },
-        {
-          key: "mcq-synth-gap-trivial",
-          label: "Gap Length",
-          dataset: "mcq_synth_gap_trivial_easy.jsonl",
-          runs: "mcq-synth-gap-trivial/mcq-order/runs.csv",
-        },
-        {
-          key: "mcq-synth-pattern-pitch-trivial",
-          label: "Pitch Pattern",
-          dataset: "mcq_synth_pattern_pitch_trivial_easy.jsonl",
-          runs: "mcq-synth-pattern-pitch-trivial/mcq-order/runs.csv",
-        },
-        {
-          key: "mcq-synth-dog-car-order-trivial",
-          label: "Dog vs Car",
-          dataset: "mcq_synth_dog_car_order_trivial_easy.jsonl",
-          runs: "mcq-synth-dog-car-order-trivial/mcq-order/runs.csv",
-        },
-      ];
+      let BENCHMARKS = [];
 
       const benchmarkSelect = document.getElementById("benchmark");
       const exampleSelect = document.getElementById("examples");
@@ -184,29 +140,6 @@
         status.classList.toggle("error", isError);
       }
 
-      function parseCsv(text) {
-        const lines = text.trim().split("\n");
-        const header = lines.shift().split(",");
-        return lines
-          .filter((line) => line.trim().length)
-          .map((line) => {
-            const parts = line.split(",");
-            const row = {};
-            header.forEach((key, idx) => {
-              row[key] = parts[idx];
-            });
-            return row;
-          });
-      }
-
-      function parseJsonl(text) {
-        return text
-          .trim()
-          .split("\n")
-          .filter((line) => line.trim().length)
-          .map((line) => JSON.parse(line));
-      }
-
       async function fetchText(path) {
         const response = await fetch(path, { cache: "no-cache" });
         if (!response.ok) {
@@ -215,51 +148,10 @@
         return response.text();
       }
 
-      function pickLatestRuns(rows) {
-        const latest = {};
-        rows.forEach((row) => {
-          const model = row.model_name;
-          if (!latest[model] || latest[model].started_at_utc < row.started_at_utc) {
-            latest[model] = row;
-          }
-        });
-        return latest;
-      }
-
-      function pathFromRuns(decisionsPath) {
-        if (!decisionsPath) return null;
-        if (decisionsPath.startsWith("results/")) {
-          return "../" + decisionsPath;
-        }
-        return RESULTS_ROOT + decisionsPath;
-      }
-
       async function loadBenchmark(benchmark, exampleCount) {
         setStatus("Loading…");
         grid.innerHTML = "";
-
-        const datasetText = await fetchText(DATA_ROOT + benchmark.dataset);
-        const dataset = parseJsonl(datasetText);
-        const runsText = await fetchText(RESULTS_ROOT + benchmark.runs);
-        const runs = parseCsv(runsText);
-        const latestRuns = pickLatestRuns(runs);
-
-        const decisionsByModel = {};
-        await Promise.all(
-          Object.keys(MODEL_LABELS).map(async (modelKey) => {
-            const run = latestRuns[modelKey];
-            if (!run) return;
-            const decisionsPath = pathFromRuns(run.decisions_path);
-            if (!decisionsPath) return;
-            const decisionsText = await fetchText(decisionsPath);
-            const decisions = parseJsonl(decisionsText);
-            decisionsByModel[modelKey] = new Map(
-              decisions.map((entry) => [entry.example_id, entry])
-            );
-          })
-        );
-
-        const slice = dataset.slice(0, exampleCount);
+        const slice = benchmark.examples.slice(0, exampleCount);
         slice.forEach((example) => {
           const card = document.createElement("div");
           card.className = "card";
@@ -294,7 +186,7 @@
           `;
           const tbody = table.querySelector("tbody");
           Object.entries(MODEL_LABELS).forEach(([modelKey, label]) => {
-            const decision = decisionsByModel[modelKey]?.get(example.id);
+            const decision = example.model_answers?.[modelKey];
             const row = document.createElement("tr");
             row.innerHTML = `
               <td>${label}</td>
@@ -312,26 +204,32 @@
       }
 
       function init() {
-        BENCHMARKS.forEach((bench, idx) => {
-          const option = document.createElement("option");
-          option.value = idx;
-          option.textContent = bench.label;
-          benchmarkSelect.appendChild(option);
-        });
-        benchmarkSelect.value = "0";
-        benchmarkSelect.addEventListener("change", () => {
-          loadBenchmark(BENCHMARKS[benchmarkSelect.value], Number(exampleSelect.value)).catch(
-            (err) => setStatus(err.message, true)
-          );
-        });
-        exampleSelect.addEventListener("change", () => {
-          loadBenchmark(BENCHMARKS[benchmarkSelect.value], Number(exampleSelect.value)).catch(
-            (err) => setStatus(err.message, true)
-          );
-        });
-        loadBenchmark(BENCHMARKS[0], Number(exampleSelect.value)).catch((err) =>
-          setStatus(err.message, true)
-        );
+        fetchText(BUNDLE_PATH)
+          .then((text) => {
+            const bundle = JSON.parse(text);
+            BENCHMARKS = bundle.benchmarks || [];
+            BENCHMARKS.forEach((bench, idx) => {
+              const option = document.createElement("option");
+              option.value = idx;
+              option.textContent = bench.label;
+              benchmarkSelect.appendChild(option);
+            });
+            benchmarkSelect.value = "0";
+            benchmarkSelect.addEventListener("change", () => {
+              loadBenchmark(BENCHMARKS[benchmarkSelect.value], Number(exampleSelect.value)).catch(
+                (err) => setStatus(err.message, true)
+              );
+            });
+            exampleSelect.addEventListener("change", () => {
+              loadBenchmark(BENCHMARKS[benchmarkSelect.value], Number(exampleSelect.value)).catch(
+                (err) => setStatus(err.message, true)
+              );
+            });
+            loadBenchmark(BENCHMARKS[0], Number(exampleSelect.value)).catch((err) =>
+              setStatus(err.message, true)
+            );
+          })
+          .catch((err) => setStatus(err.message, true));
       }
 
       init();

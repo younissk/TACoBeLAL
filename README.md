@@ -44,7 +44,8 @@ sbatch scripts/slurm/eval_mcq_synth_temporal_suite_a40.slurm
 ## Simple HTML Viewer
 
 For a static GitHub Pages view of example audio + model answers, open:
-`docs/index.html` (it reads datasets and runs from `data/` and `results/`).
+`docs/index.html`. The page reads a small bundled snapshot from
+`docs/data/temporal_bundle.json` and audio under `docs/audio/`.
 
 ## Safety Benchmark
 

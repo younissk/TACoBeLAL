@@ -1,0 +1,886 @@
+{
+  "benchmarks": [
+    {
+      "key": "mcq-synth-pitch-order-trivial",
+      "label": "Pitch Order",
+      "examples": [
+        {
+          "id": "synth_pitch_order_trivial_easy_000001",
+          "question": "You will hear a high beep and a low beep. Which one happened first?",
+          "answer_text": "the high beep",
+          "audio_filename": "synthetic/pitch_order_trivial/easy/synth_pitch_order_trivial_easy_000001.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the high beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the low beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the high beep",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the high beep",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_pitch_order_trivial_easy_000002",
+          "question": "You will hear a high beep and a low beep. Which one happened first?",
+          "answer_text": "the low beep",
+          "audio_filename": "synthetic/pitch_order_trivial/easy/synth_pitch_order_trivial_easy_000002.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the high beep",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "the high beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the low beep",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the high beep",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_pitch_order_trivial_easy_000003",
+          "question": "You will hear a high beep and a low beep. Which one happened first?",
+          "answer_text": "the high beep",
+          "audio_filename": "synthetic/pitch_order_trivial/easy/synth_pitch_order_trivial_easy_000003.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the high beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the low beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the high beep",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the high beep",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_pitch_order_trivial_easy_000004",
+          "question": "You will hear a high beep and a low beep. Which one happened first?",
+          "answer_text": "the low beep",
+          "audio_filename": "synthetic/pitch_order_trivial/easy/synth_pitch_order_trivial_easy_000004.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the low beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the low beep",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the high beep",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the high beep",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_pitch_order_trivial_easy_000005",
+          "question": "You will hear a high beep and a low beep. Which one happened first?",
+          "answer_text": "the high beep",
+          "audio_filename": "synthetic/pitch_order_trivial/easy/synth_pitch_order_trivial_easy_000005.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the low beep",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "the low beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the high beep",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the high beep",
+              "is_correct": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "mcq-synth-loudness-order-trivial",
+      "label": "Loudness Order",
+      "examples": [
+        {
+          "id": "synth_loudness_order_trivial_easy_000001",
+          "question": "You will hear a loud beep and a quiet beep. Which one happened first?",
+          "answer_text": "the loud beep",
+          "audio_filename": "synthetic/loudness_order_trivial/easy/synth_loudness_order_trivial_easy_000001.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the quiet beep",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "the quiet beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the quiet beep",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the loud beep",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_loudness_order_trivial_easy_000002",
+          "question": "You will hear a loud beep and a quiet beep. Which one happened first?",
+          "answer_text": "the quiet beep",
+          "audio_filename": "synthetic/loudness_order_trivial/easy/synth_loudness_order_trivial_easy_000002.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the quiet beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the quiet beep",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the loud beep",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the loud beep",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_loudness_order_trivial_easy_000003",
+          "question": "You will hear a loud beep and a quiet beep. Which one happened first?",
+          "answer_text": "the loud beep",
+          "audio_filename": "synthetic/loudness_order_trivial/easy/synth_loudness_order_trivial_easy_000003.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the loud beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the quiet beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the loud beep",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the loud beep",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_loudness_order_trivial_easy_000004",
+          "question": "You will hear a loud beep and a quiet beep. Which one happened first?",
+          "answer_text": "the quiet beep",
+          "audio_filename": "synthetic/loudness_order_trivial/easy/synth_loudness_order_trivial_easy_000004.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the loud beep",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "the quiet beep",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the quiet beep",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the loud beep",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_loudness_order_trivial_easy_000005",
+          "question": "You will hear a loud beep and a quiet beep. Which one happened first?",
+          "answer_text": "the loud beep",
+          "audio_filename": "synthetic/loudness_order_trivial/easy/synth_loudness_order_trivial_easy_000005.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the loud beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the quiet beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the quiet beep",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the loud beep",
+              "is_correct": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "mcq-synth-duration-order-trivial",
+      "label": "Duration Order",
+      "examples": [
+        {
+          "id": "synth_duration_order_trivial_easy_000001",
+          "question": "You will hear a long beep and a short beep. Which one happened first?",
+          "answer_text": "the long beep",
+          "audio_filename": "synthetic/duration_order_trivial/easy/synth_duration_order_trivial_easy_000001.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the long beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the short beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the long beep",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the long beep",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_duration_order_trivial_easy_000002",
+          "question": "You will hear a long beep and a short beep. Which one happened first?",
+          "answer_text": "the short beep",
+          "audio_filename": "synthetic/duration_order_trivial/easy/synth_duration_order_trivial_easy_000002.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the short beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the short beep",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the long beep",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the long beep",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_duration_order_trivial_easy_000003",
+          "question": "You will hear a long beep and a short beep. Which one happened first?",
+          "answer_text": "the long beep",
+          "audio_filename": "synthetic/duration_order_trivial/easy/synth_duration_order_trivial_easy_000003.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the long beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the short beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the long beep",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the long beep",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_duration_order_trivial_easy_000004",
+          "question": "You will hear a long beep and a short beep. Which one happened first?",
+          "answer_text": "the short beep",
+          "audio_filename": "synthetic/duration_order_trivial/easy/synth_duration_order_trivial_easy_000004.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the short beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the short beep",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the long beep",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the long beep",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_duration_order_trivial_easy_000005",
+          "question": "You will hear a long beep and a short beep. Which one happened first?",
+          "answer_text": "the long beep",
+          "audio_filename": "synthetic/duration_order_trivial/easy/synth_duration_order_trivial_easy_000005.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the long beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the short beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the short beep",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the long beep",
+              "is_correct": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "mcq-synth-count-beeps-trivial",
+      "label": "Count Beeps",
+      "examples": [
+        {
+          "id": "synth_count_beeps_trivial_easy_000001",
+          "question": "How many beeps did you hear?",
+          "answer_text": "one beep",
+          "audio_filename": "synthetic/count_beeps_trivial/easy/synth_count_beeps_trivial_easy_000001.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "one beep",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "three beeps",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "two beeps",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "three beeps",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_count_beeps_trivial_easy_000002",
+          "question": "How many beeps did you hear?",
+          "answer_text": "two beeps",
+          "audio_filename": "synthetic/count_beeps_trivial/easy/synth_count_beeps_trivial_easy_000002.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "three beeps",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "three beeps",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "one beep",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "two beeps",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_count_beeps_trivial_easy_000003",
+          "question": "How many beeps did you hear?",
+          "answer_text": "three beeps",
+          "audio_filename": "synthetic/count_beeps_trivial/easy/synth_count_beeps_trivial_easy_000003.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "three beeps",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "one beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "three beeps",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "three beeps",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_count_beeps_trivial_easy_000004",
+          "question": "How many beeps did you hear?",
+          "answer_text": "one beep",
+          "audio_filename": "synthetic/count_beeps_trivial/easy/synth_count_beeps_trivial_easy_000004.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "two beeps",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "three beeps",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "two beeps",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "three beeps",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_count_beeps_trivial_easy_000005",
+          "question": "How many beeps did you hear?",
+          "answer_text": "two beeps",
+          "audio_filename": "synthetic/count_beeps_trivial/easy/synth_count_beeps_trivial_easy_000005.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "one beep",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "one beep",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "three beeps",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "three beeps",
+              "is_correct": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "mcq-synth-gap-trivial",
+      "label": "Gap Length",
+      "examples": [
+        {
+          "id": "synth_gap_trivial_easy_000001",
+          "question": "Was the pause between the two beeps short or long?",
+          "answer_text": "a short pause",
+          "audio_filename": "synthetic/gap_trivial/easy/synth_gap_trivial_easy_000001.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "a long pause",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_gap_trivial_easy_000002",
+          "question": "Was the pause between the two beeps short or long?",
+          "answer_text": "a long pause",
+          "audio_filename": "synthetic/gap_trivial/easy/synth_gap_trivial_easy_000002.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "a long pause",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "a long pause",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "a short pause",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "a short pause",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_gap_trivial_easy_000003",
+          "question": "Was the pause between the two beeps short or long?",
+          "answer_text": "a short pause",
+          "audio_filename": "synthetic/gap_trivial/easy/synth_gap_trivial_easy_000003.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "a long pause",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_gap_trivial_easy_000004",
+          "question": "Was the pause between the two beeps short or long?",
+          "answer_text": "a long pause",
+          "audio_filename": "synthetic/gap_trivial/easy/synth_gap_trivial_easy_000004.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "a long pause",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "a long pause",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "a short pause",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "a short pause",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_gap_trivial_easy_000005",
+          "question": "Was the pause between the two beeps short or long?",
+          "answer_text": "a short pause",
+          "audio_filename": "synthetic/gap_trivial/easy/synth_gap_trivial_easy_000005.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "a short pause",
+              "is_correct": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "mcq-synth-pattern-pitch-trivial",
+      "label": "Pitch Pattern",
+      "examples": [
+        {
+          "id": "synth_pattern_pitch_trivial_easy_000001",
+          "question": "Which pattern did you hear?",
+          "answer_text": "high-low-high",
+          "audio_filename": "synthetic/pattern_pitch_trivial/easy/synth_pattern_pitch_trivial_easy_000001.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "high-low-high",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "low-high-low",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "high-low-high",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "low-high-low",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_pattern_pitch_trivial_easy_000002",
+          "question": "Which pattern did you hear?",
+          "answer_text": "low-high-low",
+          "audio_filename": "synthetic/pattern_pitch_trivial/easy/synth_pattern_pitch_trivial_easy_000002.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "high-low-high",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "high-low-high",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "low-high-low",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "high-low-high",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_pattern_pitch_trivial_easy_000003",
+          "question": "Which pattern did you hear?",
+          "answer_text": "high-low-high",
+          "audio_filename": "synthetic/pattern_pitch_trivial/easy/synth_pattern_pitch_trivial_easy_000003.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "low-high-low",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "high-low-high",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "low-high-low",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "high-low-high",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_pattern_pitch_trivial_easy_000004",
+          "question": "Which pattern did you hear?",
+          "answer_text": "low-high-low",
+          "audio_filename": "synthetic/pattern_pitch_trivial/easy/synth_pattern_pitch_trivial_easy_000004.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "high-low-high",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "high-low-high",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "low-high-low",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "high-low-high",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_pattern_pitch_trivial_easy_000005",
+          "question": "Which pattern did you hear?",
+          "answer_text": "high-low-high",
+          "audio_filename": "synthetic/pattern_pitch_trivial/easy/synth_pattern_pitch_trivial_easy_000005.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "low-high-low",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "low-high-low",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "high-low-high",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "low-high-low",
+              "is_correct": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "mcq-synth-dog-car-order-trivial",
+      "label": "Dog vs Car",
+      "examples": [
+        {
+          "id": "synth_dog_car_order_trivial_easy_000001",
+          "question": "You will hear a dog sound and a car sound. Which one happened first?",
+          "answer_text": "the dog sound",
+          "audio_filename": "synthetic/dog_car_order_trivial/easy/synth_dog_car_order_trivial_easy_000001.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_dog_car_order_trivial_easy_000002",
+          "question": "You will hear a dog sound and a car sound. Which one happened first?",
+          "answer_text": "the car sound",
+          "audio_filename": "synthetic/dog_car_order_trivial/easy/synth_dog_car_order_trivial_easy_000002.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the dog sound",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "the dog sound",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the car sound",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the dog sound",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_dog_car_order_trivial_easy_000003",
+          "question": "You will hear a dog sound and a car sound. Which one happened first?",
+          "answer_text": "the dog sound",
+          "audio_filename": "synthetic/dog_car_order_trivial/easy/synth_dog_car_order_trivial_easy_000003.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the car sound",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the car sound",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            }
+          }
+        },
+        {
+          "id": "synth_dog_car_order_trivial_easy_000004",
+          "question": "You will hear a dog sound and a car sound. Which one happened first?",
+          "answer_text": "the car sound",
+          "audio_filename": "synthetic/dog_car_order_trivial/easy/synth_dog_car_order_trivial_easy_000004.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the car sound",
+              "is_correct": true
+            },
+            "llm-qwen": {
+              "predicted_text": "the dog sound",
+              "is_correct": false
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the dog sound",
+              "is_correct": false
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the dog sound",
+              "is_correct": false
+            }
+          }
+        },
+        {
+          "id": "synth_dog_car_order_trivial_easy_000005",
+          "question": "You will hear a dog sound and a car sound. Which one happened first?",
+          "answer_text": "the dog sound",
+          "audio_filename": "synthetic/dog_car_order_trivial/easy/synth_dog_car_order_trivial_easy_000005.wav",
+          "model_answers": {
+            "random": {
+              "predicted_text": "the car sound",
+              "is_correct": false
+            },
+            "llm-qwen": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            },
+            "qwen2-audio-7b-instruct": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            },
+            "audio-flamingo-3": {
+              "predicted_text": "the dog sound",
+              "is_correct": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
